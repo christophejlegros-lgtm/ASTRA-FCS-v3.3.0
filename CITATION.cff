@@ -5,7 +5,9 @@ message: >-
   against its MANIFEST.sha256. The repository name carries "v3.3.0"; it is not
   a version identifier (RELEASE.md). The git history of E1/E2 (preregistration
   commits eb03ad2, 1905da1) lives in the original repository
-  ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0 (empirical/PROVENANCE.md §2bis).
+  ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0 (empirical/PROVENANCE.md §2bis). Archived
+  so far: v3.1.1, 10.5281/zenodo.23196960; all versions (concept DOI):
+  10.5281/zenodo.23196959. This pre-release has no DOI of its own.
 type: software
 title: "ASTRA-FCS — Agent-orchestrated Simulation Testbed for Research on Access (MCP server, FCS layer)"
 version: 3.3.0-rc.3
@@ -43,7 +45,11 @@ keywords:
   - consciousness science
   - biocomputing
   - epistemology
-# identifiers:            # add the version DOI of THIS release once Zenodo has minted it
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23196959
+    description: "Concept DOI: all versions (v3.1.1 archived as 10.5281/zenodo.23196960, from the original repository)."
+# Add the version DOI of THIS release under identifiers once Zenodo has minted it
 #   - type: doi           # (RELEASE.md §3); never reuse the DOI of an earlier version
 #     value: 10.5281/zenodo.XXXXXXX
 #     description: "Version DOI of ASTRA-FCS 3.3.0-rc.3"

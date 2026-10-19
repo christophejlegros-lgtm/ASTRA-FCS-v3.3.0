@@ -18,5 +18,18 @@
     "biocomputing",
     "epistemology"
   ],
-  "notes": "Licensing is composite: MIT for the original work; python/the_consciousness_ai/ and nine ported files of src/engine/tcai/ follow the upstream non-commercial licence (THIRD_PARTY_NOTICES.md). The single licence field of this record names the MIT part only. Random streams are seeded (ASTRA_SEED, default 20260923; mulberry32). Cite the archived DOI of the release you used. Check the deposited archive against MANIFEST.sha256 (node scripts/manifest.mjs --check). The repository name carries \"v3.1.0\" for historical reasons and is not a version identifier."
+  "notes": "Licensing is composite: MIT for the original work; python/the_consciousness_ai/ and nine ported files of src/engine/tcai/ follow the upstream non-commercial licence (THIRD_PARTY_NOTICES.md). The single licence field of this record names the MIT part only. Random streams are seeded (ASTRA_SEED, default 20260923; mulberry32). Cite the archived DOI of the release you used. Check the deposited archive against MANIFEST.sha256 (node scripts/manifest.mjs --check). The repository name carries \"v3.1.0\" for historical reasons and is not a version identifier.",
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.23196960",
+      "relation": "isNewVersionOf",
+      "scheme": "doi",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0",
+      "relation": "isDerivedFrom",
+      "scheme": "url"
+    }
+  ]
 }

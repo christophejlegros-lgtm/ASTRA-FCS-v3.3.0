@@ -21,9 +21,10 @@
 > **First empirical test (E1).** The organoid surrogate's spontaneous activity was
 > confronted with three real human brain organoids (DANDI 001603) under a preregistration
 > declared public *before* the data were received (commit `eb03ad2` **of the original
-> repository** `ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0`; order checkable with
-> `scripts/verify-anteriority.sh` in a clone of *that* repository — this one was created on
-> 19 October 2026 from the rc.3 tree in a single commit and carries no such history; no
+> repository** `ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0`; order checkable by running *this*
+> repository's `scripts/verify-anteriority.sh` against a full clone of *that* one — this one
+> was created on 19 October 2026 from the rc.3 tree in a single commit and carries no such
+> history; ancestry checked on 19 October 2026 for E1 and E2; no
 > third-party time stamp yet — see [`empirical/PROVENANCE.md`](empirical/PROVENANCE.md) §2bis). Verdict: **INADEQUATE** — the real
 > organoids burst and synchronise, the surrogate emits independent Poisson trains; the
 > failure is structural, not parametric. Protocol, results and replay:
@@ -832,7 +833,11 @@ MIT — © 2026 Christophe Jean Legros, Geneva — applies to everything in this
 
 **Citing and reviewing.** Cite via [`CITATION.cff`](CITATION.cff), with the version DOI of
 the release you used, and check the archive against `MANIFEST.sha256`
-([`RELEASE.md`](RELEASE.md)). External review is invited through
+([`RELEASE.md`](RELEASE.md)). Archived so far: v3.1.1,
+[doi:10.5281/zenodo.23196960](https://doi.org/10.5281/zenodo.23196960) (deposited from the
+original repository); all versions, concept DOI
+[doi:10.5281/zenodo.23196959](https://doi.org/10.5281/zenodo.23196959). This pre-release
+has no DOI of its own. External review is invited through
 [`REVIEW.md`](REVIEW.md) (three separate reviews); substrate-level predictions are drafted
 for preregistration in [`PREREGISTRATION.md`](PREREGISTRATION.md), E3 in
 [`empirical/PREREG-E3-DRAFT.md`](empirical/PREREG-E3-DRAFT.md). The response to the

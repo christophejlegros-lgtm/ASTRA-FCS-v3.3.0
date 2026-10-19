@@ -57,6 +57,14 @@ déplacée : une correction devient une nouvelle version.
 
 1. Créer la *release* GitHub depuis l'étiquette ; l'intégration Zenodo archive l'arbre
    étiqueté et attribue un **DOI de version** (distinct du DOI de concept).
+   **Changement de dépôt (19 octobre 2026).** Les versions déjà archivées (v3.1.1 :
+   10.5281/zenodo.23196960 ; concept : 10.5281/zenodo.23196959) l'ont été depuis le dépôt
+   d'origine. Activer l'intégration Zenodo–GitHub sur `ASTRA-FCS-v3.3.0` créerait un
+   **nouveau DOI de concept**, sans lien de version avec le premier : les citations seraient
+   scindées en deux œuvres. Déposer plutôt la version comme *New version* de l'enregistrement
+   23196960 sur Zenodo (téléversement de l'archive étiquetée), ou, à défaut, déclarer la
+   relation `isNewVersionOf` (`.zenodo.json`, `related_identifiers`), qui relie les
+   enregistrements sans réunir leurs concepts.
 2. Inscrire ce DOI de version dans `CITATION.cff` (`identifiers`) et dans le README, dans
    un commit postérieur (la version déposée ne peut pas contenir son propre DOI).
 3. Calculer et publier l'empreinte de l'archive déposée : `sha256sum <archive>.zip`.
@@ -72,8 +80,10 @@ Un commit public ne prouve pas une date : son horodatage est déclaratif. Pour E
    (jeton RFC 3161, preuve OpenTimestamps) ;
 4. consigner la référence dans `empirical/PROVENANCE.md`.
 
-Pour E1 et E2, `bash scripts/verify-anteriority.sh` (dans un clone du dépôt **d'origine**
-`ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0` ; le dépôt `ASTRA-FCS-v3.3.0`, créé en un seul
-commit, ne porte pas cet historique — `empirical/PROVENANCE.md` §2bis) contrôle
+Pour E1 et E2, `bash scripts/verify-anteriority.sh <clone>` — exécuté depuis le présent dépôt
+sur un clone **complet** (non superficiel) du dépôt **d'origine**
+`ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0`, dont la branche par défaut (v3.1.1) ne contient
+pas le script ; le dépôt `ASTRA-FCS-v3.3.0`, créé en un seul commit, ne porte pas cet
+historique — `empirical/PROVENANCE.md` §2bis) contrôle
 l'empreinte au commit d'ajout et l'ordre dans l'historique ; il signale lui-même qu'il ne
 prouve pas l'antériorité calendaire.

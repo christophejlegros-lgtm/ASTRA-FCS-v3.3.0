@@ -81,5 +81,30 @@
     "date": "2026-10-19",
     "history": "single commit; E1/E2 preregistration commits eb03ad2, 1905da1 not present (empirical/PROVENANCE.md §2bis)",
     "superseded_archive": "ASTRA-FCS-v3.3.0-rc.3.zip, SHA-256 718601e0340d298ac7dcb2ebbe14eff3c1601e4bd1552fc1c1e2d2ad487f3f3e (amended before tagging)"
+  },
+  "anteriority_original_repository": {
+    "date": "2026-10-19",
+    "repository": "christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0",
+    "head": "d81ccd1",
+    "clone": "full (19 commits)",
+    "command": "bash scripts/verify-anteriority.sh <clone> (script of this repository; the original's default branch v3.1.1 predates it)",
+    "E1": {
+      "prereg_commit": "eb03ad2",
+      "hash_at_commit": "= declared",
+      "results_first_commit": "2701372",
+      "ancestor": true
+    },
+    "E2": {
+      "prereg_commit": "1905da1",
+      "hash_at_commit": "= declared",
+      "results_first_commit": "fcf3ef3",
+      "ancestor": true
+    },
+    "limit": "Order within the history only; commit dates are declarative; no third-party time stamp."
+  },
+  "doi_chain": {
+    "v3.1.1": "10.5281/zenodo.23196960 (record checked on zenodo.org, 2026-10-19)",
+    "concept": "10.5281/zenodo.23196959 (as declared in the original CITATION.cff)",
+    "this_prerelease": "none"
   }
 }
