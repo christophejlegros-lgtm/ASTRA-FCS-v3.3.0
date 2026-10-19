@@ -1,0 +1,3059 @@
+
+> @astra/mcp-server@3.3.0-rc.3 test
+> cross-env ASTRA_LOG_LEVEL=silent TSX_TSCONFIG_PATH=tsconfig.test.json npx tsx --test tests/fcs.test.ts tests/astra.test.ts tests/world-model.test.ts tests/wm-simulation.test.ts tests/multimodal-sensors.test.ts tests/tcai.test.ts tests/neuroplatform.test.ts tests/neuroplatform-e2.test.ts tests/second-order.test.ts tests/aif-equivalence.test.ts tests/integration.test.ts tests/transports.test.ts tests/annotations.test.ts tests/reproducibility.test.ts tests/lint-guard.test.ts tests/proxy-validation.test.ts tests/fcs-consolidation.test.ts tests/identity.test.ts tests/teleology.test.ts
+
+TAP version 13
+# Subtest: ActiveInference · TS ↔ NumPy equivalence (golden)
+    # Subtest: TypeScript core reproduces the NumPy reference within 1e-9
+    ok 1 - TypeScript core reproduces the NumPy reference within 1e-9
+      ---
+      duration_ms: 3.013475
+      type: 'test'
+      ...
+    1..1
+ok 1 - ActiveInference · TS ↔ NumPy equivalence (golden)
+  ---
+  duration_ms: 3.849747
+  type: 'suite'
+  ...
+# Subtest: MCP tool annotations
+    # Subtest: the table and tools/list name exactly the same tools (EXPECTED_CAPABILITIES.tools)
+    ok 1 - the table and tools/list name exactly the same tools (EXPECTED_CAPABILITIES.tools)
+      ---
+      duration_ms: 1.947714
+      type: 'test'
+      ...
+    # Subtest: every tool carries a title and all four boolean hints
+    ok 2 - every tool carries a title and all four boolean hints
+      ---
+      duration_ms: 0.348883
+      type: 'test'
+      ...
+    # Subtest: a read-only tool is never destructive
+    ok 3 - a read-only tool is never destructive
+      ---
+      duration_ms: 0.186868
+      type: 'test'
+      ...
+    # Subtest: resets, overwrites and stimulation are flagged destructive
+    ok 4 - resets, overwrites and stimulation are flagged destructive
+      ---
+      duration_ms: 0.151745
+      type: 'test'
+      ...
+    # Subtest: stateful computations are not advertised as read-only
+    ok 5 - stateful computations are not advertised as read-only
+      ---
+      duration_ms: 0.154838
+      type: 'test'
+      ...
+    # Subtest: the FCS layer is read-only and closed-world
+    ok 6 - the FCS layer is read-only and closed-world
+      ---
+      duration_ms: 0.200856
+      type: 'test'
+      ...
+    # Subtest: only the OVOMIND reads are open-world; NeuroPlatform (simulate mode) is not
+    ok 7 - only the OVOMIND reads are open-world; NeuroPlatform (simulate mode) is not
+      ---
+      duration_ms: 0.262569
+      type: 'test'
+      ...
+    1..7
+ok 2 - MCP tool annotations
+  ---
+  duration_ms: 146.21044
+  type: 'suite'
+  ...
+# Subtest: StateStore
+    # Subtest: initialises with default values
+    ok 1 - initialises with default values
+      ---
+      duration_ms: 0.690818
+      type: 'test'
+      ...
+    # Subtest: initialises ACM with proxy names
+    ok 2 - initialises ACM with proxy names
+      ---
+      duration_ms: 0.183122
+      type: 'test'
+      ...
+    # Subtest: get() retrieves nested values via dot-notation
+    ok 3 - get() retrieves nested values via dot-notation
+      ---
+      duration_ms: 0.120867
+      type: 'test'
+      ...
+    # Subtest: set() updates values and returns true
+    ok 4 - set() updates values and returns true
+      ---
+      duration_ms: 0.275968
+      type: 'test'
+      ...
+    # Subtest: set() rejects invalid namespaces
+    ok 5 - set() rejects invalid namespaces
+      ---
+      duration_ms: 0.094117
+      type: 'test'
+      ...
+    # Subtest: emits change events
+    ok 6 - emits change events
+      ---
+      duration_ms: 0.141577
+      type: 'test'
+      ...
+    # Subtest: tick() increments counter
+    ok 7 - tick() increments counter
+      ---
+      duration_ms: 0.170268
+      type: 'test'
+      ...
+    # Subtest: reset() restores defaults
+    ok 8 - reset() restores defaults
+      ---
+      duration_ms: 0.186854
+      type: 'test'
+      ...
+    # Subtest: merge() applies bulk updates
+    ok 9 - merge() applies bulk updates
+      ---
+      duration_ms: 0.560657
+      type: 'test'
+      ...
+    1..9
+ok 3 - StateStore
+  ---
+  duration_ms: 4.674418
+  type: 'suite'
+  ...
+# Subtest: StateStore Bounds Validation
+    # Subtest: setChecked() accepts values within bounds
+    ok 1 - setChecked() accepts values within bounds
+      ---
+      duration_ms: 0.271131
+      type: 'test'
+      ...
+    # Subtest: setChecked() rejects values below minimum
+    ok 2 - setChecked() rejects values below minimum
+      ---
+      duration_ms: 0.077178
+      type: 'test'
+      ...
+    # Subtest: setChecked() rejects values above maximum
+    ok 3 - setChecked() rejects values above maximum
+      ---
+      duration_ms: 0.053368
+      type: 'test'
+      ...
+    # Subtest: setChecked() rejects Infinity
+    ok 4 - setChecked() rejects Infinity
+      ---
+      duration_ms: 0.0484
+      type: 'test'
+      ...
+    # Subtest: setChecked() rejects NaN
+    ok 5 - setChecked() rejects NaN
+      ---
+      duration_ms: 0.047497
+      type: 'test'
+      ...
+    # Subtest: setChecked() rejects invalid paths
+    ok 6 - setChecked() rejects invalid paths
+      ---
+      duration_ms: 0.055299
+      type: 'test'
+      ...
+    # Subtest: getBounds() returns bounds for known paths
+    ok 7 - getBounds() returns bounds for known paths
+      ---
+      duration_ms: 0.054213
+      type: 'test'
+      ...
+    # Subtest: getBounds() returns undefined for unknown paths
+    ok 8 - getBounds() returns undefined for unknown paths
+      ---
+      duration_ms: 0.104891
+      type: 'test'
+      ...
+    # Subtest: boundedPaths lists all registered paths
+    ok 9 - boundedPaths lists all registered paths
+      ---
+      duration_ms: 0.07842
+      type: 'test'
+      ...
+    1..9
+ok 4 - StateStore Bounds Validation
+  ---
+  duration_ms: 1.091728
+  type: 'suite'
+  ...
+# Subtest: SNNEngine
+    # Subtest: initialises with correct total neuron count
+    ok 1 - initialises with correct total neuron count
+      ---
+      duration_ms: 0.205915
+      type: 'test'
+      ...
+    # Subtest: reports layer configuration
+    ok 2 - reports layer configuration
+      ---
+      duration_ms: 0.127304
+      type: 'test'
+      ...
+    # Subtest: creates sparse synaptic connections
+    ok 3 - creates sparse synaptic connections
+      ---
+      duration_ms: 0.121956
+      type: 'test'
+      ...
+    # Subtest: supports custom layer configurations
+    ok 4 - supports custom layer configurations
+      ---
+      duration_ms: 2.815362
+      type: 'test'
+      ...
+    # Subtest: step() returns spike count
+    ok 5 - step() returns spike count
+      ---
+      duration_ms: 0.58317
+      type: 'test'
+      ...
+    # Subtest: run() accumulates spikes across steps
+    ok 6 - run() accumulates spikes across steps
+      ---
+      duration_ms: 9.244068
+      type: 'test'
+      ...
+    # Subtest: voltages initialise to vRest
+    ok 7 - voltages initialise to vRest
+      ---
+      duration_ms: 0.544722
+      type: 'test'
+      ...
+    # Subtest: init() resets state completely
+    ok 8 - init() resets state completely
+      ---
+      duration_ms: 6.293895
+      type: 'test'
+      ...
+    # Subtest: injectSpikes() modifies targeted neurons
+    ok 9 - injectSpikes() modifies targeted neurons
+      ---
+      duration_ms: 0.759332
+      type: 'test'
+      ...
+    # Subtest: injectSpikes() respects output layer boundaries
+    ok 10 - injectSpikes() respects output layer boundaries
+      ---
+      duration_ms: 0.116841
+      type: 'test'
+      ...
+    # Subtest: stats() includes layer information
+    ok 11 - stats() includes layer information
+      ---
+      duration_ms: 0.1677
+      type: 'test'
+      ...
+    # Subtest: weightStats() returns valid statistics
+    ok 12 - weightStats() returns valid statistics
+      ---
+      duration_ms: 2.818028
+      type: 'test'
+      ...
+    # Subtest: layerRates() returns per-layer firing rates
+    ok 13 - layerRates() returns per-layer firing rates
+      ---
+      duration_ms: 2.883216
+      type: 'test'
+      ...
+    # Subtest: STDP modifies weights over time
+    ok 14 - STDP modifies weights over time
+      ---
+      duration_ms: 2.98099
+      type: 'test'
+      ...
+    1..14
+ok 5 - SNNEngine
+  ---
+  duration_ms: 32.320252
+  type: 'suite'
+  ...
+# Subtest: ACMModule
+    # Subtest: assess() returns correctly named proxy fields
+    ok 1 - assess() returns correctly named proxy fields
+      ---
+      duration_ms: 1.228235
+      type: 'test'
+      ...
+    # Subtest: components include methodological basis
+    ok 2 - components include methodological basis
+      ---
+      duration_ms: 2.116766
+      type: 'test'
+      ...
+    # Subtest: formula uses proxy notation (tilde)
+    ok 3 - formula uses proxy notation (tilde)
+      ---
+      duration_ms: 0.451033
+      type: 'test'
+      ...
+    # Subtest: derives no consciousness class or level from the composite (FCS P1/P4, v3.1.1)
+    ok 4 - derives no consciousness class or level from the composite (FCS P1/P4, v3.1.1)
+      ---
+      duration_ms: 0.600123
+      type: 'test'
+      ...
+    # Subtest: score is bounded [0, 1]
+    ok 5 - score is bounded [0, 1]
+      ---
+      duration_ms: 0.276631
+      type: 'test'
+      ...
+    # Subtest: supports custom weights
+    ok 6 - supports custom weights
+      ---
+      duration_ms: 0.533148
+      type: 'test'
+      ...
+    # Subtest: increments cycle count
+    ok 7 - increments cycle count
+      ---
+      duration_ms: 0.384441
+      type: 'test'
+      ...
+    1..7
+ok 6 - ACMModule
+  ---
+  duration_ms: 5.962369
+  type: 'suite'
+  ...
+# Subtest: EthicsMonitor
+    # Subtest: assess() returns NORMAL for default values
+    ok 1 - assess() returns NORMAL for default values
+      ---
+      duration_ms: 0.745943
+      type: 'test'
+      ...
+    # Subtest: reports data source from state mode
+    ok 2 - reports data source from state mode
+      ---
+      duration_ms: 0.136465
+      type: 'test'
+      ...
+    # Subtest: irbRequired is false in sim mode
+    ok 3 - irbRequired is false in sim mode
+      ---
+      duration_ms: 0.068454
+      type: 'test'
+      ...
+    # Subtest: irbRequired is true in live mode
+    ok 4 - irbRequired is true in live mode
+      ---
+      duration_ms: 0.074513
+      type: 'test'
+      ...
+    # Subtest: detects STRESS state
+    ok 5 - detects STRESS state
+      ---
+      duration_ms: 0.108872
+      type: 'test'
+      ...
+    # Subtest: detects DISTRESS state
+    ok 6 - detects DISTRESS state
+      ---
+      duration_ms: 0.172472
+      type: 'test'
+      ...
+    # Subtest: provides mode-aware recommendations
+    ok 7 - provides mode-aware recommendations
+      ---
+      duration_ms: 0.171504
+      type: 'test'
+      ...
+    # Subtest: detects firing rate anomalies
+    ok 8 - detects firing rate anomalies
+      ---
+      duration_ms: 0.250504
+      type: 'test'
+      ...
+    # Subtest: detects ATP/ADP anomalies
+    ok 9 - detects ATP/ADP anomalies
+      ---
+      duration_ms: 0.171634
+      type: 'test'
+      ...
+    # Subtest: detects calcium anomalies
+    ok 10 - detects calcium anomalies
+      ---
+      duration_ms: 0.116245
+      type: 'test'
+      ...
+    # Subtest: simulateDrift() keeps values in plausible range
+    ok 11 - simulateDrift() keeps values in plausible range
+      ---
+      duration_ms: 0.611321
+      type: 'test'
+      ...
+    # Subtest: real DANDI 001603 organoid rates are NORMAL, not DISTRESS (v3.1.1 recalibration)
+    ok 12 - real DANDI 001603 organoid rates are NORMAL, not DISTRESS (v3.1.1 recalibration)
+      ---
+      duration_ms: 0.344114
+      type: 'test'
+      ...
+    # Subtest: maintains history with data source
+    ok 13 - maintains history with data source
+      ---
+      duration_ms: 0.082108
+      type: 'test'
+      ...
+    1..13
+ok 7 - EthicsMonitor
+  ---
+  duration_ms: 3.42697
+  type: 'suite'
+  ...
+# Subtest: Simulation
+    # Subtest: starts and stops cleanly
+    ok 1 - starts and stops cleanly
+      ---
+      duration_ms: 0.340251
+      type: 'test'
+      ...
+    # Subtest: does not start twice
+    ok 2 - does not start twice
+      ---
+      duration_ms: 0.070056
+      type: 'test'
+      ...
+    # Subtest: advances tick counter
+    ok 3 - advances tick counter
+      ---
+      duration_ms: 150.761213
+      type: 'test'
+      ...
+    1..3
+ok 8 - Simulation
+  ---
+  duration_ms: 151.739231
+  type: 'suite'
+  ...
+# Subtest: Security
+    # Subtest: rejects prototype pollution paths
+    ok 1 - rejects prototype pollution paths
+      ---
+      duration_ms: 0.208764
+      type: 'test'
+      ...
+    # Subtest: rejects constructor paths
+    ok 2 - rejects constructor paths
+      ---
+      duration_ms: 0.113848
+      type: 'test'
+      ...
+    # Subtest: bounds validation prevents extreme values
+    ok 3 - bounds validation prevents extreme values
+      ---
+      duration_ms: 0.149517
+      type: 'test'
+      ...
+    1..3
+ok 9 - Security
+  ---
+  duration_ms: 0.595481
+  type: 'suite'
+  ...
+# Subtest: Pareto — a methodological choice, not the unique admissible rule
+    # Subtest: no FCS text calls Pareto "the only admissible rule" any more
+    ok 1 - no FCS text calls Pareto "the only admissible rule" any more
+      ---
+      duration_ms: 1.15198
+      type: 'test'
+      ...
+    1..1
+ok 10 - Pareto — a methodological choice, not the unique admissible rule
+  ---
+  duration_ms: 2.291916
+  type: 'suite'
+  ...
+# Subtest: Independence, stated precisely
+    # Subtest: the dominance relation passes both checks by construction
+    ok 1 - the dominance relation passes both checks by construction
+      ---
+      duration_ms: 52.27433
+      type: 'test'
+      ...
+    # Subtest: the strata-induced weak order fails both, which is a reason not to read strata as ranks
+    ok 2 - the strata-induced weak order fails both, which is a reason not to read strata as ranks
+      ---
+      duration_ms: 10.888011
+      type: 'test'
+      ...
+    # Subtest: reports four checks
+    ok 3 - reports four checks
+      ---
+      duration_ms: 34.155892
+      type: 'test'
+      ...
+    1..3
+ok 11 - Independence, stated precisely
+  ---
+  duration_ms: 97.744488
+  type: 'suite'
+  ...
+# Subtest: Episode-window sensitivity
+    # Subtest: the eight strata are reproduced for any first cut in [10⁻¹, 10⁰) s, and not outside
+    ok 1 - the eight strata are reproduced for any first cut in [10⁻¹, 10⁰) s, and not outside
+      ---
+      duration_ms: 13.702287
+      type: 'test'
+      ...
+    1..1
+ok 12 - Episode-window sensitivity
+  ---
+  duration_ms: 14.124057
+  type: 'suite'
+  ...
+# Subtest: Inter-rater agreement (Krippendorff α)
+    # Subtest: matches the reference implementation on the canonical example
+    ok 1 - matches the reference implementation on the canonical example
+      ---
+      duration_ms: 1.058324
+      type: 'test'
+      ...
+    # Subtest: a rater who copies the source table agrees perfectly and reproduces the strata
+    ok 2 - a rater who copies the source table agrees perfectly and reproduces the strata
+      ---
+      duration_ms: 6.762251
+      type: 'test'
+      ...
+    # Subtest: a rater who shifts one ablation degree is detected
+    ok 3 - a rater who shifts one ablation degree is detected
+      ---
+      duration_ms: 1.520125
+      type: 'test'
+      ...
+    # Subtest: the coding template carries no published value
+    ok 4 - the coding template carries no published value
+      ---
+      duration_ms: 0.572187
+      type: 'test'
+      ...
+    1..4
+ok 13 - Inter-rater agreement (Krippendorff α)
+  ---
+  duration_ms: 14.653241
+  type: 'suite'
+  ...
+# Subtest: Lakatosian revision records
+    # Subtest: classifies complete, incomplete and content-decreasing records
+    ok 1 - classifies complete, incomplete and content-decreasing records
+      ---
+      duration_ms: 1.055633
+      type: 'test'
+      ...
+    # Subtest: flags a belt revision made without the rank-1 check, and accepts it once that check is recorded
+    ok 2 - flags a belt revision made without the rank-1 check, and accepts it once that check is recorded
+      ---
+      duration_ms: 0.773132
+      type: 'test'
+      ...
+    # Subtest: accepts the revision the declared order prescribes (regression found by independent review)
+    ok 3 - accepts the revision the declared order prescribes (regression found by independent review)
+      ---
+      duration_ms: 0.486198
+      type: 'test'
+      ...
+    # Subtest: treats an unset local intervention like a null one (bridge strand)
+    ok 4 - treats an unset local intervention like a null one (bridge strand)
+      ---
+      duration_ms: 0.261827
+      type: 'test'
+      ...
+    # Subtest: the M1 evaluation states its underdetermination
+    ok 5 - the M1 evaluation states its underdetermination
+      ---
+      duration_ms: 0.144192
+      type: 'test'
+      ...
+    1..5
+ok 14 - Lakatosian revision records
+  ---
+  duration_ms: 2.962127
+  type: 'suite'
+  ...
+# Subtest: Levels, core and conformance — scope notes
+    # Subtest: level II separates control, minimal-self individuation and experience
+    ok 1 - level II separates control, minimal-self individuation and experience
+      ---
+      duration_ms: 0.234693
+      type: 'test'
+      ...
+    # Subtest: the core carries scope notes on the weak constraint and polynomial admissibility
+    ok 2 - the core carries scope notes on the weak constraint and polynomial admissibility
+      ---
+      duration_ms: 0.115104
+      type: 'test'
+      ...
+    # Subtest: level order caution and six open questions are published
+    ok 3 - level order caution and six open questions are published
+      ---
+      duration_ms: 0.054308
+      type: 'test'
+      ...
+    # Subtest: a conformance profile states that it is not a diagnosis
+    ok 4 - a conformance profile states that it is not a diagnosis
+      ---
+      duration_ms: 1.342202
+      type: 'test'
+      ...
+    # Subtest: the consolidated report clears the claim guard
+    ok 5 - the consolidated report clears the claim guard
+      ---
+      duration_ms: 57.62985
+      type: 'test'
+      ...
+    1..5
+ok 15 - Levels, core and conformance — scope notes
+  ---
+  duration_ms: 60.340618
+  type: 'suite'
+  ...
+# Subtest: FCS taxonomy — document IV v1.3 (table as in v1.2)
+    # Subtest: carries seventeen species–function pairs
+    ok 1 - carries seventeen species–function pairs
+      ---
+      duration_ms: 1.14379
+      type: 'test'
+      ...
+    # Subtest: covers thirteen molecular classes
+    ok 2 - covers thirteen molecular classes
+      ---
+      duration_ms: 0.318879
+      type: 'test'
+      ...
+    # Subtest: uses all five causal roles
+    ok 3 - uses all five causal roles
+      ---
+      duration_ms: 0.307081
+      type: 'test'
+      ...
+    # Subtest: pair ids are unique and resolvable
+    ok 4 - pair ids are unique and resolvable
+      ---
+      duration_ms: 0.305112
+      type: 'test'
+      ...
+    # Subtest: every τ range is well-ordered and every d is in [0,4]
+    ok 5 - every τ range is well-ordered and every d is in [0,4]
+      ---
+      duration_ms: 0.189136
+      type: 'test'
+      ...
+    # Subtest: only the mobile charge sits at distance 0
+    ok 6 - only the mobile charge sits at distance 0
+      ---
+      duration_ms: 1.726458
+      type: 'test'
+      ...
+    # Subtest: the two constitutive pairs are the charge and the valve
+    ok 7 - the two constitutive pairs are the charge and the valve
+      ---
+      duration_ms: 0.224391
+      type: 'test'
+      ...
+    # Subtest: the four permissive pairs are 2b, 7, 12b, 13
+    ok 8 - the four permissive pairs are 2b, 7, 12b, 13
+      ---
+      duration_ms: 0.285889
+      type: 'test'
+      ...
+    # Subtest: function, not substance: class 2 and class 9 each split into two roles
+    ok 9 - function, not substance: class 2 and class 9 each split into two roles
+      ---
+      duration_ms: 0.308485
+      type: 'test'
+      ...
+    # Subtest: τ formatting renders superscript exponents
+    ok 10 - τ formatting renders superscript exponents
+      ---
+      duration_ms: 0.763216
+      type: 'test'
+      ...
+    1..10
+ok 16 - FCS taxonomy — document IV v1.3 (table as in v1.2)
+  ---
+  duration_ms: 7.381901
+  type: 'suite'
+  ...
+# Subtest: FCS stratification — Pareto dominance, document IV §2
+    # Subtest: reproduces the eight published strata exactly
+    ok 1 - reproduces the eight published strata exactly
+      ---
+      duration_ms: 3.249231
+      type: 'test'
+      ...
+    # Subtest: stratum 1 is the ion alone; stratum 2 the valve alone
+    ok 2 - stratum 1 is the ion alone; stratum 2 the valve alone
+      ---
+      duration_ms: 0.201747
+      type: 'test'
+      ...
+    # Subtest: stratum 8 holds the two distant permissive cofactor pairs
+    ok 3 - stratum 8 holds the two distant permissive cofactor pairs
+      ---
+      duration_ms: 0.134146
+      type: 'test'
+      ...
+    # Subtest: every pair lands in exactly one stratum
+    ok 4 - every pair lands in exactly one stratum
+      ---
+      duration_ms: 0.136631
+      type: 'test'
+      ...
+    # Subtest: dominance is irreflexive and asymmetric
+    ok 5 - dominance is irreflexive and asymmetric
+      ---
+      duration_ms: 0.782073
+      type: 'test'
+      ...
+    # Subtest: no pair is dominated by another in its own stratum
+    ok 6 - no pair is dominated by another in its own stratum
+      ---
+      duration_ms: 0.298002
+      type: 'test'
+      ...
+    # Subtest: the τ ordinalisation is what it declares: three ranks, cut at the episode window
+    ok 7 - the τ ordinalisation is what it declares: three ranks, cut at the episode window
+      ---
+      duration_ms: 0.222372
+      type: 'test'
+      ...
+    # Subtest: a different τ ordinalisation gives a different order — the choice is load-bearing
+    ok 8 - a different τ ordinalisation gives a different order — the choice is load-bearing
+      ---
+      duration_ms: 0.72834
+      type: 'test'
+      ...
+    # Subtest: comparison reports incomparability rather than inventing an order
+    ok 9 - comparison reports incomparability rather than inventing an order
+      ---
+      duration_ms: 1.775164
+      type: 'test'
+      ...
+    # Subtest: the declared τ reduction is the only one of the ten alternatives that reproduces the strata (v3.1.1)
+    ok 10 - the declared τ reduction is the only one of the ten alternatives that reproduces the strata (v3.1.1)
+      ---
+      duration_ms: 10.38904
+      type: 'test'
+      ...
+    # Subtest: dominance relation: 93 of 136 unordered pairs are comparable; the Hasse diagram generates it (v3.1.1)
+    ok 11 - dominance relation: 93 of 136 unordered pairs are comparable; the Hasse diagram generates it (v3.1.1)
+      ---
+      duration_ms: 2.270566
+      type: 'test'
+      ...
+    # Subtest: strata do not order 28 of the 121 cross-stratum pairs (v3.1.1)
+    ok 12 - strata do not order 28 of the 121 cross-stratum pairs (v3.1.1)
+      ---
+      duration_ms: 3.849373
+      type: 'test'
+      ...
+    # Subtest: a stratum is context-dependent: removing the ion shifts the 16 others (v3.1.1)
+    ok 13 - a stratum is context-dependent: removing the ion shifts the 16 others (v3.1.1)
+      ---
+      duration_ms: 2.207589
+      type: 'test'
+      ...
+    # Subtest: 12b and 13 are equivalent on all three sub-criteria
+    ok 14 - 12b and 13 are equivalent on all three sub-criteria
+      ---
+      duration_ms: 0.423144
+      type: 'test'
+      ...
+    # Subtest: unknown pair id throws rather than defaulting
+    ok 15 - unknown pair id throws rather than defaulting
+      ---
+      duration_ms: 1.169157
+      type: 'test'
+      ...
+    1..15
+ok 17 - FCS stratification — Pareto dominance, document IV §2
+  ---
+  duration_ms: 28.555879
+  type: 'suite'
+  ...
+# Subtest: FCS four-level framework
+    # Subtest: four levels, each with a non-empty ASTRA gap
+    ok 1 - four levels, each with a non-empty ASTRA gap
+      ---
+      duration_ms: 0.32708
+      type: 'test'
+      ...
+    # Subtest: the field hypothesis is belt, not core
+    ok 2 - the field hypothesis is belt, not core
+      ---
+      duration_ms: 0.108335
+      type: 'test'
+      ...
+    # Subtest: only the organoid realises level I
+    ok 3 - only the organoid realises level I
+      ---
+      duration_ms: 0.302853
+      type: 'test'
+      ...
+    # Subtest: silicon simulates levels III and IV without realising level I
+    ok 4 - silicon simulates levels III and IV without realising level I
+      ---
+      duration_ms: 0.176958
+      type: 'test'
+      ...
+    # Subtest: level coverage names a substrate for every level
+    ok 5 - level coverage names a substrate for every level
+      ---
+      duration_ms: 0.695107
+      type: 'test'
+      ...
+    1..5
+ok 18 - FCS four-level framework
+  ---
+  duration_ms: 1.915642
+  type: 'suite'
+  ...
+# Subtest: FCS substrate conformance audit
+    # Subtest: silicon realises no constitutive pair
+    ok 1 - silicon realises no constitutive pair
+      ---
+      duration_ms: 1.686106
+      type: 'test'
+      ...
+    # Subtest: silicon has no field to observe
+    ok 2 - silicon has no field to observe
+      ---
+      duration_ms: 0.30879
+      type: 'test'
+      ...
+    # Subtest: the organoid realises both constitutive pairs and carries the carrier
+    ok 3 - the organoid realises both constitutive pairs and carries the carrier
+      ---
+      duration_ms: 0.735715
+      type: 'test'
+      ...
+    # Subtest: live biomarkers bind to the taxonomy by class
+    ok 4 - live biomarkers bind to the taxonomy by class
+      ---
+      duration_ms: 0.544217
+      type: 'test'
+      ...
+    # Subtest: intracellular Ca²⁺ (eth.ca, nM) binds to NO pair — second messenger, outside class 1 (v3.1.1)
+    ok 5 - intracellular Ca²⁺ (eth.ca, nM) binds to NO pair — second messenger, outside class 1 (v3.1.1)
+      ---
+      duration_ms: 0.331556
+      type: 'test'
+      ...
+    # Subtest: class 1 reads only an extracellular calcium value in mM
+    ok 6 - class 1 reads only an extracellular calcium value in mM
+      ---
+      duration_ms: 0.160221
+      type: 'test'
+      ...
+    # Subtest: a missing biomarker withholds rather than defaulting
+    ok 7 - a missing biomarker withholds rather than defaulting
+      ---
+      duration_ms: 0.160086
+      type: 'test'
+      ...
+    # Subtest: every human-wearable verdict is undetermined, by design
+    ok 8 - every human-wearable verdict is undetermined, by design
+      ---
+      duration_ms: 0.094346
+      type: 'test'
+      ...
+    # Subtest: no audit carries an aggregate score
+    ok 9 - no audit carries an aggregate score
+      ---
+      duration_ms: 0.22461
+      type: 'test'
+      ...
+    # Subtest: tallies sum to the seventeen pairs on every substrate
+    ok 10 - tallies sum to the seventeen pairs on every substrate
+      ---
+      duration_ms: 0.294928
+      type: 'test'
+      ...
+    1..10
+ok 19 - FCS substrate conformance audit
+  ---
+  duration_ms: 4.943708
+  type: 'suite'
+  ...
+# Subtest: FCS negative heuristic — five prohibitions, enforced
+    # Subtest: all five prohibitions are defined with a rationale
+    ok 1 - all five prohibitions are defined with a rationale
+      ---
+      duration_ms: 0.301541
+      type: 'test'
+      ...
+    # Subtest: P4 refuses ordinal criteria lacking a common scale
+    ok 2 - P4 refuses ordinal criteria lacking a common scale
+      ---
+      duration_ms: 0.163133
+      type: 'test'
+      ...
+    # Subtest: P4 admits commensurable quantities
+    ok 3 - P4 admits commensurable quantities
+      ---
+      duration_ms: 1.179774
+      type: 'test'
+      ...
+    # Subtest: P4 treats a single criterion as no aggregation
+    ok 4 - P4 treats a single criterion as no aggregation
+      ---
+      duration_ms: 0.175234
+      type: 'test'
+      ...
+    # Subtest: refuseAggregate returns a withheld scalar carrying its reason
+    ok 5 - refuseAggregate returns a withheld scalar carrying its reason
+      ---
+      duration_ms: 0.261405
+      type: 'test'
+      ...
+    # Subtest: P5 blocks a constitutive inference from non-selective failure
+    ok 6 - P5 blocks a constitutive inference from non-selective failure
+      ---
+      duration_ms: 0.113702
+      type: 'test'
+      ...
+    # Subtest: P5 blocks a fat-handed intervention whatever the ablation degree
+    ok 7 - P5 blocks a fat-handed intervention whatever the ablation degree
+      ---
+      duration_ms: 0.057836
+      type: 'test'
+      ...
+    # Subtest: P5 admits a selective intervention on a non-permissive effect, with the conjunction clause
+    ok 8 - P5 admits a selective intervention on a non-permissive effect, with the conjunction clause
+      ---
+      duration_ms: 0.062751
+      type: 'test'
+      ...
+    # Subtest: P1 catches a quantified degree of proto-consciousness, in both languages
+    ok 9 - P1 catches a quantified degree of proto-consciousness, in both languages
+      ---
+      duration_ms: 5.356465
+      type: 'test'
+      ...
+    # Subtest: P2 catches identifying an observable with phenomenality
+    ok 10 - P2 catches identifying an observable with phenomenality
+      ---
+      duration_ms: 0.154221
+      type: 'test'
+      ...
+    # Subtest: accented tokens are caught despite JavaScript's ASCII \\b
+    ok 11 - accented tokens are caught despite JavaScript's ASCII \\b
+      ---
+      duration_ms: 0.132729
+      type: 'test'
+      ...
+    # Subtest: a French sentence crossing two prohibitions reports both
+    ok 12 - a French sentence crossing two prohibitions reports both
+      ---
+      duration_ms: 0.078225
+      type: 'test'
+      ...
+    # Subtest: P4 catches an aggregate score named in prose
+    ok 13 - P4 catches an aggregate score named in prose
+      ---
+      duration_ms: 0.057086
+      type: 'test'
+      ...
+    # Subtest: ordinary FCS prose passes the linter
+    ok 14 - ordinary FCS prose passes the linter
+      ---
+      duration_ms: 0.075228
+      type: 'test'
+      ...
+    # Subtest: the whole consolidated report passes its own linters
+    ok 15 - the whole consolidated report passes its own linters
+      ---
+      duration_ms: 47.81051
+      type: 'test'
+      ...
+    # Subtest: use/mention: stating a prohibition is exempt, making the move is not
+    ok 16 - use/mention: stating a prohibition is exempt, making the move is not
+      ---
+      duration_ms: 0.570377
+      type: 'test'
+      ...
+    # Subtest: use/mention: a bibliographic title is exempt
+    ok 17 - use/mention: a bibliographic title is exempt
+      ---
+      duration_ms: 0.11225
+      type: 'test'
+      ...
+    # Subtest: P3 fires on a fit-to-mechanism inference, not on any sentence containing "mécanisme" (v3.1.1)
+    ok 18 - P3 fires on a fit-to-mechanism inference, not on any sentence containing "mécanisme" (v3.1.1)
+      ---
+      duration_ms: 0.193637
+      type: 'test'
+      ...
+    # Subtest: a year in parentheses no longer exempts an assertion (v3.1.1)
+    ok 19 - a year in parentheses no longer exempts an assertion (v3.1.1)
+      ---
+      duration_ms: 0.688519
+      type: 'test'
+      ...
+    # Subtest: naming a prohibition does not exempt a sentence that asserts a value (v3.1.1)
+    ok 20 - naming a prohibition does not exempt a sentence that asserts a value (v3.1.1)
+      ---
+      duration_ms: 0.101429
+      type: 'test'
+      ...
+    # Subtest: common paraphrases of a quantified degree are caught (v3.1.1)
+    ok 21 - common paraphrases of a quantified degree are caught (v3.1.1)
+      ---
+      duration_ms: 0.223394
+      type: 'test'
+      ...
+    # Subtest: P4: an ordinal unit label does not make two ranks commensurable (v3.1.1)
+    ok 22 - P4: an ordinal unit label does not make two ranks commensurable (v3.1.1)
+      ---
+      duration_ms: 0.231891
+      type: 'test'
+      ...
+    # Subtest: the exemption does not neuter the linter inside a mixed payload
+    ok 23 - the exemption does not neuter the linter inside a mixed payload
+      ---
+      duration_ms: 0.224001
+      type: 'test'
+      ...
+    1..23
+ok 20 - FCS negative heuristic — five prohibitions, enforced
+  ---
+  duration_ms: 58.987676
+  type: 'suite'
+  ...
+# Subtest: FCS withdrawal conditions and revision order
+    # Subtest: unset outcomes stay undetermined and never collapse to negative
+    ok 1 - unset outcomes stay undetermined and never collapse to negative
+      ---
+      duration_ms: 0.731856
+      type: 'test'
+      ...
+    # Subtest: a negative level-I strand withdraws the field hypothesis and M2 with it
+    ok 2 - a negative level-I strand withdraws the field hypothesis and M2 with it
+      ---
+      duration_ms: 0.191789
+      type: 'test'
+      ...
+    # Subtest: a negative osmotic strand also withdraws the field hypothesis
+    ok 3 - a negative osmotic strand also withdraws the field hypothesis
+      ---
+      duration_ms: 0.07871
+      type: 'test'
+      ...
+    # Subtest: the declared asymmetry holds: a favourable human outcome does not corroborate M2
+    ok 4 - the declared asymmetry holds: a favourable human outcome does not corroborate M2
+      ---
+      duration_ms: 0.190443
+      type: 'test'
+      ...
+    # Subtest: the outcome against the bias does withdraw M2
+    ok 5 - the outcome against the bias does withdraw M2
+      ---
+      duration_ms: 0.183705
+      type: 'test'
+      ...
+    # Subtest: covariation alone leaves the bridge undetermined; the local intervention decides
+    ok 6 - covariation alone leaves the bridge undetermined; the local intervention decides
+      ---
+      duration_ms: 0.353536
+      type: 'test'
+      ...
+    # Subtest: interoceptive dimensionality effects withdraw the kinaesthetic thesis, framework surviving
+    ok 7 - interoceptive dimensionality effects withdraw the kinaesthetic thesis, framework surviving
+      ---
+      duration_ms: 0.19953
+      type: 'test'
+      ...
+    # Subtest: M1 carries a dated clause and is withdrawn once it elapses unmet
+    ok 8 - M1 carries a dated clause and is withdrawn once it elapses unmet
+      ---
+      duration_ms: 0.261456
+      type: 'test'
+      ...
+    # Subtest: an experiment ranked by M1 keeps it standing past its deadline
+    ok 9 - an experiment ranked by M1 keeps it standing past its deadline
+      ---
+      duration_ms: 0.122898
+      type: 'test'
+      ...
+    # Subtest: the revision order is declared, ordered and complete
+    ok 10 - the revision order is declared, ordered and complete
+      ---
+      duration_ms: 0.406194
+      type: 'test'
+      ...
+    # Subtest: the core carries no withdrawal condition
+    ok 11 - the core carries no withdrawal condition
+      ---
+      duration_ms: 8.119408
+      type: 'test'
+      ...
+    # Subtest: next-to-revise skips withdrawn theses
+    ok 12 - next-to-revise skips withdrawn theses
+      ---
+      duration_ms: 0.201353
+      type: 'test'
+      ...
+    1..12
+ok 21 - FCS withdrawal conditions and revision order
+  ---
+  duration_ms: 11.471029
+  type: 'suite'
+  ...
+# Subtest: FCS bibliography
+    # Subtest: every reference carries a DOI verified by the source documents
+    ok 1 - every reference carries a DOI verified by the source documents
+      ---
+      duration_ms: 0.343993
+      type: 'test'
+      ...
+    # Subtest: reference keys are unique
+    ok 2 - reference keys are unique
+      ---
+      duration_ms: 0.10165
+      type: 'test'
+      ...
+    # Subtest: the strands load-bearing citations are present
+    ok 3 - the strands load-bearing citations are present
+      ---
+      duration_ms: 0.083081
+      type: 'test'
+      ...
+    1..3
+ok 22 - FCS bibliography
+  ---
+  duration_ms: 0.627145
+  type: 'suite'
+  ...
+# Subtest: FCS consolidated report
+    # Subtest: reports the taxonomy shape and the reproduction verdict
+    ok 1 - reports the taxonomy shape and the reproduction verdict
+      ---
+      duration_ms: 65.8088
+      type: 'test'
+      ...
+    # Subtest: carries the provenance of the source documents
+    ok 2 - carries the provenance of the source documents
+      ---
+      duration_ms: 25.774141
+      type: 'test'
+      ...
+    1..2
+ok 23 - FCS consolidated report
+  ---
+  duration_ms: 91.732611
+  type: 'suite'
+  ...
+# Subtest: FCS belt extension — synthesis S-1.6 (v3.1.1)
+    # Subtest: the two columns do not overlap: nothing both breaks the dependence and satisfies the P5 clause
+    ok 1 - the two columns do not overlap: nothing both breaks the dependence and satisfies the P5 clause
+      ---
+      duration_ms: 0.248705
+      type: 'test'
+      ...
+    # Subtest: optogenetic gain of function satisfies the P5 clause; loss of function does not
+    ok 2 - optogenetic gain of function satisfies the P5 clause; loss of function does not
+      ---
+      duration_ms: 2.171764
+      type: 'test'
+      ...
+    # Subtest: every astrocytic function decomposes onto a pair already in the table
+    ok 3 - every astrocytic function decomposes onto a pair already in the table
+      ---
+      duration_ms: 0.224837
+      type: 'test'
+      ...
+    # Subtest: a candidate astrocytic pair would be equivalent to class 8 and add no distinction
+    ok 4 - a candidate astrocytic pair would be equivalent to class 8 and add no distinction
+      ---
+      duration_ms: 0.107205
+      type: 'test'
+      ...
+    # Subtest: the published table is unchanged by the extension
+    ok 5 - the published table is unchanged by the extension
+      ---
+      duration_ms: 0.052867
+      type: 'test'
+      ...
+    # Subtest: the consolidated report carries the S-1.6 extension and passes its own linter
+    ok 6 - the consolidated report carries the S-1.6 extension and passes its own linter
+      ---
+      duration_ms: 27.955253
+      type: 'test'
+      ...
+    1..6
+ok 24 - FCS belt extension — synthesis S-1.6 (v3.1.1)
+  ---
+  duration_ms: 30.991946
+  type: 'suite'
+  ...
+# Subtest: Identity of the cited object
+    # Subtest: documentation, metadata and CI agree with src/version.ts
+    ok 1 - documentation, metadata and CI agree with src/version.ts
+      ---
+      duration_ms: 86.913288
+      type: 'test'
+      ...
+    # Subtest: the name passes its own test, files included
+    ok 2 - the name passes its own test, files included
+      ---
+      duration_ms: 41.691488
+      type: 'test'
+      ...
+    # Subtest: the name test fails on the withdrawn "Awareness" expansion
+    ok 3 - the name test fails on the withdrawn "Awareness" expansion
+      ---
+      duration_ms: 1.753145
+      type: 'test'
+      ...
+    # Subtest: the name test fails when the declared units do not spell the acronym
+    ok 4 - the name test fails when the declared units do not spell the acronym
+      ---
+      duration_ms: 1.111198
+      type: 'test'
+      ...
+    # Subtest: the name test fails when a definition asserts what ASTRA cannot assert
+    ok 5 - the name test fails when a definition asserts what ASTRA cannot assert
+      ---
+      duration_ms: 3.701929
+      type: 'test'
+      ...
+    # Subtest: the counts computed at registration equal EXPECTED_CAPABILITIES
+    ok 6 - the counts computed at registration equal EXPECTED_CAPABILITIES
+      ---
+      duration_ms: 79.977796
+      type: 'test'
+      ...
+    1..6
+ok 25 - Identity of the cited object
+  ---
+  duration_ms: 216.669635
+  type: 'suite'
+  ...
+# Subtest: Tool Discovery
+    # Subtest: lists all 12 tools
+    ok 1 - lists all 12 tools
+      ---
+      duration_ms: 17.281934
+      type: 'test'
+      ...
+    # Subtest: tools have titles and annotations
+    ok 2 - tools have titles and annotations
+      ---
+      duration_ms: 6.064799
+      type: 'test'
+      ...
+    # Subtest: expected tool names are present
+    ok 3 - expected tool names are present
+      ---
+      duration_ms: 4.581392
+      type: 'test'
+      ...
+    1..3
+ok 26 - Tool Discovery
+  ---
+  duration_ms: 118.594325
+  type: 'suite'
+  ...
+# Subtest: Tool Execution
+    # Subtest: get_system_status returns structured data
+    ok 1 - get_system_status returns structured data
+      ---
+      duration_ms: 22.216684
+      type: 'test'
+      ...
+    # Subtest: get_metrics returns all subsystems
+    ok 2 - get_metrics returns all subsystems
+      ---
+      duration_ms: 7.861664
+      type: 'test'
+      ...
+    # Subtest: get_metrics ACM uses proxy names
+    ok 3 - get_metrics ACM uses proxy names
+      ---
+      duration_ms: 1.273855
+      type: 'test'
+      ...
+    # Subtest: get_snn_state includes layer info
+    ok 4 - get_snn_state includes layer info
+      ---
+      duration_ms: 1.449703
+      type: 'test'
+      ...
+    # Subtest: snn_step advances simulation
+    ok 5 - snn_step advances simulation
+      ---
+      duration_ms: 86.947225
+      type: 'test'
+      ...
+    # Subtest: snn_reset reinitialises engine with layers
+    ok 6 - snn_reset reinitialises engine with layers
+      ---
+      duration_ms: 1.76018
+      type: 'test'
+      ...
+    # Subtest: inject_spikes targets correct layer
+    ok 7 - inject_spikes targets correct layer
+      ---
+      duration_ms: 1.379385
+      type: 'test'
+      ...
+    # Subtest: get_acm_score uses proxy naming
+    ok 8 - get_acm_score uses proxy naming
+      ---
+      duration_ms: 2.161778
+      type: 'test'
+      ...
+    # Subtest: check_ethics includes data source and disclaimer
+    ok 9 - check_ethics includes data source and disclaimer
+      ---
+      duration_ms: 0.906825
+      type: 'test'
+      ...
+    1..9
+ok 27 - Tool Execution
+  ---
+  duration_ms: 180.428301
+  type: 'suite'
+  ...
+# Subtest: set_parameter Bounds Validation
+    # Subtest: accepts valid values within bounds
+    ok 1 - accepts valid values within bounds
+      ---
+      duration_ms: 1.226303
+      type: 'test'
+      ...
+    # Subtest: rejects values below minimum
+    ok 2 - rejects values below minimum
+      ---
+      duration_ms: 0.90952
+      type: 'test'
+      ...
+    # Subtest: rejects values above maximum
+    ok 3 - rejects values above maximum
+      ---
+      duration_ms: 0.740915
+      type: 'test'
+      ...
+    # Subtest: rejects invalid paths
+    ok 4 - rejects invalid paths
+      ---
+      duration_ms: 0.655246
+      type: 'test'
+      ...
+    # Subtest: returns bounds info with successful updates
+    ok 5 - returns bounds info with successful updates
+      ---
+      duration_ms: 0.514828
+      type: 'test'
+      ...
+    1..5
+ok 28 - set_parameter Bounds Validation
+  ---
+  duration_ms: 51.08361
+  type: 'suite'
+  ...
+# Subtest: Resources
+    # Subtest: lists 5 resources
+    ok 1 - lists 5 resources
+      ---
+      duration_ms: 3.520954
+      type: 'test'
+      ...
+    # Subtest: reads metrics-realtime
+    ok 2 - reads metrics-realtime
+      ---
+      duration_ms: 1.682184
+      type: 'test'
+      ...
+    # Subtest: snn-topology reflects actual engine config
+    ok 3 - snn-topology reflects actual engine config
+      ---
+      duration_ms: 0.751811
+      type: 'test'
+      ...
+    # Subtest: acm-state uses proxy names
+    ok 4 - acm-state uses proxy names
+      ---
+      duration_ms: 1.915807
+      type: 'test'
+      ...
+    # Subtest: ethics-welfare includes data source
+    ok 5 - ethics-welfare includes data source
+      ---
+      duration_ms: 1.031914
+      type: 'test'
+      ...
+    # Subtest: snapshot-current includes all state
+    ok 6 - snapshot-current includes all state
+      ---
+      duration_ms: 2.806046
+      type: 'test'
+      ...
+    1..6
+ok 29 - Resources
+  ---
+  duration_ms: 59.648631
+  type: 'suite'
+  ...
+# Subtest: Prompts
+    # Subtest: lists 3 prompts
+    ok 1 - lists 3 prompts
+      ---
+      duration_ms: 1.548635
+      type: 'test'
+      ...
+    # Subtest: system-health-report prompt mentions proxy disclaimer
+    ok 2 - system-health-report prompt mentions proxy disclaimer
+      ---
+      duration_ms: 0.999352
+      type: 'test'
+      ...
+    # Subtest: snn-experiment prompt warns about proxy interpretation
+    ok 3 - snn-experiment prompt warns about proxy interpretation
+      ---
+      duration_ms: 0.585593
+      type: 'test'
+      ...
+    # Subtest: ethics-stress-test prompt notes sim mode
+    ok 4 - ethics-stress-test prompt notes sim mode
+      ---
+      duration_ms: 0.346892
+      type: 'test'
+      ...
+    1..4
+ok 30 - Prompts
+  ---
+  duration_ms: 65.130903
+  type: 'suite'
+  ...
+# Subtest: Multi-Step Workflow
+    # Subtest: full experiment: reset → inject → run → assess
+    ok 1 - full experiment: reset → inject → run → assess
+      ---
+      duration_ms: 4289.331133
+      type: 'test'
+      ...
+    # Subtest: ethics stress test: NORMAL → STRESS → DISTRESS → recovery
+    ok 2 - ethics stress test: NORMAL → STRESS → DISTRESS → recovery
+      ---
+      duration_ms: 3.760009
+      type: 'test'
+      ...
+    1..2
+ok 31 - Multi-Step Workflow
+  ---
+  duration_ms: 4345.585798
+  type: 'suite'
+  ...
+# Subtest: Server-wide claim guard — mechanism
+    # Subtest: blocks a forbidden claim emitted by an arbitrary tool
+    ok 1 - blocks a forbidden claim emitted by an arbitrary tool
+      ---
+      duration_ms: 40.198963
+      type: 'test'
+      ...
+    # Subtest: fcs_lint is exempt: echoing the screened string is its function
+    ok 2 - fcs_lint is exempt: echoing the screened string is its function
+      ---
+      duration_ms: 0.333754
+      type: 'test'
+      ...
+    1..2
+ok 32 - Server-wide claim guard — mechanism
+  ---
+  duration_ms: 41.47234
+  type: 'suite'
+  ...
+# Subtest: Server-wide claim guard — ASTRA payloads as shipped
+    # Subtest: every tool callable without arguments clears the guard
+    ok 1 - every tool callable without arguments clears the guard
+      ---
+      duration_ms: 810.63129
+      type: 'test'
+      ...
+    # Subtest: every resource clears the guard
+    ok 2 - every resource clears the guard
+      ---
+      duration_ms: 38.531105
+      type: 'test'
+      ...
+    # Subtest: get_acm_score carries no consciousness class or label
+    ok 3 - get_acm_score carries no consciousness class or label
+      ---
+      duration_ms: 1.817456
+      type: 'test'
+      ...
+    1..3
+ok 33 - Server-wide claim guard — ASTRA payloads as shipped
+  ---
+  duration_ms: 924.976859
+  type: 'suite'
+  ...
+# Subtest: Claim linter — v3.3.0-rc.3 widening
+    # Subtest: catches the English claims rc.2 let through
+    ok 1 - catches the English claims rc.2 let through
+      ---
+      duration_ms: 2.635272
+      type: 'test'
+      ...
+    # Subtest: catches French claims (none was caught in rc.2)
+    ok 2 - catches French claims (none was caught in rc.2)
+      ---
+      duration_ms: 0.536014
+      type: 'test'
+      ...
+    # Subtest: does not flag negations, non-assertive clauses or technical uses
+    ok 3 - does not flag negations, non-assertive clauses or technical uses
+      ---
+      duration_ms: 0.851902
+      type: 'test'
+      ...
+    # Subtest: ASTRA's own name, definitions and summaries clear it
+    ok 4 - ASTRA's own name, definitions and summaries clear it
+      ---
+      duration_ms: 0.618744
+      type: 'test'
+      ...
+    # Subtest: keeps the five historical rules with their rc.2 behaviour
+    ok 5 - keeps the five historical rules with their rc.2 behaviour
+      ---
+      duration_ms: 0.404647
+      type: 'test'
+      ...
+    1..5
+ok 34 - Claim linter — v3.3.0-rc.3 widening
+  ---
+  duration_ms: 5.393243
+  type: 'suite'
+  ...
+# Subtest: VJEPAEncoder
+    # Subtest: should encode a single frame to correct latent dim
+    ok 1 - should encode a single frame to correct latent dim
+      ---
+      duration_ms: 20.460569
+      type: 'test'
+      ...
+    # Subtest: should encode video with temporal aggregation
+    ok 2 - should encode video with temporal aggregation
+      ---
+      duration_ms: 18.636014
+      type: 'test'
+      ...
+    # Subtest: should produce different embeddings for different images
+    ok 3 - should produce different embeddings for different images
+      ---
+      duration_ms: 7.752378
+      type: 'test'
+      ...
+    # Subtest: should produce finite values
+    ok 4 - should produce finite values
+      ---
+      duration_ms: 4.951811
+      type: 'test'
+      ...
+    1..4
+ok 35 - VJEPAEncoder
+  ---
+  duration_ms: 52.676515
+  type: 'suite'
+  ...
+# Subtest: AJEPAEncoder
+    # Subtest: should encode audio to correct latent dim
+    ok 1 - should encode audio to correct latent dim
+      ---
+      duration_ms: 125.152122
+      type: 'test'
+      ...
+    # Subtest: should compute mel spectrogram
+    ok 2 - should compute mel spectrogram
+      ---
+      duration_ms: 44.541492
+      type: 'test'
+      ...
+    # Subtest: should update EMA target encoder
+    ok 3 - should update EMA target encoder
+      ---
+      duration_ms: 300.839609
+      type: 'test'
+      ...
+    # Subtest: should produce finite values for various durations
+    ok 4 - should produce finite values for various durations
+      ---
+      duration_ms: 172.074311
+      type: 'test'
+      ...
+    1..4
+ok 36 - AJEPAEncoder
+  ---
+  duration_ms: 643.105933
+  type: 'suite'
+  ...
+# Subtest: KonikuOlfactoryEncoder
+    # Subtest: should encode olfactory reading to correct latent dim
+    ok 1 - should encode olfactory reading to correct latent dim
+      ---
+      duration_ms: 2.73739
+      type: 'test'
+      ...
+    # Subtest: should scale confidence with neuron viability
+    ok 2 - should scale confidence with neuron viability
+      ---
+      duration_ms: 2.534811
+      type: 'test'
+      ...
+    # Subtest: should handle inactive device gracefully
+    ok 3 - should handle inactive device gracefully
+      ---
+      duration_ms: 1.475335
+      type: 'test'
+      ...
+    # Subtest: should integrate temporal history
+    ok 4 - should integrate temporal history
+      ---
+      duration_ms: 3.307156
+      type: 'test'
+      ...
+    # Subtest: should differentiate different compound profiles
+    ok 5 - should differentiate different compound profiles
+      ---
+      duration_ms: 2.025414
+      type: 'test'
+      ...
+    1..5
+ok 37 - KonikuOlfactoryEncoder
+  ---
+  duration_ms: 12.348808
+  type: 'suite'
+  ...
+# Subtest: CrossModalFusion
+    # Subtest: should fuse multiple modalities
+    ok 1 - should fuse multiple modalities
+      ---
+      duration_ms: 1.075873
+      type: 'test'
+      ...
+    # Subtest: should assign zero weight to missing modalities
+    ok 2 - should assign zero weight to missing modalities
+      ---
+      duration_ms: 0.693316
+      type: 'test'
+      ...
+    # Subtest: should compute cross-modal coherence
+    ok 3 - should compute cross-modal coherence
+      ---
+      duration_ms: 0.747723
+      type: 'test'
+      ...
+    1..3
+ok 38 - CrossModalFusion
+  ---
+  duration_ms: 2.627511
+  type: 'suite'
+  ...
+# Subtest: MultimodalSensorPipeline
+    # Subtest: should process all three modalities
+    ok 1 - should process all three modalities
+      ---
+      duration_ms: 31.770025
+      type: 'test'
+      ...
+    # Subtest: should handle partial modalities
+    ok 2 - should handle partial modalities
+      ---
+      duration_ms: 68.80208
+      type: 'test'
+      ...
+    # Subtest: should track statistics
+    ok 3 - should track statistics
+      ---
+      duration_ms: 69.663755
+      type: 'test'
+      ...
+    # Subtest: should reset cleanly
+    ok 4 - should reset cleanly
+      ---
+      duration_ms: 9.785265
+      type: 'test'
+      ...
+    1..4
+ok 39 - MultimodalSensorPipeline
+  ---
+  duration_ms: 180.250113
+  type: 'suite'
+  ...
+# Subtest: OrganoidMEA · network-burst model (E2 candidate)
+    # Subtest: default spontaneous model is still 'poisson' with an unchanged RNG stream
+    ok 1 - default spontaneous model is still 'poisson' with an unchanged RNG stream
+      ---
+      duration_ms: 4.651787
+      type: 'test'
+      ...
+    # Subtest: E2 parameters are frozen and are the configured defaults
+    ok 2 - E2 parameters are frozen and are the configured defaults
+      ---
+      duration_ms: 1.786633
+      type: 'test'
+      ...
+    # Subtest: partial parameter override keeps the other calibrated values
+    ok 3 - partial parameter override keeps the other calibrated values
+      ---
+      duration_ms: 0.256835
+      type: 'test'
+      ...
+    # Subtest: deterministic for a fixed seed; different seeds differ
+    ok 4 - deterministic for a fixed seed; different seeds differ
+      ---
+      duration_ms: 53.293445
+      type: 'test'
+      ...
+    # Subtest: counts match the spike log and 1.5 ms refractoriness holds
+    ok 5 - counts match the spike log and 1.5 ms refractoriness holds
+      ---
+      duration_ms: 14.64318
+      type: 'test'
+      ...
+    # Subtest: reset() reproduces the same realisation
+    ok 6 - reset() reproduces the same realisation
+      ---
+      duration_ms: 8.08025
+      type: 'test'
+      ...
+    # Subtest: statistical signatures: organoid-like rate, irregular ISIs, network bursts, positive synchrony
+    ok 7 - statistical signatures: organoid-like rate, irregular ISIs, network bursts, positive synchrony
+      ---
+      duration_ms: 130.508435
+      type: 'test'
+      ...
+    # Subtest: stimulation still works in network-burst mode
+    ok 8 - stimulation still works in network-burst mode
+      ---
+      duration_ms: 1.446884
+      type: 'test'
+      ...
+    1..8
+ok 40 - OrganoidMEA · network-burst model (E2 candidate)
+  ---
+  duration_ms: 215.914261
+  type: 'suite'
+  ...
+# Subtest: NeuroPlatform · StimParam
+    # Subtest: defaults match the documented StimParam reference table
+    ok 1 - defaults match the documented StimParam reference table
+      ---
+      duration_ms: 0.684555
+      type: 'test'
+      ...
+    # Subtest: charge balance: equal D·A products are balanced, unequal are not
+    ok 2 - charge balance: equal D·A products are balanced, unequal are not
+      ---
+      duration_ms: 0.193871
+      type: 'test'
+      ...
+    # Subtest: charge accessors compute D·A in pC
+    ok 3 - charge accessors compute D·A in pC
+      ---
+      duration_ms: 0.195646
+      type: 'test'
+      ...
+    # Subtest: validate flags out-of-range index, trigger_key and excessive amplitude
+    ok 4 - validate flags out-of-range index, trigger_key and excessive amplitude
+      ---
+      duration_ms: 0.210867
+      type: 'test'
+      ...
+    # Subtest: display_attributes returns a complete, JSON-safe record
+    ok 5 - display_attributes returns a complete, JSON-safe record
+      ---
+      duration_ms: 0.133898
+      type: 'test'
+      ...
+    1..5
+ok 41 - NeuroPlatform · StimParam
+  ---
+  duration_ms: 2.206295
+  type: 'suite'
+  ...
+# Subtest: NeuroPlatform · OrganoidMEA simulator
+    # Subtest: initialises 128 electrodes with plausible viability
+    ok 1 - initialises 128 electrodes with plausible viability
+      ---
+      duration_ms: 0.613018
+      type: 'test'
+      ...
+    # Subtest: advance() accumulates spontaneous spikes and is deterministic for a fixed seed
+    ok 2 - advance() accumulates spontaneous spikes and is deterministic for a fixed seed
+      ---
+      duration_ms: 5.596922
+      type: 'test'
+      ...
+    # Subtest: stimulate() with higher charge yields more evoked spikes on average
+    ok 3 - stimulate() with higher charge yields more evoked spikes on average
+      ---
+      duration_ms: 0.851503
+      type: 'test'
+      ...
+    # Subtest: heavy unbalanced stimulation degrades local viability
+    ok 4 - heavy unbalanced stimulation degrades local viability
+      ---
+      duration_ms: 0.478336
+      type: 'test'
+      ...
+    # Subtest: spike-count / spike-event DB queries are consistent
+    ok 5 - spike-count / spike-event DB queries are consistent
+      ---
+      duration_ms: 4.644493
+      type: 'test'
+      ...
+    # Subtest: getRawSpike returns ~3 ms window with a biphasic deflection
+    ok 6 - getRawSpike returns ~3 ms window with a biphasic deflection
+      ---
+      duration_ms: 0.391582
+      type: 'test'
+      ...
+    1..6
+ok 42 - NeuroPlatform · OrganoidMEA simulator
+  ---
+  duration_ms: 13.034522
+  type: 'suite'
+  ...
+# Subtest: NeuroPlatform · Controllers
+    # Subtest: IntanController stages, uploads and resolves params per trigger; refractory replace by index
+    ok 1 - IntanController stages, uploads and resolves params per trigger; refractory replace by index
+      ---
+      duration_ms: 0.564655
+      type: 'test'
+      ...
+    # Subtest: IntanController.countSpike returns a 128-length closed-loop vector
+    ok 2 - IntanController.countSpike returns a 128-length closed-loop vector
+      ---
+      duration_ms: 0.333796
+      type: 'test'
+      ...
+    # Subtest: IntanController throws after close until reopen
+    ok 3 - IntanController throws after close until reopen
+      ---
+      duration_ms: 0.507661
+      type: 'test'
+      ...
+    # Subtest: TriggerController requires a 16-length array and fires bound params
+    ok 4 - TriggerController requires a 16-length array and fires bound params
+      ---
+      duration_ms: 0.569861
+      type: 'test'
+      ...
+    # Subtest: DatabaseController query objects round-trip through the store
+    ok 5 - DatabaseController query objects round-trip through the store
+      ---
+      duration_ms: 1.044273
+      type: 'test'
+      ...
+    # Subtest: CameraController returns a capture id and image descriptor
+    ok 6 - CameraController returns a capture id and image descriptor
+      ---
+      duration_ms: 0.31391
+      type: 'test'
+      ...
+    1..6
+ok 43 - NeuroPlatform · Controllers
+  ---
+  duration_ms: 3.5304
+  type: 'suite'
+  ...
+# Subtest: NeuroPlatform · ASTRA Bridge
+    # Subtest: closedLoopRead produces bounded coupling signals and a 128-length spike drive
+    ok 1 - closedLoopRead produces bounded coupling signals and a 128-length spike drive
+      ---
+      duration_ms: 0.742135
+      type: 'test'
+      ...
+    # Subtest: triggers recorded in the DB are queryable and de-duplicated
+    ok 2 - triggers recorded in the DB are queryable and de-duplicated
+      ---
+      duration_ms: 0.336176
+      type: 'test'
+      ...
+    # Subtest: activeElectrodes reflects the most recent closed-loop window
+    ok 3 - activeElectrodes reflects the most recent closed-loop window
+      ---
+      duration_ms: 1.074993
+      type: 'test'
+      ...
+    # Subtest: status() reports controller + organoid telemetry
+    ok 4 - status() reports controller + organoid telemetry
+      ---
+      duration_ms: 0.269008
+      type: 'test'
+      ...
+    # Subtest: reset restores deterministic baseline
+    ok 5 - reset restores deterministic baseline
+      ---
+      duration_ms: 1.142826
+      type: 'test'
+      ...
+    1..5
+ok 44 - NeuroPlatform · ASTRA Bridge
+  ---
+  duration_ms: 3.788938
+  type: 'suite'
+  ...
+# Subtest: Φ̃-RIIU — legacy formula and status-bearing evaluation
+    # Subtest: computeValue() is bit-identical to the v3.1.1 loop
+    ok 1 - computeValue() is bit-identical to the v3.1.1 loop
+      ---
+      duration_ms: 19.469099
+      type: 'test'
+      ...
+    # Subtest: separates not-measured, insufficient-sample, degenerate and value
+    ok 2 - separates not-measured, insufficient-sample, degenerate and value
+      ---
+      duration_ms: 1.291609
+      type: 'test'
+      ...
+    # Subtest: a value inside the witness band becomes a null result
+    ok 3 - a value inside the witness band becomes a null result
+      ---
+      duration_ms: 6.241289
+      type: 'test'
+      ...
+    # Subtest: the correlation share is scale-invariant; the L1 share is not
+    ok 4 - the correlation share is scale-invariant; the L1 share is not
+      ---
+      duration_ms: 1.680907
+      type: 'test'
+      ...
+    1..4
+ok 45 - Φ̃-RIIU — legacy formula and status-bearing evaluation
+  ---
+  duration_ms: 29.482569
+  type: 'suite'
+  ...
+# Subtest: Effective information — observational estimate with coverage
+    # Subtest: reports coverage and keeps the legacy value
+    ok 1 - reports coverage and keeps the legacy value
+      ---
+      duration_ms: 0.863313
+      type: 'test'
+      ...
+    # Subtest: withholds the value when an observed state has too few transitions
+    ok 2 - withholds the value when an observed state has too few transitions
+      ---
+      duration_ms: 0.286884
+      type: 'test'
+      ...
+    1..2
+ok 46 - Effective information — observational estimate with coverage
+  ---
+  duration_ms: 1.332994
+  type: 'suite'
+  ...
+# Subtest: validateProxies — declared properties
+    # Subtest: runs 17 controls in three families, 9 requirements and 8 declared defects
+    ok 1 - runs 17 controls in three families, 9 requirements and 8 declared defects
+      ---
+      duration_ms: 1.404936
+      type: 'test'
+      ...
+    # Subtest: Φ̃-RIIU and EI controls all hold
+    ok 2 - Φ̃-RIIU and EI controls all hold
+      ---
+      duration_ms: 0.245056
+      type: 'test'
+      ...
+    # Subtest: the deployed Φ̃-RIIU witness level on independent noise is high (d = n = 64)
+    ok 3 - the deployed Φ̃-RIIU witness level on independent noise is high (d = n = 64)
+      ---
+      duration_ms: 0.28979
+      type: 'test'
+      ...
+    # Subtest: the ACM integration and broadcast proxies FAIL their ablation controls, as their cards declare
+    ok 4 - the ACM integration and broadcast proxies FAIL their ablation controls, as their cards declare
+      ---
+      duration_ms: 0.258118
+      type: 'test'
+      ...
+    # Subtest: leaves the global random stream exactly where it was
+    ok 5 - leaves the global random stream exactly where it was
+      ---
+      duration_ms: 10.791534
+      type: 'test'
+      ...
+    # Subtest: every card cites only controls that exist, and the report clears the claim guard
+    ok 6 - every card cites only controls that exist, and the report clears the claim guard
+      ---
+      duration_ms: 23.054367
+      type: 'test'
+      ...
+    # Subtest: every card states the invariance checked by each control that targets it
+    ok 7 - every card states the invariance checked by each control that targets it
+      ---
+      duration_ms: 0.26512
+      type: 'test'
+      ...
+    1..7
+ok 47 - validateProxies — declared properties
+  ---
+  duration_ms: 194.580335
+  type: 'suite'
+  ...
+# Subtest: rng.withIsolatedStream
+    # Subtest: restores the stream even when fn throws
+    ok 1 - restores the stream even when fn throws
+      ---
+      duration_ms: 0.253149
+      type: 'test'
+      ...
+    1..1
+ok 48 - rng.withIsolatedStream
+  ---
+  duration_ms: 0.430585
+  type: 'suite'
+  ...
+# Subtest: ACM wiring (defects of ≤ 3.1.1)
+    # Subtest: an unstepped engine is reported as not measured
+    ok 1 - an unstepped engine is reported as not measured
+      ---
+      duration_ms: 1.146888
+      type: 'test'
+      ...
+    # Subtest: GW̃ now reads the stepped engine instead of a state field nothing wrote
+    ok 2 - GW̃ now reads the stepped engine instead of a state field nothing wrote
+      ---
+      duration_ms: 1.485766
+      type: 'test'
+      ...
+    # Subtest: snn_step advances the network get_acm_score reads
+    ok 3 - snn_step advances the network get_acm_score reads
+      ---
+      duration_ms: 175.006183
+      type: 'test'
+      ...
+    # Subtest: proxy_validate is exposed, returns the 17 controls and classifies live values
+    ok 4 - proxy_validate is exposed, returns the 17 controls and classifies live values
+      ---
+      duration_ms: 117.421987
+      type: 'test'
+      ...
+    1..4
+ok 49 - ACM wiring (defects of ≤ 3.1.1)
+  ---
+  duration_ms: 295.424478
+  type: 'suite'
+  ...
+# Subtest: Seeded random streams
+    # Subtest: reports a 32-bit seed and its source
+    ok 1 - reports a 32-bit seed and its source
+      ---
+      duration_ms: 0.856988
+      type: 'test'
+      ...
+    # Subtest: produces values in [0, 1)
+    ok 2 - produces values in [0, 1)
+      ---
+      duration_ms: 3.15385
+      type: 'test'
+      ...
+    # Subtest: same seed ⇒ identical SNN connectivity and dynamics
+    ok 3 - same seed ⇒ identical SNN connectivity and dynamics
+      ---
+      duration_ms: 12.692665
+      type: 'test'
+      ...
+    # Subtest: different seed ⇒ different SNN connectivity
+    ok 4 - different seed ⇒ different SNN connectivity
+      ---
+      duration_ms: 9.298151
+      type: 'test'
+      ...
+    # Subtest: same seed ⇒ identical fused sensory embedding
+    ok 5 - same seed ⇒ identical fused sensory embedding
+      ---
+      duration_ms: 116.324817
+      type: 'test'
+      ...
+    # Subtest: different seed ⇒ different (randomly initialised) encoder weights
+    ok 6 - different seed ⇒ different (randomly initialised) encoder weights
+      ---
+      duration_ms: 92.918326
+      type: 'test'
+      ...
+    1..6
+ok 50 - Seeded random streams
+  ---
+  duration_ms: 236.462769
+  type: 'suite'
+  ...
+# Subtest: SecondOrder · MetaLearningModule
+    # Subtest: cold start returns zero velocity below 10 samples
+    ok 1 - cold start returns zero velocity below 10 samples
+      ---
+      duration_ms: 0.958523
+      type: 'test'
+      ...
+    # Subtest: stabilising RPE ⇒ positive learning velocity (converging)
+    ok 2 - stabilising RPE ⇒ positive learning velocity (converging)
+      ---
+      duration_ms: 0.623276
+      type: 'test'
+      ...
+    # Subtest: variance spike ⇒ novelty flag
+    ok 3 - variance spike ⇒ novelty flag
+      ---
+      duration_ms: 0.359073
+      type: 'test'
+      ...
+    # Subtest: values stay finite and velocity bounded
+    ok 4 - values stay finite and velocity bounded
+      ---
+      duration_ms: 0.857546
+      type: 'test'
+      ...
+    1..4
+ok 51 - SecondOrder · MetaLearningModule
+  ---
+  duration_ms: 4.080568
+  type: 'suite'
+  ...
+# Subtest: SecondOrder · CapabilityModel
+    # Subtest: EMA converges toward repeated realized valence
+    ok 1 - EMA converges toward repeated realized valence
+      ---
+      duration_ms: 0.428474
+      type: 'test'
+      ...
+    # Subtest: undefined action maps to idle bucket
+    ok 2 - undefined action maps to idle bucket
+      ---
+      duration_ms: 0.178323
+      type: 'test'
+      ...
+    # Subtest: snapshot is sorted by expected valence desc
+    ok 3 - snapshot is sorted by expected valence desc
+      ---
+      duration_ms: 0.424031
+      type: 'test'
+      ...
+    1..3
+ok 52 - SecondOrder · CapabilityModel
+  ---
+  duration_ms: 1.586963
+  type: 'suite'
+  ...
+# Subtest: SecondOrder · RNDCuriosity (two-layer)
+    # Subtest: intrinsic reward is bounded in [0,1]
+    ok 1 - intrinsic reward is bounded in [0,1]
+      ---
+      duration_ms: 1.618132
+      type: 'test'
+      ...
+    # Subtest: repeated exposure to the same input reduces prediction error (learning)
+    ok 2 - repeated exposure to the same input reduces prediction error (learning)
+      ---
+      duration_ms: 28.923727
+      type: 'test'
+      ...
+    # Subtest: deterministic under fixed seed
+    ok 3 - deterministic under fixed seed
+      ---
+      duration_ms: 0.831416
+      type: 'test'
+      ...
+    1..3
+ok 53 - SecondOrder · RNDCuriosity (two-layer)
+  ---
+  duration_ms: 31.681555
+  type: 'suite'
+  ...
+# Subtest: SecondOrder · MetaconsciousnessEvaluator
+    # Subtest: composite is bounded and monotone in calibration
+    ok 1 - composite is bounded and monotone in calibration
+      ---
+      duration_ms: 0.376774
+      type: 'test'
+      ...
+    1..1
+ok 54 - SecondOrder · MetaconsciousnessEvaluator
+  ---
+  duration_ms: 0.485686
+  type: 'suite'
+  ...
+# Subtest: SecondOrder · DevelopmentTracker
+    # Subtest: high stable composite + meta ⇒ advanced stage
+    ok 1 - high stable composite + meta ⇒ advanced stage
+      ---
+      duration_ms: 0.666409
+      type: 'test'
+      ...
+    # Subtest: low composite stays nascent/reactive
+    ok 2 - low composite stays nascent/reactive
+      ---
+      duration_ms: 0.271611
+      type: 'test'
+      ...
+    1..2
+ok 55 - SecondOrder · DevelopmentTracker
+  ---
+  duration_ms: 1.254082
+  type: 'suite'
+  ...
+# Subtest: SecondOrder · ConvergenceMonitor (free-energy + task quality)
+    # Subtest: requires sustained satisfaction over patience before halting
+    ok 1 - requires sustained satisfaction over patience before halting
+      ---
+      duration_ms: 0.521102
+      type: 'test'
+      ...
+    # Subtest: low task quality alone blocks satisfaction even when free energy has settled
+    ok 2 - low task quality alone blocks satisfaction even when free energy has settled
+      ---
+      duration_ms: 0.186383
+      type: 'test'
+      ...
+    # Subtest: high |ΔF| (not yet settled) blocks satisfaction even with good task quality
+    ok 3 - high |ΔF| (not yet settled) blocks satisfaction even with good task quality
+      ---
+      duration_ms: 0.239526
+      type: 'test'
+      ...
+    # Subtest: reasons reflect each threshold independently
+    ok 4 - reasons reflect each threshold independently
+      ---
+      duration_ms: 0.154472
+      type: 'test'
+      ...
+    # Subtest: satisfactionScore is bounded in [0,1] and rises with quality
+    ok 5 - satisfactionScore is bounded in [0,1] and rises with quality
+      ---
+      duration_ms: 0.172607
+      type: 'test'
+      ...
+    # Subtest: configure() updates thresholds and resets sustained count
+    ok 6 - configure() updates thresholds and resets sustained count
+      ---
+      duration_ms: 0.212268
+      type: 'test'
+      ...
+    1..6
+ok 56 - SecondOrder · ConvergenceMonitor (free-energy + task quality)
+  ---
+  duration_ms: 1.736532
+  type: 'suite'
+  ...
+# Subtest: SecondOrder · ActiveInferenceCore (real free energy)
+    # Subtest: variational free energy decreases as the model learns a stable observation
+    ok 1 - variational free energy decreases as the model learns a stable observation
+      ---
+      duration_ms: 2.138088
+      type: 'test'
+      ...
+    # Subtest: EFE decomposition and pragmatic value track preferences
+    ok 2 - EFE decomposition and pragmatic value track preferences
+      ---
+      duration_ms: 0.310341
+      type: 'test'
+      ...
+    # Subtest: observation clamped to valid range; outputs finite
+    ok 3 - observation clamped to valid range; outputs finite
+      ---
+      duration_ms: 0.192681
+      type: 'test'
+      ...
+    1..3
+ok 57 - SecondOrder · ActiveInferenceCore (real free energy)
+  ---
+  duration_ms: 2.781801
+  type: 'suite'
+  ...
+# Subtest: SecondOrder · ADVERSARIAL halting (stationarity ≠ satisfaction)
+    # Subtest: GOOD regime (high task feedback) eventually halts as satisfied
+    ok 1 - GOOD regime (high task feedback) eventually halts as satisfied
+      ---
+      duration_ms: 23.773924
+      type: 'test'
+      ...
+    # Subtest: MEDIOCRE fixed point (constant LOW feedback) is NEVER satisfied despite F settling
+    ok 2 - MEDIOCRE fixed point (constant LOW feedback) is NEVER satisfied despite F settling
+      ---
+      duration_ms: 107.281823
+      type: 'test'
+      ...
+    # Subtest: reset clears AIF and convergence state
+    ok 3 - reset clears AIF and convergence state
+      ---
+      duration_ms: 4.425759
+      type: 'test'
+      ...
+    1..3
+ok 58 - SecondOrder · ADVERSARIAL halting (stationarity ≠ satisfaction)
+  ---
+  duration_ms: 135.795945
+  type: 'suite'
+  ...
+# Subtest: SecondOrder · CLOSED-LOOP on real LIF SNN (v2.9)
+    # Subtest: AIF observation is grounded in the real SNN substrate (non-trivial, in range)
+    ok 1 - AIF observation is grounded in the real SNN substrate (non-trivial, in range)
+      ---
+      duration_ms: 24.375358
+      type: 'test'
+      ...
+    # Subtest: SNN firing rate responds monotonically to injection (real coupling)
+    ok 2 - SNN firing rate responds monotonically to injection (real coupling)
+      ---
+      duration_ms: 11.577993
+      type: 'test'
+      ...
+    # Subtest: default controller regulates to an INTERIOR drive (non-degenerate, v2.9)
+    ok 3 - default controller regulates to an INTERIOR drive (non-degenerate, v2.9)
+      ---
+      duration_ms: 802.458169
+      type: 'test'
+      ...
+    # Subtest: controller tracks the setpoint: higher target ⇒ higher drive (v2.9)
+    ok 4 - controller tracks the setpoint: higher target ⇒ higher drive (v2.9)
+      ---
+      duration_ms: 1124.913451
+      type: 'test'
+      ...
+    # Subtest: production loop OFF by default leaves the shared SNN untouched (no contention, v2.9)
+    ok 5 - production loop OFF by default leaves the shared SNN untouched (no contention, v2.9)
+      ---
+      duration_ms: 14.345111
+      type: 'test'
+      ...
+    # Subtest: production loop ON closes the loop through the shared SNN (read+write, v2.9)
+    ok 6 - production loop ON closes the loop through the shared SNN (read+write, v2.9)
+      ---
+      duration_ms: 44.939908
+      type: 'test'
+      ...
+    # Subtest: open loop freezes the drive; closed loop moves it
+    ok 7 - open loop freezes the drive; closed loop moves it
+      ---
+      duration_ms: 10.025704
+      type: 'test'
+      ...
+    1..7
+ok 59 - SecondOrder · CLOSED-LOOP on real LIF SNN (v2.9)
+  ---
+  duration_ms: 2033.133143
+  type: 'suite'
+  ...
+# Subtest: ContinuousActuationController · setpoint regulation (v2.9)
+    # Subtest: regulates to an interior drive that achieves the setpoint (clean world)
+    ok 1 - regulates to an interior drive that achieves the setpoint (clean world)
+      ---
+      duration_ms: 0.351949
+      type: 'test'
+      ...
+    # Subtest: a higher setpoint yields a higher regulated drive
+    ok 2 - a higher setpoint yields a higher regulated drive
+      ---
+      duration_ms: 0.343005
+      type: 'test'
+      ...
+    # Subtest: configure changes the target and reset restores neutral state
+    ok 3 - configure changes the target and reset restores neutral state
+      ---
+      duration_ms: 0.244504
+      type: 'test'
+      ...
+    1..3
+ok 60 - ContinuousActuationController · setpoint regulation (v2.9)
+  ---
+  duration_ms: 1.163746
+  type: 'suite'
+  ...
+# Subtest: SecondOrder · threshold calibration on measured ΔF (v2.9)
+    # Subtest: calibrate sets epsFreeEnergy from the measured ΔF median
+    ok 1 - calibrate sets epsFreeEnergy from the measured ΔF median
+      ---
+      duration_ms: 0.391622
+      type: 'test'
+      ...
+    # Subtest: relative (scale-free) convergence: |ΔF| ≤ rel·F passes even above absolute eps
+    ok 2 - relative (scale-free) convergence: |ΔF| ≤ rel·F passes even above absolute eps
+      ---
+      duration_ms: 0.07249
+      type: 'test'
+      ...
+    1..2
+ok 61 - SecondOrder · threshold calibration on measured ΔF (v2.9)
+  ---
+  duration_ms: 0.613913
+  type: 'suite'
+  ...
+# Subtest: SecondOrder · TCAIConsciousnessSystem integration
+    # Subtest: runCycle populates a second-order snapshot
+    ok 1 - runCycle populates a second-order snapshot
+      ---
+      duration_ms: 1.206912
+      type: 'test'
+      ...
+    # Subtest: repeated identical cycles drive curiosity down (familiarity)
+    ok 2 - repeated identical cycles drive curiosity down (familiarity)
+      ---
+      duration_ms: 38.052419
+      type: 'test'
+      ...
+    # Subtest: reset clears the second-order loop
+    ok 3 - reset clears the second-order loop
+      ---
+      duration_ms: 1.657195
+      type: 'test'
+      ...
+    1..3
+ok 62 - SecondOrder · TCAIConsciousnessSystem integration
+  ---
+  duration_ms: 41.116702
+  type: 'suite'
+  ...
+# Subtest: TCAI · Oscillatory Binding (Kuramoto/AKOrN)
+    # Subtest: order parameter stays in [0,1] and rises under strong uniform coupling
+    ok 1 - order parameter stays in [0,1] and rises under strong uniform coupling
+      ---
+      duration_ms: 5.352457
+      type: 'test'
+      ...
+    # Subtest: bindBids returns gated bids for all registered modules + syncR
+    ok 2 - bindBids returns gated bids for all registered modules + syncR
+      ---
+      duration_ms: 0.471773
+      type: 'test'
+      ...
+    1..2
+ok 63 - TCAI · Oscillatory Binding (Kuramoto/AKOrN)
+  ---
+  duration_ms: 6.646559
+  type: 'suite'
+  ...
+# Subtest: TCAI · Global Neuronal Workspace
+    # Subtest: high bid triggers sigmoid ignition and a winner
+    ok 1 - high bid triggers sigmoid ignition and a winner
+      ---
+      duration_ms: 1.618969
+      type: 'test'
+      ...
+    # Subtest: low bids fail to ignite (no conscious access)
+    ok 2 - low bids fail to ignite (no conscious access)
+      ---
+      duration_ms: 0.235541
+      type: 'test'
+      ...
+    # Subtest: qualia vector components are bounded
+    ok 3 - qualia vector components are bounded
+      ---
+      duration_ms: 0.159186
+      type: 'test'
+      ...
+    # Subtest: unity metrics report stable focus under repeated winner
+    ok 4 - unity metrics report stable focus under repeated winner
+      ---
+      duration_ms: 2.221889
+      type: 'test'
+      ...
+    1..4
+ok 64 - TCAI · Global Neuronal Workspace
+  ---
+  duration_ms: 4.495814
+  type: 'suite'
+  ...
+# Subtest: TCAI · Emotional Memory Core
+    # Subtest: attention gate blocks low-attention storage
+    ok 1 - attention gate blocks low-attention storage
+      ---
+      duration_ms: 0.309962
+      type: 'test'
+      ...
+    # Subtest: store + retrieve ranks by similarity, congruence and salience
+    ok 2 - store + retrieve ranks by similarity, congruence and salience
+      ---
+      duration_ms: 0.455431
+      type: 'test'
+      ...
+    # Subtest: capacity eviction removes lowest-salience records
+    ok 3 - capacity eviction removes lowest-salience records
+      ---
+      duration_ms: 0.40088
+      type: 'test'
+      ...
+    # Subtest: salience-weighted RL batch is deterministic and unique
+    ok 4 - salience-weighted RL batch is deterministic and unique
+      ---
+      duration_ms: 0.442217
+      type: 'test'
+      ...
+    # Subtest: cosineSimilarity sanity
+    ok 5 - cosineSimilarity sanity
+      ---
+      duration_ms: 0.11315
+      type: 'test'
+      ...
+    1..5
+ok 65 - TCAI · Emotional Memory Core
+  ---
+  duration_ms: 2.02872
+  type: 'suite'
+  ...
+# Subtest: TCAI · Emotional Processing & Reward Shaping
+    # Subtest: appraisal maps reward/threat into PAD with inertia
+    ok 1 - appraisal maps reward/threat into PAD with inertia
+      ---
+      duration_ms: 0.182124
+      type: 'test'
+      ...
+    # Subtest: shaped reward includes emotional and memory terms
+    ok 2 - shaped reward includes emotional and memory terms
+      ---
+      duration_ms: 0.286042
+      type: 'test'
+      ...
+    1..2
+ok 66 - TCAI · Emotional Processing & Reward Shaping
+  ---
+  duration_ms: 0.59891
+  type: 'suite'
+  ...
+# Subtest: TCAI · Self Model & Attention Schema
+    # Subtest: effort drains energy; stress tracks negative arousal
+    ok 1 - effort drains energy; stress tracks negative arousal
+      ---
+      duration_ms: 0.338866
+      type: 'test'
+      ...
+    # Subtest: attention schema stability reflects focus persistence
+    ok 2 - attention schema stability reflects focus persistence
+      ---
+      duration_ms: 0.088082
+      type: 'test'
+      ...
+    1..2
+ok 67 - TCAI · Self Model & Attention Schema
+  ---
+  duration_ms: 0.586038
+  type: 'suite'
+  ...
+# Subtest: TCAI · Consciousness Metrics
+    # Subtest: GNW metrics accumulate ignition and broadcast availability
+    ok 1 - GNW metrics accumulate ignition and broadcast availability
+      ---
+      duration_ms: 0.174349
+      type: 'test'
+      ...
+    # Subtest: effective information: deterministic cycle > random walk
+    ok 2 - effective information: deterministic cycle > random walk
+      ---
+      duration_ms: 0.474062
+      type: 'test'
+      ...
+    # Subtest: discretizeContinuous maps range onto [0, n−1]
+    ok 3 - discretizeContinuous maps range onto [0, n−1]
+      ---
+      duration_ms: 0.109879
+      type: 'test'
+      ...
+    # Subtest: Φ̃-RIIU: correlated latents > independent-ish latents
+    ok 4 - Φ̃-RIIU: correlated latents > independent-ish latents
+      ---
+      duration_ms: 0.485103
+      type: 'test'
+      ...
+    1..4
+ok 68 - TCAI · Consciousness Metrics
+  ---
+  duration_ms: 1.362655
+  type: 'suite'
+  ...
+# Subtest: TCAI · Consciousness System (full cycle)
+    # Subtest: runCycle wires workspace → emotion → reward → memory → self
+    ok 1 - runCycle wires workspace → emotion → reward → memory → self
+      ---
+      duration_ms: 38.739093
+      type: 'test'
+      ...
+    # Subtest: report() produces bounded composite with disclaimer
+    ok 2 - report() produces bounded composite with disclaimer
+      ---
+      duration_ms: 30.487115
+      type: 'test'
+      ...
+    # Subtest: reset clears all subsystems
+    ok 3 - reset clears all subsystems
+      ---
+      duration_ms: 4.085769
+      type: 'test'
+      ...
+    1..3
+ok 69 - TCAI · Consciousness System (full cycle)
+  ---
+  duration_ms: 73.50585
+  type: 'suite'
+  ...
+# Subtest: met goals and admissibility remain distinct; utility has exact bounds
+ok 70 - met goals and admissibility remain distinct; utility has exact bounds
+  ---
+  duration_ms: 9.034032
+  type: 'test'
+  ...
+# Subtest: missing evidence and overlapping limits cannot count as success
+ok 71 - missing evidence and overlapping limits cannot count as success
+  ---
+  duration_ms: 1.406435
+  type: 'test'
+  ...
+# Subtest: utility bounds reverse for minimizing and saturate at declared anchors
+ok 72 - utility bounds reverse for minimizing and saturate at declared anchors
+  ---
+  duration_ms: 0.978038
+  type: 'test'
+  ...
+# Subtest: maximize criteria and optional utility work
+ok 73 - maximize criteria and optional utility work
+  ---
+  duration_ms: 0.917249
+  type: 'test'
+  ...
+# Subtest: reject malformed numbers, intervals, IDs, units, contexts and utility models
+ok 74 - reject malformed numbers, intervals, IDs, units, contexts and utility models
+  ---
+  duration_ms: 4.633231
+  type: 'test'
+  ...
+# Subtest: Pareto comparison excludes vetoed outcomes and retains overlapping alternatives
+ok 75 - Pareto comparison excludes vetoed outcomes and retains overlapping alternatives
+  ---
+  duration_ms: 1.394933
+  type: 'test'
+  ...
+# Subtest: no total ranking for conflicting objectives, ties, or mixed evidence
+ok 76 - no total ranking for conflicting objectives, ties, or mixed evidence
+  ---
+  duration_ms: 1.729464
+  type: 'test'
+  ...
+# Subtest: MCP registers all tools, passes the global guard and reports invalid input
+ok 77 - MCP registers all tools, passes the global guard and reports invalid input
+  ---
+  duration_ms: 149.767363
+  type: 'test'
+  ...
+# Subtest: rc.2 — an ordinal criterion may carry a threshold but never enter the utility (FCS P4)
+ok 78 - rc.2 — an ordinal criterion may carry a threshold but never enter the utility (FCS P4)
+  ---
+  duration_ms: 1.602133
+  type: 'test'
+  ...
+# Subtest: rc.2 — no goal or constraint on consciousness or phenomenality (FCS P1–P2)
+ok 79 - rc.2 — no goal or constraint on consciousness or phenomenality (FCS P1–P2)
+  ---
+  duration_ms: 2.365319
+  type: 'test'
+  ...
+# Subtest: rc.2 — admissibility states its basis; an empty contract is reported as such
+ok 80 - rc.2 — admissibility states its basis; an empty contract is reported as such
+  ---
+  duration_ms: 0.984405
+  type: 'test'
+  ...
+# Subtest: rc.2 — the guard screens the restated purpose
+ok 81 - rc.2 — the guard screens the restated purpose
+  ---
+  duration_ms: 78.332338
+  type: 'test'
+  ...
+# Subtest: rc.2 — the stored synthetic example is what the module computes
+ok 82 - rc.2 — the stored synthetic example is what the module computes
+  ---
+  duration_ms: 1.281877
+  type: 'test'
+  ...
+# Subtest: Transport Streamable HTTP
+    # Subtest: T1 — /health expose statut, version unifiée et transport
+    ok 1 - T1 — /health expose statut, version unifiée et transport
+      ---
+      duration_ms: 26.856887
+      type: 'test'
+      ...
+    # Subtest: T2 — préflight CORS OPTIONS → 204 avec en-têtes
+    ok 2 - T2 — préflight CORS OPTIONS → 204 avec en-têtes
+      ---
+      duration_ms: 6.797194
+      type: 'test'
+      ...
+    # Subtest: T3 — cycle de vie complet initialize → tools/list → DELETE
+    ok 3 - T3 — cycle de vie complet initialize → tools/list → DELETE
+      ---
+      duration_ms: 163.963932
+      type: 'test'
+      ...
+    # Subtest: T4 — régression corps-parsé : initialize répond sous délai strict
+    ok 4 - T4 — régression corps-parsé : initialize répond sous délai strict
+      ---
+      duration_ms: 74.689081
+      type: 'test'
+      ...
+    # Subtest: T5 — POST non-initialize sans session → 400 JSON-RPC (garde anti-fuite)
+    ok 5 - T5 — POST non-initialize sans session → 400 JSON-RPC (garde anti-fuite)
+      ---
+      duration_ms: 6.181761
+      type: 'test'
+      ...
+    # Subtest: T6 — GET /mcp sans session → 404
+    ok 6 - T6 — GET /mcp sans session → 404
+      ---
+      duration_ms: 4.437769
+      type: 'test'
+      ...
+    # Subtest: T7 — session supprimée : POST ultérieur rejeté
+    ok 7 - T7 — session supprimée : POST ultérieur rejeté
+      ---
+      duration_ms: 96.182836
+      type: 'test'
+      ...
+    1..7
+ok 83 - Transport Streamable HTTP
+  ---
+  duration_ms: 394.043579
+  type: 'test'
+  ...
+# Subtest: Transport SSE
+    # Subtest: T8 — /health expose statut, version unifiée et transport
+    ok 1 - T8 — /health expose statut, version unifiée et transport
+      ---
+      duration_ms: 7.512307
+      type: 'test'
+      ...
+    # Subtest: T9 — cycle de vie : endpoint, initialize (202), réponse sur le flux
+    ok 2 - T9 — cycle de vie : endpoint, initialize (202), réponse sur le flux
+      ---
+      duration_ms: 231.657054
+      type: 'test'
+      ...
+    # Subtest: T10 — POST /messages avec session inconnue → 404
+    ok 3 - T10 — POST /messages avec session inconnue → 404
+      ---
+      duration_ms: 10.668602
+      type: 'test'
+      ...
+    1..3
+ok 84 - Transport SSE
+  ---
+  duration_ms: 254.051717
+  type: 'test'
+  ...
+# Subtest: WMSimulationManager — Tick Processing
+    # Subtest: should accept ticks without crashing
+    ok 1 - should accept ticks without crashing
+      ---
+      duration_ms: 22.605875
+      type: 'test'
+      ...
+    # Subtest: should populate replay buffer from transitions
+    ok 2 - should populate replay buffer from transitions
+      ---
+      duration_ms: 3.851382
+      type: 'test'
+      ...
+    # Subtest: should respect replay buffer capacity
+    ok 3 - should respect replay buffer capacity
+      ---
+      duration_ms: 7.048819
+      type: 'test'
+      ...
+    1..3
+ok 85 - WMSimulationManager — Tick Processing
+  ---
+  duration_ms: 34.865255
+  type: 'suite'
+  ...
+# Subtest: WMSimulationManager — Training
+    # Subtest: should auto-train at configured frequency
+    ok 1 - should auto-train at configured frequency
+      ---
+      duration_ms: 19.927928
+      type: 'test'
+      ...
+    # Subtest: should execute manual trainBatch
+    ok 2 - should execute manual trainBatch
+      ---
+      duration_ms: 5.493724
+      type: 'test'
+      ...
+    # Subtest: should execute trainFull over entire buffer
+    ok 3 - should execute trainFull over entire buffer
+      ---
+      duration_ms: 6.506362
+      type: 'test'
+      ...
+    # Subtest: should fire onTrainingSummary callback
+    ok 4 - should fire onTrainingSummary callback
+      ---
+      duration_ms: 3.47421
+      type: 'test'
+      ...
+    1..4
+ok 86 - WMSimulationManager — Training
+  ---
+  duration_ms: 36.054907
+  type: 'suite'
+  ...
+# Subtest: WMSimulationManager — Surprise Monitoring
+    # Subtest: should detect surprise alerts for anomalous transitions
+    ok 1 - should detect surprise alerts for anomalous transitions
+      ---
+      duration_ms: 2.235099
+      type: 'test'
+      ...
+    # Subtest: should not generate alerts when monitoring is disabled
+    ok 2 - should not generate alerts when monitoring is disabled
+      ---
+      duration_ms: 1.986678
+      type: 'test'
+      ...
+    1..2
+ok 87 - WMSimulationManager — Surprise Monitoring
+  ---
+  duration_ms: 4.497194
+  type: 'suite'
+  ...
+# Subtest: WMSimulationManager — Planning
+    # Subtest: should plan toward target firing rates
+    ok 1 - should plan toward target firing rates
+      ---
+      duration_ms: 4.192748
+      type: 'test'
+      ...
+    # Subtest: should plan toward target ACM score
+    ok 2 - should plan toward target ACM score
+      ---
+      duration_ms: 3.514028
+      type: 'test'
+      ...
+    # Subtest: should return null if no observation available
+    ok 3 - should return null if no observation available
+      ---
+      duration_ms: 2.410736
+      type: 'test'
+      ...
+    1..3
+ok 88 - WMSimulationManager — Planning
+  ---
+  duration_ms: 10.256179
+  type: 'suite'
+  ...
+# Subtest: WMSimulationManager — Lifecycle
+    # Subtest: should clear buffer
+    ok 1 - should clear buffer
+      ---
+      duration_ms: 4.76617
+      type: 'test'
+      ...
+    # Subtest: should full reset
+    ok 2 - should full reset
+      ---
+      duration_ms: 13.524651
+      type: 'test'
+      ...
+    # Subtest: should recordAction for external spike injections
+    ok 3 - should recordAction for external spike injections
+      ---
+      duration_ms: 2.110009
+      type: 'test'
+      ...
+    # Subtest: should provide comprehensive status
+    ok 4 - should provide comprehensive status
+      ---
+      duration_ms: 1.716406
+      type: 'test'
+      ...
+    1..4
+ok 89 - WMSimulationManager — Lifecycle
+  ---
+  duration_ms: 22.882734
+  type: 'suite'
+  ...
+# Subtest: SNNStateEncoder
+    # Subtest: should encode to correct dimensionality
+    ok 1 - should encode to correct dimensionality
+      ---
+      duration_ms: 10.93982
+      type: 'test'
+      ...
+    # Subtest: should produce different outputs for different inputs
+    ok 2 - should produce different outputs for different inputs
+      ---
+      duration_ms: 3.679108
+      type: 'test'
+      ...
+    # Subtest: should produce finite values
+    ok 3 - should produce finite values
+      ---
+      duration_ms: 3.218148
+      type: 'test'
+      ...
+    # Subtest: should handle zero input gracefully
+    ok 4 - should handle zero input gracefully
+      ---
+      duration_ms: 2.599484
+      type: 'test'
+      ...
+    1..4
+ok 90 - SNNStateEncoder
+  ---
+  duration_ms: 21.372937
+  type: 'suite'
+  ...
+# Subtest: LatentPredictor
+    # Subtest: should predict correct dimensionality
+    ok 1 - should predict correct dimensionality
+      ---
+      duration_ms: 3.95983
+      type: 'test'
+      ...
+    # Subtest: should be sensitive to different actions
+    ok 2 - should be sensitive to different actions
+      ---
+      duration_ms: 1.373766
+      type: 'test'
+      ...
+    # Subtest: should encode SpikeAction to fixed-size vector
+    ok 3 - should encode SpikeAction to fixed-size vector
+      ---
+      duration_ms: 1.426633
+      type: 'test'
+      ...
+    # Subtest: should produce finite predictions
+    ok 4 - should produce finite predictions
+      ---
+      duration_ms: 1.436412
+      type: 'test'
+      ...
+    1..4
+ok 91 - LatentPredictor
+  ---
+  duration_ms: 8.577402
+  type: 'suite'
+  ...
+# Subtest: SIGReg
+    # Subtest: should return 0 for single embedding
+    ok 1 - should return 0 for single embedding
+      ---
+      duration_ms: 0.339286
+      type: 'test'
+      ...
+    # Subtest: should return low loss for Gaussian-distributed embeddings
+    ok 2 - should return low loss for Gaussian-distributed embeddings
+      ---
+      duration_ms: 33.992869
+      type: 'test'
+      ...
+    # Subtest: should return higher loss for collapsed (constant) embeddings
+    ok 3 - should return higher loss for collapsed (constant) embeddings
+      ---
+      duration_ms: 46.276745
+      type: 'test'
+      ...
+    # Subtest: should produce finite values
+    ok 4 - should produce finite values
+      ---
+      duration_ms: 3.122765
+      type: 'test'
+      ...
+    1..4
+ok 92 - SIGReg
+  ---
+  duration_ms: 84.022857
+  type: 'suite'
+  ...
+# Subtest: WorldModelEngine
+    # Subtest: should encode observations to latent embeddings
+    ok 1 - should encode observations to latent embeddings
+      ---
+      duration_ms: 0.994662
+      type: 'test'
+      ...
+    # Subtest: should predict next state given action
+    ok 2 - should predict next state given action
+      ---
+      duration_ms: 0.690841
+      type: 'test'
+      ...
+    # Subtest: should train and reduce prediction loss over steps
+    ok 3 - should train and reduce prediction loss over steps
+      ---
+      duration_ms: 20.660406
+      type: 'test'
+      ...
+    # Subtest: should compute surprise scores
+    ok 4 - should compute surprise scores
+      ---
+      duration_ms: 0.616826
+      type: 'test'
+      ...
+    # Subtest: should plan towards goal states
+    ok 5 - should plan towards goal states
+      ---
+      duration_ms: 5.919736
+      type: 'test'
+      ...
+    # Subtest: should provide full status snapshot
+    ok 6 - should provide full status snapshot
+      ---
+      duration_ms: 0.221642
+      type: 'test'
+      ...
+    # Subtest: should reset cleanly
+    ok 7 - should reset cleanly
+      ---
+      duration_ms: 0.201771
+      type: 'test'
+      ...
+    1..7
+ok 93 - WorldModelEngine
+  ---
+  duration_ms: 31.660804
+  type: 'suite'
+  ...
+# Subtest: WorldModel Security
+    # Subtest: should handle NaN inputs without crashing
+    ok 1 - should handle NaN inputs without crashing
+      ---
+      duration_ms: 2.305624
+      type: 'test'
+      ...
+    # Subtest: should handle Infinity inputs
+    ok 2 - should handle Infinity inputs
+      ---
+      duration_ms: 2.220905
+      type: 'test'
+      ...
+    # Subtest: should handle empty spike action
+    ok 3 - should handle empty spike action
+      ---
+      duration_ms: 3.450891
+      type: 'test'
+      ...
+    1..3
+ok 94 - WorldModel Security
+  ---
+  duration_ms: 8.237035
+  type: 'suite'
+  ...
+1..94
+# tests 415
+# suites 79
+# pass 415
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 21562.066557

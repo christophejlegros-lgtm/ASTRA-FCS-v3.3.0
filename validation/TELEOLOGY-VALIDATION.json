@@ -1,0 +1,27 @@
+{
+  "version": "3.3.0-rc.1",
+  "date": "2026-10-19",
+  "status": "local prerelease; not published to GitHub",
+  "runtime": "Node.js v24.19.0",
+  "checks": {
+    "typescript_build": "pass",
+    "eslint_src": "pass",
+    "identity": "pass: 75 tools, 16 resources, 10 prompts",
+    "frozen_files": "pass: 12 LF-normalized hashes unchanged",
+    "tests": {
+      "command": "ASTRA_LOG_LEVEL=silent TSX_TSCONFIG_PATH=tsconfig.test.json node --import tsx --test tests/*.test.ts",
+      "passed": 401,
+      "failed": 0,
+      "skipped": 0,
+      "new_teleology_tests": 8
+    },
+    "example_replay": "pass; synthetic only"
+  },
+  "limits": [
+    "Standard tsx CLI hit EPERM creating a local IPC pipe; tests were run with Node --import tsx instead.",
+    "Dependencies reused from the existing local installation; npm ci was not rerun.",
+    "The Node 20/22 CI matrix, Docker, external devices and empirical studies were not run for this extension.",
+    "Contract declarations, evidence provenance and utility assumptions are not independently authenticated.",
+    "Tests establish software behavior, not empirical or philosophical truth."
+  ]
+}

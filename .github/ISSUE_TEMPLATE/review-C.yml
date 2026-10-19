@@ -1,0 +1,45 @@
+name: "Relecture C — Philosophie de l'esprit et des sciences"
+description: "Une objection ou une réponse à une question de la relecture C (REVIEW.md). One issue per question."
+title: "[C?] "
+labels: ["review-C-philosophy"]
+body:
+  - type: dropdown
+    id: question
+    attributes:
+      label: Question
+      options: ["C1", "C2", "C3", "C4", "C5", "C6", "Autre / Other"]
+    validations:
+      required: true
+  - type: input
+    id: manifest
+    attributes:
+      label: "Empreinte de MANIFEST.sha256 de la version relue · SHA-256 of the reviewed MANIFEST.sha256"
+      description: "sha256sum MANIFEST.sha256 — identifies the exact object reviewed."
+    validations:
+      required: true
+  - type: textarea
+    id: finding
+    attributes:
+      label: "Constat · Finding"
+      description: "Ce qui est affirmé, où (fichier, ligne, outil), et pourquoi ce n'est pas recevable ou pas exact."
+    validations:
+      required: true
+  - type: textarea
+    id: remedy
+    attributes:
+      label: "Correction proposée · Proposed remedy (optional)"
+  - type: checkboxes
+    id: independence
+    attributes:
+      label: "Indépendance · Independence (REVIEW.md)"
+      options:
+        - label: "Je n'ai pas participé au développement d'ASTRA ni à la rédaction de la série FCS."
+          required: true
+        - label: "Je déclare ci-dessous tout lien avec l'auteur ou avec les entreprises citées, et tout usage d'outils d'IA dans cette relecture."
+          required: true
+  - type: textarea
+    id: coi
+    attributes:
+      label: "Déclarations · Declarations (conflicts of interest, AI tools used)"
+    validations:
+      required: true

@@ -1,0 +1,30 @@
+{
+  "version": "3.3.0-rc.2",
+  "date": "2026-10-19",
+  "status": "pre-release; corrections of rc.1 after critical review (REVUE-v3.3.0-rc.1.md); not tagged",
+  "nature": "Checks run with AI assistance in a clean environment; not an external review (REVIEW.md).",
+  "runtime": { "node": "v22.22.0", "python": "3.13.16", "install": "npm ci (clean)" },
+  "rc1_as_received": {
+    "build": "pass", "lint": "pass", "tests": "401/401 (78 suites, tsx CLI via npm test)",
+    "identity": "pass", "frozen": "12/12 unchanged", "manifest": "447 files verified",
+    "golden": "current", "empirical": "test_confront --strict 17 PASS; test_e3 22 PASS",
+    "note": "All gates green while findings F1–F11 were present: a green check proves only what it tests."
+  },
+  "rc2": {
+    "build": "pass",
+    "lint": "pass",
+    "tests": { "command": "npm test", "passed": 406, "failed": 0, "suites": 78, "teleology_tests": 13, "log": "validation/rc2-tests.txt" },
+    "identity": "pass: v3.3.0-rc.2 · 75 tools · 16 resources · 10 prompts",
+    "frozen_files": "pass: 12 LF-normalised hashes unchanged",
+    "golden": "current",
+    "empirical": "test_confront --strict 17 PASS; test_e3 22 PASS",
+    "teleology_example": "node examples/teleology/replay.mjs --check: current",
+    "stdio_smoke": "ASTRA MCP Server v3.3.0-rc.2: 75 tools · 16 resources · 10 prompts",
+    "prereg_check": "77 open markers (unchanged; author's decisions)"
+  },
+  "limits": [
+    "The Node 20 leg of the CI matrix and the Docker job were not run here.",
+    "Contract declarations, evidence provenance and utility assumptions are not independently authenticated.",
+    "Tests establish software behaviour, not empirical or philosophical truth."
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "contractId": "prediction-v1",
+  "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
+  "function": "Prédiction sur données réservées",
+  "owner": "Équipe de recherche",
+  "reports": [
+    {
+      "contractId": "prediction-v1",
+      "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
+      "function": "Prédiction sur données réservées",
+      "owner": "Équipe de recherche",
+      "outcomeId": "sobre",
+      "evidenceKind": "simulated",
+      "source": "Valeurs synthétiques créées pour illustrer les règles",
+      "admissibility": "admissible",
+      "admissibilityBasis": "declared-constraints",
+      "constraintsDeclared": 1,
+      "attainment": "met",
+      "criteria": [
+        {
+          "id": "error",
+          "beneficiary": "Chercheurs",
+          "unit": "fraction",
+          "status": "pass",
+          "interval": [
+            0.1,
+            0.15
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "id": "energy",
+          "beneficiary": "Opérateur",
+          "unit": "J",
+          "status": "pass",
+          "interval": [
+            4,
+            5
+          ]
+        }
+      ],
+      "utility": {
+        "lower": 0.85,
+        "upper": 0.9,
+        "conditional": true
+      },
+      "interpretation": "Conditional on supplied data and declared values; no causal inference."
+    },
+    {
+      "contractId": "prediction-v1",
+      "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
+      "function": "Prédiction sur données réservées",
+      "owner": "Équipe de recherche",
+      "outcomeId": "imprecise",
+      "evidenceKind": "simulated",
+      "source": "Valeurs synthétiques créées pour illustrer les règles",
+      "admissibility": "admissible",
+      "admissibilityBasis": "declared-constraints",
+      "constraintsDeclared": 1,
+      "attainment": "not_met",
+      "criteria": [
+        {
+          "id": "error",
+          "beneficiary": "Chercheurs",
+          "unit": "fraction",
+          "status": "fail",
+          "interval": [
+            0.3,
+            0.35
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "id": "energy",
+          "beneficiary": "Opérateur",
+          "unit": "J",
+          "status": "pass",
+          "interval": [
+            4,
+            5
+          ]
+        }
+      ],
+      "utility": {
+        "lower": 0.65,
+        "upper": 0.7,
+        "conditional": true
+      },
+      "interpretation": "Conditional on supplied data and declared values; no causal inference."
+    },
+    {
+      "contractId": "prediction-v1",
+      "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
+      "function": "Prédiction sur données réservées",
+      "owner": "Équipe de recherche",
+      "outcomeId": "excessive",
+      "evidenceKind": "simulated",
+      "source": "Valeurs synthétiques créées pour illustrer les règles",
+      "admissibility": "rejected",
+      "admissibilityBasis": "declared-constraints",
+      "constraintsDeclared": 1,
+      "attainment": "met",
+      "criteria": [
+        {
+          "id": "error",
+          "beneficiary": "Chercheurs",
+          "unit": "fraction",
+          "status": "pass",
+          "interval": [
+            0.01,
+            0.02
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "id": "energy",
+          "beneficiary": "Opérateur",
+          "unit": "J",
+          "status": "fail",
+          "interval": [
+            12,
+            13
+          ]
+        }
+      ],
+      "utility": null,
+      "interpretation": "Conditional on supplied data and declared values; no causal inference."
+    }
+  ],
+  "dominance": [
+    {
+      "better": "sobre",
+      "worse": "imprecise"
+    }
+  ],
+  "nonDominated": [
+    "sobre"
+  ],
+  "excluded": [
+    "excessive"
+  ],
+  "interpretation": "Non-dominated does not mean optimal. Utility does not override constraints."
+}

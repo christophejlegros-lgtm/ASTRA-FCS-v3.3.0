@@ -1,0 +1,106 @@
+{
+  "contract": {
+    "id": "prediction-v1",
+    "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
+    "function": "Prédiction sur données réservées",
+    "owner": "Équipe de recherche",
+    "context": "Exemple synthétique v1",
+    "horizon": "100 essais",
+    "criteria": [
+      {
+        "id": "error",
+        "description": "Erreur de prédiction",
+        "beneficiary": "Chercheurs",
+        "unit": "fraction",
+        "direction": "minimize",
+        "threshold": 0.2
+      }
+    ],
+    "constraints": [
+      {
+        "id": "energy",
+        "description": "Budget énergétique",
+        "beneficiary": "Opérateur",
+        "unit": "J",
+        "direction": "minimize",
+        "threshold": 10
+      }
+    ],
+    "utility": {
+      "rationale": "Convention instrumentale linéaire entre erreur 1 et 0 ; aucune mesure de bien-être.",
+      "terms": [
+        {
+          "criterionId": "error",
+          "worst": 1,
+          "best": 0,
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "outcomes": [
+    {
+      "id": "sobre",
+      "kind": "simulated",
+      "source": "Valeurs synthétiques créées pour illustrer les règles",
+      "context": "Exemple synthétique v1",
+      "horizon": "100 essais",
+      "observations": [
+        {
+          "criterionId": "error",
+          "unit": "fraction",
+          "lower": 0.1,
+          "upper": 0.15
+        },
+        {
+          "criterionId": "energy",
+          "unit": "J",
+          "lower": 4,
+          "upper": 5
+        }
+      ]
+    },
+    {
+      "id": "imprecise",
+      "kind": "simulated",
+      "source": "Valeurs synthétiques créées pour illustrer les règles",
+      "context": "Exemple synthétique v1",
+      "horizon": "100 essais",
+      "observations": [
+        {
+          "criterionId": "error",
+          "unit": "fraction",
+          "lower": 0.3,
+          "upper": 0.35
+        },
+        {
+          "criterionId": "energy",
+          "unit": "J",
+          "lower": 4,
+          "upper": 5
+        }
+      ]
+    },
+    {
+      "id": "excessive",
+      "kind": "simulated",
+      "source": "Valeurs synthétiques créées pour illustrer les règles",
+      "context": "Exemple synthétique v1",
+      "horizon": "100 essais",
+      "observations": [
+        {
+          "criterionId": "error",
+          "unit": "fraction",
+          "lower": 0.01,
+          "upper": 0.02
+        },
+        {
+          "criterionId": "energy",
+          "unit": "J",
+          "lower": 12,
+          "upper": 13
+        }
+      ]
+    }
+  ]
+}

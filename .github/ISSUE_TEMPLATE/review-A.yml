@@ -1,0 +1,45 @@
+name: "Relecture A — Neurosciences computationnelles"
+description: "Une objection ou une réponse à une question de la relecture A (REVIEW.md). One issue per question."
+title: "[A?] "
+labels: ["review-A-neuroscience"]
+body:
+  - type: dropdown
+    id: question
+    attributes:
+      label: Question
+      options: ["A1", "A2", "A3", "A4", "A5", "A6", "Autre / Other"]
+    validations:
+      required: true
+  - type: input
+    id: manifest
+    attributes:
+      label: "Empreinte de MANIFEST.sha256 de la version relue · SHA-256 of the reviewed MANIFEST.sha256"
+      description: "sha256sum MANIFEST.sha256 — identifies the exact object reviewed."
+    validations:
+      required: true
+  - type: textarea
+    id: finding
+    attributes:
+      label: "Constat · Finding"
+      description: "Ce qui est affirmé, où (fichier, ligne, outil), et pourquoi ce n'est pas recevable ou pas exact."
+    validations:
+      required: true
+  - type: textarea
+    id: remedy
+    attributes:
+      label: "Correction proposée · Proposed remedy (optional)"
+  - type: checkboxes
+    id: independence
+    attributes:
+      label: "Indépendance · Independence (REVIEW.md)"
+      options:
+        - label: "Je n'ai pas participé au développement d'ASTRA ni à la rédaction de la série FCS."
+          required: true
+        - label: "Je déclare ci-dessous tout lien avec l'auteur ou avec les entreprises citées, et tout usage d'outils d'IA dans cette relecture."
+          required: true
+  - type: textarea
+    id: coi
+    attributes:
+      label: "Déclarations · Declarations (conflicts of interest, AI tools used)"
+    validations:
+      required: true

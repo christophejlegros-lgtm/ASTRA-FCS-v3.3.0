@@ -1,0 +1,43 @@
+{
+  "version": "3.3.0-rc.3",
+  "date": "2026-10-19",
+  "status": "pre-release; name, canonical definition, widened claim linter, name test in check:identity; not tagged",
+  "nature": "Checks run with AI assistance in a clean environment (git clone of branch rc3, npm ci); not an external review (REVIEW.md).",
+  "runtime": { "node": "v22.22.0", "python": "3.13.16", "install": "npm ci (clean)" },
+  "name": {
+    "id": "ASTRA-FCS",
+    "en": "Agent-orchestrated Simulation Testbed for Research on Access",
+    "fr": "Agent Orchestré de Simulation et Test de Recherche sur l'Access",
+    "fr_source": "wording stated by the author",
+    "acronym_reading_fr": "« Agent Orchestré » declared as one initial-bearing unit (reported as a notice by check:identity)",
+    "withdrawn": ["Autonomous Sentient Thoughtful Reasoning Agent (3.1.0)", "Agent-orchestrated Simulation Testbed for Research on Awareness (3.3.0-rc.3)"]
+  },
+  "claim_linter": {
+    "rules": { "rc2": 5, "rc3": 21, "languages": ["en", "fr"] },
+    "rc2_misses_now_caught": [
+      "ASTRA is a sentient agent.", "ASTRA measures awareness.", "ASTRA detects consciousness in organoids.",
+      "ASTRA est conscient.", "L'indice mesure la conscience phénoménale."
+    ],
+    "shipped_payloads": "every argument-free tool and every resource clears the guard; all 415 tests pass, including the tools called with arguments",
+    "payload_reworded": "ArgonovLedger ADMISSIBLE reason: Argonov's criterion stated as his"
+  },
+  "rc3": {
+    "identity": "pass: v3.3.0-rc.3 · 75 tools · 16 resources · 10 prompts; name consistent",
+    "frozen_files": "pass: 12 LF-normalised hashes unchanged",
+    "build": "pass",
+    "lint": "pass",
+    "golden": "current",
+    "teleology_example": "node examples/teleology/replay.mjs --check: current",
+    "tests": { "command": "npm test", "passed": 415, "failed": 0, "suites": 79, "added": { "claim_linter": 5, "name": 4 }, "log": "validation/rc3-tests.txt" },
+    "empirical": "test_confront --strict 17 PASS; test_e3 22 PASS",
+    "stdio_smoke": "ASTRA MCP Server v3.3.0-rc.3: 75 tools · 16 resources · 10 prompts",
+    "prereg_check": "77 open markers (unchanged; author's decisions)"
+  },
+  "limits": [
+    "The claim linter is a pattern heuristic: a paraphrase outside the encoded forms passes, and a negator more than three words away is not seen.",
+    "Noun forms ('a measure of consciousness') are left to lintFcs; lintFcs itself has no French patterns.",
+    "The Node 20 leg of the CI matrix and the Docker job were not run here.",
+    "F12 (two trees claiming the 3.3.0 line) is not resolved by this pre-release.",
+    "Tests establish software behaviour, not empirical or philosophical truth."
+  ]
+}

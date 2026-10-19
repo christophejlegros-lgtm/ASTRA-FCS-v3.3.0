@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software, please cite it as below. Cite the archived DOI of
+  the exact release you used (Zenodo–GitHub integration), and check the archive
+  against its MANIFEST.sha256. The repository name carries "v3.1.0" for
+  historical reasons; it is not a version identifier (RELEASE.md).
+type: software
+title: "ASTRA-FCS — Agent-orchestrated Simulation Testbed for Research on Access (MCP server, FCS layer)"
+version: 3.3.0-rc.3
+# date-released must equal the date of the signed tag v3.3.0-rc.3 (RELEASE.md §2); set it when tagging.
+date-released: 2026-10-19
+# Composite licensing: MIT for the original work; python/the_consciousness_ai/ and the
+# nine ported files of src/engine/tcai/ follow the upstream NON-COMMERCIAL licence.
+# No single SPDX identifier describes the whole, hence license-url (CFF 1.2.0).
+license-url: "https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0/blob/main/THIRD_PARTY_NOTICES.md"
+repository-code: "https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0"
+authors:
+  - family-names: Legros
+    given-names: Christophe Jean
+    affiliation: "Assistance Multi IA, Geneva"
+    email: Assistant-Multi-IA@proton.me
+abstract: >-
+  ASTRA-FCS is a research instrument for simulating and auditing functional
+  correlates of access (Block 1995) under substrate constraints; it neither
+  measures, detects nor attributes phenomenal consciousness. Model Context
+  Protocol server exposing 75 simulation and analysis tools to AI
+  assistants: a LIF+STDP spiking network, a JEPA-style world model, computed
+  proxies named after theories of consciousness, simulated bridges to
+  biocomputing platforms, an executable layer for the research programme of
+  substrate-constrained functionalism (FCS), and a read-only functional-teleology
+  extension (pre-release) that assesses declared purposes against reported
+  outcome intervals under hard constraints. All biological and physiological
+  data are simulated; the consciousness-related indices are proxies, not
+  measurements, each documented by a proxy card and checked by validation
+  controls (v3.2.0). Third-party components keep their own licences (see
+  THIRD_PARTY_NOTICES.md).
+keywords:
+  - model context protocol
+  - spiking neural network
+  - active inference
+  - consciousness science
+  - biocomputing
+  - epistemology
+# identifiers:            # add the version DOI of THIS release once Zenodo has minted it
+#   - type: doi           # (RELEASE.md §3); never reuse the DOI of an earlier version
+#     value: 10.5281/zenodo.XXXXXXX
+#     description: "Version DOI of ASTRA-FCS 3.3.0-rc.3"

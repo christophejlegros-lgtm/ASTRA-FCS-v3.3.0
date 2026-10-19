@@ -1,0 +1,548 @@
+{
+  "status": "Synthetic ground truth only \u2014 properties of the E3 bench, nothing about real organoids.",
+  "reproduce": [
+    "python3 empirical/test_e3.py --truth-seed 1 --tau 0.8 --summary-out s1.json",
+    "python3 empirical/test_e3.py --truth-seed 2 --tau 0.8 --summary-out s2.json",
+    "python3 empirical/test_e3.py --truth-seed 3 --tau 0.8 --summary-out s3.json",
+    "python3 empirical/test_e3.py --truth-seed 4 --tau 0.0 --summary-out s4.json"
+  ],
+  "design": "6 training + 6 test synthetic organoids, T = 60 s, bank 250 per generator and window, k = 15, 40 predictive draws, fair CRPS, organoid bootstrap (500).",
+  "runs": [
+    {
+      "truthSeed": 1,
+      "tau": 0.8,
+      "models": {
+        "M2-hierarchical-network-burst": {
+          "coverage95": 1.0,
+          "jointCoverage95": 1.0,
+          "meanCRPS": {
+            "mean": 0.12860753826455995,
+            "ci95": [
+              0.08426381212598087,
+              0.17361484639329247
+            ],
+            "n": 6
+          }
+        },
+        "M1-pooled-network-burst": {
+          "coverage95": 0.6666666666666666,
+          "jointCoverage95": 0.16666666666666666,
+          "meanCRPS": {
+            "mean": 0.12354516479517648,
+            "ci95": [
+              0.07992741782628934,
+              0.16734599766481928
+            ],
+            "n": 6
+          }
+        },
+        "C1-hierarchical-desync": {
+          "coverage95": 0.36666666666666664,
+          "jointCoverage95": 0.0,
+          "meanCRPS": {
+            "mean": 1.4817476536409773,
+            "ci95": [
+              1.4099034188050248,
+              1.5562157350882644
+            ],
+            "n": 6
+          }
+        },
+        "M1-E2-frozen (python prototype)": {
+          "coverage95": 0.7,
+          "jointCoverage95": 0.3333333333333333,
+          "meanCRPS": {
+            "mean": 0.14084000443943792,
+            "ci95": [
+              0.07765512674709867,
+              0.21020998568483
+            ],
+            "n": 6
+          }
+        }
+      },
+      "comparisons": [
+        {
+          "a": "M2-hierarchical-network-burst",
+          "b": "M1-pooled-network-burst",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": 0.005062373469383461,
+            "ci95": [
+              -0.033965077474300935,
+              0.04145963089424345
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M2-hierarchical-network-burst",
+          "b": "C1-hierarchical-desync",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -1.3531401153764173,
+            "ci95": [
+              -1.3894852952878076,
+              -1.311492969154819
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M2-hierarchical-network-burst",
+          "b": "M1-E2-frozen (python prototype)",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -0.012232466174878004,
+            "ci95": [
+              -0.04358251017709478,
+              0.015688325596853854
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M1-pooled-network-burst",
+          "b": "C1-hierarchical-desync",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -1.3582024888458009,
+            "ci95": [
+              -1.4328055847659813,
+              -1.2905229687315725
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M1-pooled-network-burst",
+          "b": "M1-E2-frozen (python prototype)",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -0.017294839644261466,
+            "ci95": [
+              -0.07019892258234918,
+              0.030950485311084304
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "C1-hierarchical-desync",
+          "b": "M1-E2-frozen (python prototype)",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": 1.3409076492015393,
+            "ci95": [
+              1.2915545583111996,
+              1.3841961800216465
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        }
+      ]
+    },
+    {
+      "truthSeed": 2,
+      "tau": 0.8,
+      "models": {
+        "M2-hierarchical-network-burst": {
+          "coverage95": 0.9333333333333333,
+          "jointCoverage95": 0.6666666666666666,
+          "meanCRPS": {
+            "mean": 0.12183329972403172,
+            "ci95": [
+              0.08265529285440136,
+              0.16110235388034666
+            ],
+            "n": 6
+          }
+        },
+        "M1-pooled-network-burst": {
+          "coverage95": 0.6,
+          "jointCoverage95": 0.16666666666666666,
+          "meanCRPS": {
+            "mean": 0.10190711718911187,
+            "ci95": [
+              0.06562549895576976,
+              0.1432453407374349
+            ],
+            "n": 6
+          }
+        },
+        "C1-hierarchical-desync": {
+          "coverage95": 0.3,
+          "jointCoverage95": 0.0,
+          "meanCRPS": {
+            "mean": 1.370769767382771,
+            "ci95": [
+              1.3148822742316009,
+              1.4202426733424638
+            ],
+            "n": 6
+          }
+        },
+        "M1-E2-frozen (python prototype)": {
+          "coverage95": 0.7333333333333333,
+          "jointCoverage95": 0.16666666666666666,
+          "meanCRPS": {
+            "mean": 0.09855087781455808,
+            "ci95": [
+              0.0666186749156729,
+              0.13791023557454005
+            ],
+            "n": 6
+          }
+        }
+      },
+      "comparisons": [
+        {
+          "a": "M2-hierarchical-network-burst",
+          "b": "M1-pooled-network-burst",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": 0.019926182534919856,
+            "ci95": [
+              0.0011203286999426146,
+              0.037106321670278226
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M2-hierarchical-network-burst",
+          "b": "C1-hierarchical-desync",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -1.2489364676587391,
+            "ci95": [
+              -1.2785974774747353,
+              -1.2149679871978516
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M2-hierarchical-network-burst",
+          "b": "M1-E2-frozen (python prototype)",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": 0.023282421909473622,
+            "ci95": [
+              -0.03758477303678934,
+              0.08226372434225704
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M1-pooled-network-burst",
+          "b": "C1-hierarchical-desync",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -1.268862650193659,
+            "ci95": [
+              -1.3102654126728503,
+              -1.2288200024465052
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M1-pooled-network-burst",
+          "b": "M1-E2-frozen (python prototype)",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": 0.0033562393745537717,
+            "ci95": [
+              -0.04480145556163538,
+              0.05988898689343469
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "C1-hierarchical-desync",
+          "b": "M1-E2-frozen (python prototype)",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": 1.2722188895682127,
+            "ci95": [
+              1.2079746603037727,
+              1.3401462677595803
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        }
+      ]
+    },
+    {
+      "truthSeed": 3,
+      "tau": 0.8,
+      "models": {
+        "M2-hierarchical-network-burst": {
+          "coverage95": 0.9333333333333333,
+          "jointCoverage95": 0.6666666666666666,
+          "meanCRPS": {
+            "mean": 0.13618179950657705,
+            "ci95": [
+              0.1020549503721805,
+              0.16220462131620872
+            ],
+            "n": 6
+          }
+        },
+        "M1-pooled-network-burst": {
+          "coverage95": 0.7,
+          "jointCoverage95": 0.0,
+          "meanCRPS": {
+            "mean": 0.15195673938889276,
+            "ci95": [
+              0.09629206691100611,
+              0.21301864026021455
+            ],
+            "n": 6
+          }
+        },
+        "C1-hierarchical-desync": {
+          "coverage95": 0.26666666666666666,
+          "jointCoverage95": 0.0,
+          "meanCRPS": {
+            "mean": 1.4809912394731262,
+            "ci95": [
+              1.3787876556879668,
+              1.561995346617385
+            ],
+            "n": 6
+          }
+        },
+        "M1-E2-frozen (python prototype)": {
+          "coverage95": 0.43333333333333335,
+          "jointCoverage95": 0.16666666666666666,
+          "meanCRPS": {
+            "mean": 0.15927247782284107,
+            "ci95": [
+              0.1284518664335464,
+              0.19128012708300288
+            ],
+            "n": 6
+          }
+        }
+      },
+      "comparisons": [
+        {
+          "a": "M2-hierarchical-network-burst",
+          "b": "M1-pooled-network-burst",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -0.01577493988231567,
+            "ci95": [
+              -0.050670624988731004,
+              0.008086507178113269
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M2-hierarchical-network-burst",
+          "b": "C1-hierarchical-desync",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -1.3448094399665493,
+            "ci95": [
+              -1.434145882653252,
+              -1.2258027285570439
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M2-hierarchical-network-burst",
+          "b": "M1-E2-frozen (python prototype)",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -0.02309067831626402,
+            "ci95": [
+              -0.05801446588936155,
+              0.004319549529764699
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M1-pooled-network-burst",
+          "b": "C1-hierarchical-desync",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -1.3290345000842336,
+            "ci95": [
+              -1.439925425952672,
+              -1.1901435304581256
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M1-pooled-network-burst",
+          "b": "M1-E2-frozen (python prototype)",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -0.007315738433948347,
+            "ci95": [
+              -0.05867941983319588,
+              0.0552118239919386
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "C1-hierarchical-desync",
+          "b": "M1-E2-frozen (python prototype)",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": 1.3217187616502852,
+            "ci95": [
+              1.233932044248955,
+              1.381676287328044
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        }
+      ]
+    },
+    {
+      "truthSeed": 4,
+      "tau": 0.0,
+      "models": {
+        "M2-hierarchical-network-burst": {
+          "coverage95": 1.0,
+          "jointCoverage95": 1.0,
+          "meanCRPS": {
+            "mean": 0.10024404515939396,
+            "ci95": [
+              0.08661547421573634,
+              0.1171323908217423
+            ],
+            "n": 6
+          }
+        },
+        "M1-pooled-network-burst": {
+          "coverage95": 0.7333333333333333,
+          "jointCoverage95": 0.16666666666666666,
+          "meanCRPS": {
+            "mean": 0.08001838471398845,
+            "ci95": [
+              0.0498578831099957,
+              0.11359485401306398
+            ],
+            "n": 6
+          }
+        },
+        "C1-hierarchical-desync": {
+          "coverage95": 0.4,
+          "jointCoverage95": 0.0,
+          "meanCRPS": {
+            "mean": 1.4001663770512558,
+            "ci95": [
+              1.342835258635635,
+              1.4472586457163148
+            ],
+            "n": 6
+          }
+        },
+        "M1-E2-frozen (python prototype)": {
+          "coverage95": 0.9333333333333333,
+          "jointCoverage95": 0.6666666666666666,
+          "meanCRPS": {
+            "mean": 0.06885445741000944,
+            "ci95": [
+              0.0417798254238273,
+              0.09231751179170448
+            ],
+            "n": 6
+          }
+        }
+      },
+      "comparisons": [
+        {
+          "a": "M2-hierarchical-network-burst",
+          "b": "M1-pooled-network-burst",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": 0.020225660445405514,
+            "ci95": [
+              0.003692034049018079,
+              0.035433284464786295
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M2-hierarchical-network-burst",
+          "b": "C1-hierarchical-desync",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -1.2999223318918618,
+            "ci95": [
+              -1.357100814771496,
+              -1.2232295440266925
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M2-hierarchical-network-burst",
+          "b": "M1-E2-frozen (python prototype)",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": 0.03138958774938453,
+            "ci95": [
+              0.01781373659627773,
+              0.04562330646019084
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M1-pooled-network-burst",
+          "b": "C1-hierarchical-desync",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": -1.3201479923372674,
+            "ci95": [
+              -1.38191383248679,
+              -1.2325369911691497
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "M1-pooled-network-burst",
+          "b": "M1-E2-frozen (python prototype)",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": 0.011163927303979013,
+            "ci95": [
+              0.0009295152166604476,
+              0.024066015652625925
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        },
+        {
+          "a": "C1-hierarchical-desync",
+          "b": "M1-E2-frozen (python prototype)",
+          "meanCRPSdifference_a_minus_b": {
+            "mean": 1.3313119196412464,
+            "ci95": [
+              1.2476006353205915,
+              1.3824733280129171
+            ],
+            "n": 6
+          },
+          "noteEn": "Negative favours a. Organoid-level bootstrap; the statistics of one organoid are not independent of each other."
+        }
+      ]
+    }
+  ]
+}

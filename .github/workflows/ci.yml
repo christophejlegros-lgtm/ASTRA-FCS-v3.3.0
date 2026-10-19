@@ -1,0 +1,139 @@
+name: CI
+
+# ASTRA Unified ResearchLab MCP — Continuous Integration
+# © 2026 Christophe Jean Legros — Geneva · Assistance Multi IA
+#
+# Aligned to v3.2.0 (consolidation after the epistemological analysis of 9 Oct 2026):
+# identity and frozen-file gates, strict TypeScript build, lint, the full test suite,
+# the TS↔NumPy golden check, the empirical benches (E1/E2 bench strict, E3 synthetic
+# ground truth), a preregistration-readiness report, a stdio capability smoke test
+# (counts computed at registration), the release-manifest check on tags, and a
+# Docker build + /health smoke.
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    name: Build & Test (Node ${{ matrix.node }})
+    runs-on: ubuntu-24.04   # pinned: ubuntu-latest moves to Ubuntu 26 from 2026-10-19
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['20', '22']   # package.json engines: node >=20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Node ${{ matrix.node }}
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Set up Python (for the TS↔NumPy golden check)
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install numpy + h5py
+        run: python3 -m pip install --upgrade pip numpy h5py
+
+      - name: Install dependencies (clean)
+        run: npm ci
+
+      - name: Identity of the cited object (version, counts and name agree everywhere)
+        # v3.3.0-rc.3: run through tsx (the name test imports the linters from src/; no build needed)
+        run: npm run check:identity
+
+      - name: Frozen E1/E2 files unchanged (E2 must stay replayable)
+        run: npm run check:frozen
+
+      - name: Type-check / build (tsc strict, Node16 ESM)
+        run: npm run build
+
+      - name: Lint
+        # ESLint v9 flat config (eslint.config.js + typescript-eslint) is now
+        # wired in — lint is a blocking gate alongside tsc strict.
+        run: npm run lint
+
+      - name: TS↔NumPy active-inference golden is current
+        run: npm run golden:check
+
+      - name: Test suite (incl. closed-loop active inference & HTTP/SSE transports)
+        run: npm test
+
+      - name: Teleology example recomputed by the compiled module (v3.3.0-rc.2)
+        run: node examples/teleology/replay.mjs --check
+
+      - name: Empirical benches (E1/E2 bench strict, E3 synthetic ground truth)
+        run: |
+          python3 empirical/test_confront.py --strict
+          python3 empirical/test_e3.py
+
+      - name: Preregistration readiness (report only — open parameters are the author's)
+        run: npm run prereg:check -- --report
+
+      - name: Release manifest matches the tree (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        run: npm run manifest:check
+
+      - name: Capability smoke test (stdio transport)
+        # The stdio entrypoint logs the capability summary at startup; since v3.2.0 the
+        # counts are computed at registration (lint-guard.ts → capabilityCounts).
+        # Assert v3.3.0-rc.3 exposes exactly 75 tools · 16 resources · 10 prompts
+        # (50 core + 6 ovo_* + 6 orch_* + 9 fcs_* + proxy_validate + 3 teleology_*).
+        run: |
+          set -euo pipefail
+          LOG="$(timeout 8s node dist/index.js 2>&1 || true)"
+          echo "$LOG"
+          echo "$LOG" | grep -q "ASTRA MCP Server v3.3.0-rc.3: 75 tools · 16 resources · 10 prompts" \
+            || { echo "::error::Capability summary mismatch (expected 75 tools · 16 resources · 10 prompts)"; exit 1; }
+
+  docker-smoke:
+    name: Docker build & /health smoke
+    runs-on: ubuntu-24.04   # pinned: ubuntu-latest moves to Ubuntu 26 from 2026-10-19
+    needs: build-test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Build image
+        run: docker build -t astra-mcp:ci .
+
+      - name: Run container
+        run: docker run -d --name astra -p 9003:9003 astra-mcp:ci
+
+      - name: Smoke-test /health endpoint
+        run: |
+          set -euo pipefail
+          ok=0
+          for i in $(seq 1 25); do
+            if curl -fsS http://localhost:9003/health | grep -q '"status":"ok"'; then
+              ok=1; break
+            fi
+            sleep 2
+          done
+          echo "----- /health -----"
+          curl -fsS http://localhost:9003/health || true
+          echo
+          echo "----- container logs -----"
+          docker logs astra || true
+          test "$ok" = "1" || { echo "::error::/health did not become healthy"; exit 1; }
+
+      - name: Tear down
+        if: always()
+        run: docker rm -f astra >/dev/null 2>&1 || true
