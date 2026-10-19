@@ -45,9 +45,18 @@ contient donc ni le commit `eb03ad2` (pré-enregistrement E1) ni `1905da1` (E2) 
 `scripts/verify-anteriority.sh` signale à bon droit que pré-enregistrements et résultats
 sont « added in the SAME commit — no anteriority can be shown from this history ».
 
-- L'ordre pré-enregistrement → résultats ne se contrôle que dans un clone du dépôt
-  d'origine `ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0`, s'il reste public. Le présent dépôt
-  ne l'établit pas et ne doit pas être cité comme preuve d'antériorité.
+- L'ordre pré-enregistrement → résultats ne se contrôle que dans un clone **complet** du dépôt
+  d'origine `ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0`, s'il reste public. Sa branche par
+  défaut (v3.1.1) ne contient pas `scripts/verify-anteriority.sh` (ajouté en v3.2.0) : on
+  exécute le script du présent dépôt en lui passant ce clone,
+  `bash scripts/verify-anteriority.sh <clone>` ; un clone superficiel est refusé. Le présent
+  dépôt ne l'établit pas et ne doit pas être cité comme preuve d'antériorité.
+- **Contrôle effectué le 19 octobre 2026** (avec assistance d'IA, sur le dépôt d'origine à
+  `d81ccd1`, 19 commits, clone complet) : empreintes au commit d'ajout = empreintes
+  déclarées ; `eb03ad2` (E1) est ancêtre de `2701372`, premier commit de
+  `results/E1.json` ; `1905da1` (E2) est ancêtre de `fcf3ef3`, premier commit de
+  `results/E2.json`. Ce résultat établit l'ordre dans l'historique ; les dates de commit
+  restent déclaratives.
 - Les empreintes (pré-enregistrements, code gelé, résultats) sont identiques à celles
   déclarées : `npm run check:frozen` le vérifie ici comme ailleurs.
 - Le statut des deux commits reste celui du §2 : **déclarés**, vérifiables dans le dépôt
@@ -55,7 +64,10 @@ sont « added in the SAME commit — no anteriority can be shown from this histo
 
 *EN — This repository was created from the rc.3 tree in a single commit and holds neither
 `eb03ad2` nor `1905da1`. Anteriority within a git history can be checked only in a clone
-of the original repository; it is not established here. Hashes are unchanged.*
+of the original repository, by running this repository's script on a full clone of it
+(its default branch, v3.1.1, predates the script). Checked on 19 October 2026: both
+preregistration commits are ancestors of the first commits adding the results. Hashes are
+unchanged.*
 
 ## 3. Empreintes des résultats · Result hashes (SHA-256, LF)
 

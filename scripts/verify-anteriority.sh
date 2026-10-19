@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
-# ASTRA — Anteriority check of the preregistrations (v3.2.0)
+# ASTRA — Anteriority check of the preregistrations (v3.2.0; path argument v3.3.0-rc.3)
 # ══════════════════════════════════════════════════════════
 # Programme minimal de consolidation, point 1: "les empreintes doivent permettre
 # l'inspection indépendante de l'antériorité, pas simplement être déclarées".
 #
-# Run INSIDE A CLONE OF THE ORIGINAL PUBLIC REPOSITORY (full history), not in an archive.
-# The repository ASTRA-FCS-v3.3.0 was created on 19 Oct 2026 from the rc.3 tree in ONE
-# commit: run there, this script correctly reports "added in the SAME commit — no
-# anteriority can be shown from this history" (empirical/PROVENANCE.md §2bis).
-#   git clone https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0.git
-#   cd ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0 && bash scripts/verify-anteriority.sh
+# The E1/E2 history lives in the ORIGINAL public repository. Its default branch (v3.1.1)
+# predates this script, so run THIS copy of the script against a FULL (non-shallow)
+# clone of it, passed as the argument:
+#   git clone https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0.git /tmp/astra-origin
+#   bash scripts/verify-anteriority.sh /tmp/astra-origin
+# Without an argument the current directory is checked. In ASTRA-FCS-v3.3.0, created on
+# 19 Oct 2026 from the rc.3 tree in ONE commit, the script correctly reports "added in the
+# SAME commit — no anteriority can be shown from this history" (empirical/PROVENANCE.md §2bis).
+# A shallow clone is refused: its oldest commit would look like the commit that added
+# every file, and the check would report a spurious absence of anteriority.
 #
 # For each preregistration it reports: the first commit that added it, the
 # LF-normalised SHA-256 of the file AT that commit (compared with the declared
@@ -27,10 +31,17 @@
 # © 2026 Christophe Jean Legros — Geneva · Assistance Multi IA
 set -uo pipefail
 
-if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-  echo "Not a git work tree: run this in a clone of the public repository (an archive carries no history)." >&2
+REPO="${1:-.}"
+if ! git -C "$REPO" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  echo "Not a git work tree: $REPO (an archive carries no history; pass a clone of the original repository)." >&2
   exit 2
 fi
+if [ "$(git -C "$REPO" rev-parse --is-shallow-repository)" = "true" ]; then
+  echo "Shallow clone: $REPO. Clone without --depth (or run git -C \"$REPO\" fetch --unshallow) and retry." >&2
+  exit 2
+fi
+cd "$REPO" || exit 2
+echo "Repository checked: $(git remote get-url origin 2>/dev/null || pwd) @ $(git rev-parse --short HEAD)"
 
 lfsha() { python3 -c 'import hashlib,sys; print(hashlib.sha256(sys.stdin.buffer.read().replace(b"\r\n", b"\n")).hexdigest())'; }
 

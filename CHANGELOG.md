@@ -42,6 +42,17 @@ revue externe (`REVIEW.md`).
   Windows) ; `.gitattributes` (LF pour le texte, binaires intacts).
 - Nom de fichier : `Fonctionnalisme Contraint par Substrat v1..5.pdf` → `… v1.5.pdf`.
 - CI GitHub du commit publié (run 39242870810) : Node 20, Node 22 et Docker verts.
+- Revue de la publication (même jour) :
+  - la procédure d'antériorité était inexécutable telle qu'écrite — la branche par défaut du
+    dépôt d'origine (v3.1.1) ne contient pas `verify-anteriority.sh` ; le script accepte
+    désormais le chemin d'un clone (`bash scripts/verify-anteriority.sh <clone>`) et refuse
+    un clone superficiel, qui produirait un faux « SAME commit » ; contrôle exécuté sur le
+    dépôt d'origine (E1, E2 : ancêtres) et consigné, `PROVENANCE.md` §2bis ;
+  - chaîne des DOI rétablie : l'arbre ne mentionnait plus les DOI Zenodo déjà attribués
+    (v3.1.1 : 10.5281/zenodo.23196960 ; concept : 10.5281/zenodo.23196959) ; ils figurent
+    dans `CITATION.cff`, le README et `.zenodo.json` (`isNewVersionOf`), et `RELEASE.md` §3
+    avertit qu'activer l'intégration Zenodo sur le nouveau dépôt créerait un second DOI de
+    concept.
 - L'arbre rc.3 est amendé avant marquage : l'archive `ASTRA-FCS-v3.3.0-rc.3.zip` du
   19 octobre (SHA-256 `718601e0…87f3f3e`) est remplacée par l'état de ce dépôt.
 
