@@ -84,6 +84,19 @@ export function checkIdentity() {
   } else problems.push('CHANGELOG.md missing');
 
   const repo = /repository-code:\s*"([^"]+)"/.exec(cff)?.[1] ?? '';
+  // v3.3.0-rc.3 (publication): every link to the CURRENT repository agrees with
+  // CITATION.cff repository-code. References to the original repository as the
+  // holder of the E1/E2 history (PROVENANCE, verify-anteriority.sh) are not links
+  // to the current location and are not checked here.
+  if (repo) {
+    const lic = /license-url:\s*"([^"]+)"/.exec(cff)?.[1] ?? '';
+    expect(lic.startsWith(`${repo}/`), `CITATION.cff license-url does not point into ${repo}`);
+    expect(readme.includes(`${repo}/actions`), `README CI badge does not point to ${repo}`);
+    expect(readme.includes(`git clone ${repo}.git`), `README Quick Start does not clone ${repo}`);
+    expect(review.includes(repo), `REVIEW.md does not link ${repo}`);
+    const tpl = '.github/ISSUE_TEMPLATE/config.yml';
+    if (existsSync(join(ROOT, tpl))) expect(read(tpl).includes(repo), `${tpl} does not link ${repo}`);
+  }
   const repoVersion = /-v(\d+\.\d+\.\d+)$/.exec(repo)?.[1];
   if (repoVersion && repoVersion !== version) {
     notices.push(`Repository name carries "v${repoVersion}" while the tree is v${version}: the name is not a version identifier (RELEASE.md §1).`);

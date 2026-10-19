@@ -1,5 +1,5 @@
 blank_issues_enabled: true
 contact_links:
   - name: Demande de revue externe · External review request
-    url: https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0/blob/main/REVIEW.md
+    url: https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0/blob/main/REVIEW.md
     about: Trois relectures séparées (A neurosciences, B mesure, C philosophie). Lire REVIEW.md avant d'ouvrir une issue.

@@ -2,8 +2,10 @@ cff-version: 1.2.0
 message: >-
   If you use this software, please cite it as below. Cite the archived DOI of
   the exact release you used (Zenodo–GitHub integration), and check the archive
-  against its MANIFEST.sha256. The repository name carries "v3.1.0" for
-  historical reasons; it is not a version identifier (RELEASE.md).
+  against its MANIFEST.sha256. The repository name carries "v3.3.0"; it is not
+  a version identifier (RELEASE.md). The git history of E1/E2 (preregistration
+  commits eb03ad2, 1905da1) lives in the original repository
+  ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0 (empirical/PROVENANCE.md §2bis).
 type: software
 title: "ASTRA-FCS — Agent-orchestrated Simulation Testbed for Research on Access (MCP server, FCS layer)"
 version: 3.3.0-rc.3
@@ -12,8 +14,8 @@ date-released: 2026-10-19
 # Composite licensing: MIT for the original work; python/the_consciousness_ai/ and the
 # nine ported files of src/engine/tcai/ follow the upstream NON-COMMERCIAL licence.
 # No single SPDX identifier describes the whole, hence license-url (CFF 1.2.0).
-license-url: "https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0/blob/main/THIRD_PARTY_NOTICES.md"
-repository-code: "https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0"
+license-url: "https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0/blob/main/THIRD_PARTY_NOTICES.md"
+repository-code: "https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0"
 authors:
   - family-names: Legros
     given-names: Christophe Jean

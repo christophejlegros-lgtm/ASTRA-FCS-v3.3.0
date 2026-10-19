@@ -4,7 +4,10 @@
 # Programme minimal de consolidation, point 1: "les empreintes doivent permettre
 # l'inspection indépendante de l'antériorité, pas simplement être déclarées".
 #
-# Run INSIDE A CLONE OF THE PUBLIC REPOSITORY (full history), not in an archive:
+# Run INSIDE A CLONE OF THE ORIGINAL PUBLIC REPOSITORY (full history), not in an archive.
+# The repository ASTRA-FCS-v3.3.0 was created on 19 Oct 2026 from the rc.3 tree in ONE
+# commit: run there, this script correctly reports "added in the SAME commit — no
+# anteriority can be shown from this history" (empirical/PROVENANCE.md §2bis).
 #   git clone https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0.git
 #   cd ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0 && bash scripts/verify-anteriority.sh
 #

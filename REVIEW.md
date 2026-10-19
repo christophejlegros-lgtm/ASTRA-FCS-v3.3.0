@@ -1,8 +1,9 @@
 # Demande de revue externe · External review request
 
-**ASTRA-FCS v3.3.0-rc.3** · <https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0>
-(le nom du dépôt porte « v3.1.0 » pour des raisons historiques ; ce n'est pas un identifiant
-de version — voir `RELEASE.md` · *the repository name is not a version identifier*)
+**ASTRA-FCS v3.3.0-rc.3** · <https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0>
+(le nom du dépôt porte « v3.3.0 » ; ce n'est pas un identifiant de version — voir `RELEASE.md`
+· *the repository name is not a version identifier*. L'historique git d'E1/E2 est dans le dépôt
+d'origine `ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0` : `empirical/PROVENANCE.md` §2bis)
 Christophe Jean Legros · Assistance Multi IA, Genève · Assistant-Multi-IA@proton.me
 
 ---

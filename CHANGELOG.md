@@ -30,6 +30,21 @@ revue externe (`REVIEW.md`).
   `lintClaim`, `lintFcs` et `PHENOMENAL_TERMS`, avec contrôle que le test peut échouer.
   Exécuté par `tsx` (importe les linters de `src/`, sans build).
 
+### Publication — dépôt `ASTRA-FCS-v3.3.0` (19 octobre 2026, avant tout marquage)
+- Liens vers le dépôt courant (`CITATION.cff` repository-code et license-url, badge CI,
+  Quick Start, `REVIEW.md`, gabarit d'issues) : ancien dépôt → `ASTRA-FCS-v3.3.0` ;
+  `check:identity` vérifie désormais leur accord avec `repository-code`.
+- Antériorité : le nouveau dépôt, créé en un seul commit, ne contient ni `eb03ad2` ni
+  `1905da1` ; README, `RELEASE.md`, `CITATION.cff`, `REVIEW.md` et
+  `scripts/verify-anteriority.sh` le disent, et `empirical/PROVENANCE.md` §2bis consigne
+  que l'ordre ne se contrôle que dans le dépôt d'origine.
+- Bit d'exécution de `scripts/verify-anteriority.sh` restauré (perdu au commit depuis
+  Windows) ; `.gitattributes` (LF pour le texte, binaires intacts).
+- Nom de fichier : `Fonctionnalisme Contraint par Substrat v1..5.pdf` → `… v1.5.pdf`.
+- CI GitHub du commit publié (run 39242870810) : Node 20, Node 22 et Docker verts.
+- L'arbre rc.3 est amendé avant marquage : l'archive `ASTRA-FCS-v3.3.0-rc.3.zip` du
+  19 octobre (SHA-256 `718601e0…87f3f3e`) est remplacée par l'état de ce dépôt.
+
 ### Inchangé
 - Surface MCP (75 outils, 16 ressources, 10 prompts), API, fichiers gelés E1/E2.
   Tests : 406 → 415.
