@@ -72,6 +72,8 @@ Un commit public ne prouve pas une date : son horodatage est déclaratif. Pour E
    (jeton RFC 3161, preuve OpenTimestamps) ;
 4. consigner la référence dans `empirical/PROVENANCE.md`.
 
-Pour E1 et E2, `bash scripts/verify-anteriority.sh` (dans un clone du dépôt public) contrôle
+Pour E1 et E2, `bash scripts/verify-anteriority.sh` (dans un clone du dépôt **d'origine**
+`ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0` ; le dépôt `ASTRA-FCS-v3.3.0`, créé en un seul
+commit, ne porte pas cet historique — `empirical/PROVENANCE.md` §2bis) contrôle
 l'empreinte au commit d'ajout et l'ordre dans l'historique ; il signale lui-même qu'il ne
 prouve pas l'antériorité calendaire.

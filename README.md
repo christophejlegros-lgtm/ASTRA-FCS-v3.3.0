@@ -20,9 +20,11 @@
 
 > **First empirical test (E1).** The organoid surrogate's spontaneous activity was
 > confronted with three real human brain organoids (DANDI 001603) under a preregistration
-> declared public *before* the data were received (commit `eb03ad2`; order checkable with
-> `scripts/verify-anteriority.sh`, no third-party time stamp yet — see
-> [`empirical/PROVENANCE.md`](empirical/PROVENANCE.md)). Verdict: **INADEQUATE** — the real
+> declared public *before* the data were received (commit `eb03ad2` **of the original
+> repository** `ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0`; order checkable with
+> `scripts/verify-anteriority.sh` in a clone of *that* repository — this one was created on
+> 19 October 2026 from the rc.3 tree in a single commit and carries no such history; no
+> third-party time stamp yet — see [`empirical/PROVENANCE.md`](empirical/PROVENANCE.md) §2bis). Verdict: **INADEQUATE** — the real
 > organoids burst and synchronise, the surrogate emits independent Poisson trains; the
 > failure is structural, not parametric. Protocol, results and replay:
 > [`empirical/`](empirical/RESULTS-E1.md).
@@ -47,7 +49,7 @@
 > ([`empirical/PREREG-E3-DRAFT.md`](empirical/PREREG-E3-DRAFT.md), unfiled draft).
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-cyan.svg)](LICENSE)
-[![CI](https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0/actions/workflows/ci.yml/badge.svg)](https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0/actions)
+[![CI](https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0/actions/workflows/ci.yml/badge.svg)](https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0/actions)
 [![MCP Spec](https://img.shields.io/badge/MCP_Spec-2025--11--25-blue.svg)](https://modelcontextprotocol.io/specification/2025-11-25)
 [![MCP SDK](https://img.shields.io/badge/MCP_SDK-1.12+-blueviolet.svg)](https://modelcontextprotocol.io)
 [![Node.js](https://img.shields.io/badge/Node.js-≥20-green.svg)](https://nodejs.org)
@@ -423,8 +425,8 @@ Koniku Kore ────────────────┘         │     
 ## Quick Start
 
 ```bash
-git clone https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0.git
-cd ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0
+git clone https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0.git
+cd ASTRA-FCS-v3.3.0
 
 # Install & build
 npm install

@@ -37,6 +37,26 @@ pas d'historique git.
 | Valeurs et verdicts E1/E2 | `RESULTS-E1.md`, `RESULTS-E2.md` | tableaux | identiques aux JSON | cohérence ✔ |
 | Antériorité calendaire E1/E2 | — | — | — | **aucun horodatage tiers à ce jour** |
 
+## 2bis. Dépôt `ASTRA-FCS-v3.3.0` (19 octobre 2026) · Repository `ASTRA-FCS-v3.3.0`
+
+Le dépôt <https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0> a été créé le
+19 octobre 2026 à partir de l'arbre v3.3.0-rc.3, **en un seul commit** (`4c9e0e6`). Il ne
+contient donc ni le commit `eb03ad2` (pré-enregistrement E1) ni `1905da1` (E2) : exécuté ici,
+`scripts/verify-anteriority.sh` signale à bon droit que pré-enregistrements et résultats
+sont « added in the SAME commit — no anteriority can be shown from this history ».
+
+- L'ordre pré-enregistrement → résultats ne se contrôle que dans un clone du dépôt
+  d'origine `ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0`, s'il reste public. Le présent dépôt
+  ne l'établit pas et ne doit pas être cité comme preuve d'antériorité.
+- Les empreintes (pré-enregistrements, code gelé, résultats) sont identiques à celles
+  déclarées : `npm run check:frozen` le vérifie ici comme ailleurs.
+- Le statut des deux commits reste celui du §2 : **déclarés**, vérifiables dans le dépôt
+  d'origine seulement, sans horodatage tiers.
+
+*EN — This repository was created from the rc.3 tree in a single commit and holds neither
+`eb03ad2` nor `1905da1`. Anteriority within a git history can be checked only in a clone
+of the original repository; it is not established here. Hashes are unchanged.*
+
 ## 3. Empreintes des résultats · Result hashes (SHA-256, LF)
 
 | Fichier | SHA-256 | Produit par | Commit |

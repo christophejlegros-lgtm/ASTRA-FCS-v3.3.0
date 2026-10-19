@@ -1,0 +1,10 @@
+# ASTRA — line endings (v3.3.0-rc.3, publication from Windows)
+# Text is stored LF so that shell scripts run and MANIFEST.sha256 stays stable;
+# binaries are never converted.
+* text=auto eol=lf
+*.sh text eol=lf
+*.pdf binary
+*.png binary
+*.jpg binary
+*.nwb binary
+*.zip binary
