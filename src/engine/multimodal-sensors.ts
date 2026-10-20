@@ -958,6 +958,9 @@ export class KonikuOlfactoryEncoder {
  * This allows the SNN state to "attend" to the most relevant modalities,
  * implementing a form of neural workspace bottleneck (GWT-inspired).
  */
+/** Modalities the cross-modal attention accepts (v3.3.0-rc.5: interoception is refused). */
+export const EXTEROCEPTIVE_MODALITIES: ReadonlySet<string> = new Set(['visual', 'audio', 'olfactory']);
+
 export class CrossModalFusion {
   private queryProj: DenseMatrix;      // SNN z → query
   private keyProjs: Map<string, DenseMatrix>;   // Per-modality key projections
@@ -993,6 +996,14 @@ export class CrossModalFusion {
    * @returns Fused embedding compatible with the World Model latent space
    */
   fuse(snnZ: Float64Array, modalities: ModalityEmbedding[]): FusedEmbedding {
+    // v3.3.0-rc.5 — exteroceptive fusion only. The interoceptive channel
+    // (interoception.ts) is kept out of this attention by construction, so that
+    // its congruence can be manipulated independently (kinaesthetic withdrawal test).
+    for (const m of modalities) {
+      if (!EXTEROCEPTIVE_MODALITIES.has((m as { modality?: string }).modality ?? '')) {
+        throw new TypeError(`CrossModalFusion: "${(m as { modality?: string; channel?: string }).modality ?? (m as { channel?: string }).channel}" is not an exteroceptive modality`);
+      }
+    }
     const d = this.config.latentDim;
 
     // Prepare all inputs (SNN + available modalities)

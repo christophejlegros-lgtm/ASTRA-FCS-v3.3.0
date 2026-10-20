@@ -130,20 +130,26 @@ export const LEVELS: Record<FcsLevel, LevelDescriptor> = {
       noteFr: 'Le plus petit sujet est la plus petite boucle close. Rival déclaré : la clôture intéroceptive, à laquelle le choix cède si les effets de dimensionnalité y apparaissent.',
       noteEn: 'The smallest subject is the smallest closed loop. Declared rival: interoceptive closure, to which the choice yields if the dimensionality effects appear there.',
     },
-    astraModules: ['engine/tcai/self-model.ts', 'engine/tcai/second-order.ts', 'engine/tcai/acm-bridge.ts (connectProductionSnn)'],
+    astraModules: ['engine/tcai/self-model.ts', 'engine/tcai/second-order.ts', 'engine/tcai/acm-bridge.ts (connectProductionSnn)',
+      'engine/somatosensory.ts + engine/reafference.ts (body loop, v3.3.0-rc.5)', 'engine/interoception.ts (declared rival, separate channel)',
+      'engine/fcs/kinaesthetic-withdrawal.ts (withdrawal test)'],
     realisedBy: ['silicon-snn', 'organoid-mea'],
     astraGapFr:
       'ASTRA ferme une boucle commande–retour sur son propre réseau : la clôture opérationnelle est réelle au ' +
       'sens du critère M3. Ce que le critère ne livre pas, et que la thèse kinesthésique ne prétend pas livrer, ' +
       'est un degré : l\'interdiction 1 proscrit de quantifier une proto-conscience. « Réalisé » porte ici sur la ' +
       'boucle de contrôle sensorimoteur (a) et sur la frontière opérationnelle (b) ; non sur l\'expérience (c), ' +
-      'que ni (a) ni (b) n\'établissent (voir distinctions).',
+      'que ni (a) ni (b) n\'établissent (voir distinctions). Depuis la v3.3.0-rc.5, le comparateur ' +
+      'efférence–réafférence porte aussi sur un corps instrumenté, simulé ou rapporté, et le canal intéroceptif ' +
+      'est tenu séparé ; le test de retrait n\'accepte que des observations rapportées sous protocole déposé.',
     astraGapEn:
       'ASTRA closes a command–return loop on its own network: the operational closure is real in the sense of ' +
       'criterion M3. What the criterion does not deliver, and what the kinaesthetic thesis does not claim to ' +
       'deliver, is a degree: prohibition 1 forbids quantifying a proto-consciousness. "Realised" here bears on the ' +
       'sensorimotor control loop (a) and on the operational boundary (b); not on experience (c), which neither (a) ' +
-      'nor (b) establishes (see distinctions).',
+      'nor (b) establishes (see distinctions). Since v3.3.0-rc.5 the efference–reafference comparator also runs on ' +
+      'an instrumented body, simulated or reported, with the interoceptive channel kept separate; the withdrawal ' +
+      'test accepts only reported observations under a filed protocol.',
     distinctions: [
       {
         id: 'a-sensorimotor-control',

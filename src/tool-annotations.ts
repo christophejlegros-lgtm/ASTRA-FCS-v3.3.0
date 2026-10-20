@@ -160,6 +160,16 @@ export const TOOL_ANNOTATIONS = {
   teleology_framework: read('Teleology — Framework'),
   teleology_assess: read('Teleology — Outcome Assessment'),
   teleology_compare: read('Teleology — Alternative Comparison'),
+
+  // ── Body channels & kinaesthetic withdrawal test (server-body-tools.ts, v3.3.0-rc.5) — fresh models and
+  //    local random streams per call; nothing is sent to a device, the global stream is untouched ──
+  soma_encode: read('Somatosensory — Afferent-Class Encoding'),
+  intero_encode: read('Interoception — Homeostatic Encoding (separate channel)'),
+  kin_closure: read('Kinaesthetic Loop — Operational Closure (M3)'),
+  kin_manipulation_check: read('Kinaesthetic Loop — Manipulation Check per Condition'),
+  kin_protocol: read('Kinaesthetic Withdrawal — Protocol Template / Freeze'),
+  kin_analyse: read('Kinaesthetic Withdrawal — Analysis'),
+  kin_validate: read('Kinaesthetic Withdrawal — Synthetic Controls'),
 } as const satisfies Record<string, Hints>;
 
 export type ToolName = keyof typeof TOOL_ANNOTATIONS;

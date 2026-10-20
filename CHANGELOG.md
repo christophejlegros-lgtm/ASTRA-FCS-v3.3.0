@@ -4,6 +4,110 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) ; versions : [
 La version courante est fixée par `src/version.ts` ; `npm run check:identity` vérifie que ce
 fichier, le README, les métadonnées de citation et le gate CI la portent tous.
 
+## [3.3.0-rc.5] — 2026-10-20 (candidat local, non publié)
+
+Canaux du corps et test de retrait de la thèse kinesthésique, après l'analyse critique de
+`SENSORS.pdf` (`REVUE-SENSORS.md`). Réalisé avec une assistance d'IA ; ce n'est pas une revue
+externe (`REVIEW.md`).
+
+### Ajouté
+- **Canal somatosensoriel** (`src/engine/somatosensory.ts`). Le canal produit des analogues
+  fonctionnels des classes afférentes : SA1, FA1, FA2, SA2, COLD, WARM, NOCI (indicateurs de
+  seuil), SPINDLE et TENDON. Ses lectures sont validées et portent un domaine d'horloge.
+  L'étirement cutané est classé réafférent. Le contact thermique est chauffé et lu avec le
+  flux. Un code de fréquence est déclaré.
+- **Canal intéroceptif séparé** (`src/engine/interoception.ts`). Il a son propre type, ses
+  variables déclarées (consigne et plage viable) et une prédiction homéostatique apprise.
+  Aucun défaut n'est fourni pour les cultures. `checkChannelSeparation` signale les signaux
+  communs aux deux canaux. La fusion extéroceptive refuse une trame non extéroceptive
+  (`EXTEROCEPTIVE_MODALITIES`).
+- **Boucle efférence–réafférence** (`src/engine/reafference.ts`). Le module comprend un modèle
+  direct NLMS et un appariement par latence attendue, calibrée puis figée. Il fournit un
+  comparateur dont le résidu estime l'exafférence, et une clôture opérationnelle M3 éprouvée
+  contre un substitut aux commandes décalées.
+- **Manipulations de congruence** (`src/engine/congruence.ts`). Côté sensorimoteur : délai,
+  gain, inversion, remappage et gigue. Côté intéroceptif : délai, gain autour de la consigne,
+  décalage et découplage. Les manipulations portent sur les horodatages matériels. Une
+  condition n'appartient qu'à une famille, et les flux aléatoires sont locaux.
+- **Contrôle de manipulation** (`src/engine/body-loop.ts`) : calibration, gel, puis
+  manipulation, avec les erreurs des deux canaux par condition. **Doigt simulé**
+  (`src/engine/body-sim.ts`), destiné uniquement à éprouver la chaîne.
+- **Dimensionnalité** (`src/engine/dimensionality.ts`). Le module calcule la matrice de
+  dissimilarité, le spectre MDS classique et le rapport de participation, et fournit la loi
+  de Student et la pente des moindres carrés, sans dépendance statistique.
+- **Test de retrait** (`src/engine/fcs/kinaesthetic-withdrawal.ts`). Il comprend le protocole
+  et son empreinte SHA-256 canonique, ainsi que l'éthique de délivrance (blocage sans
+  approbation pour une culture vivante ou des sujets humains). L'analyse calcule une pente par
+  unité et des intervalles (1 − 2α). L'absence est établie par équivalence dans ±SESOI, et le
+  critère d'effet est à préenregistrer. Des contrôles de manipulation et de spécificité
+  s'ajoutent. Les quatre motifs sont dérivés, et une diminution de dimensionnalité est une
+  anomalie imputée au rang 1. Les conditions confirmatoires sont : protocole déposé, empreinte
+  inchangée, aucun paramètre ouvert, données postérieures au dépôt et d'origine `reported`.
+  **Les simulations ne fixent jamais un résultat de retrait.** Des contrôles synthétiques à
+  motif connu sont fournis.
+- `withdrawal.ts` : le champ optionnel `kinaestheticPattern` motive la position de la thèse,
+  et des entrées incohérentes ne sont pas utilisées. Le comportement booléen antérieur est
+  inchangé. `fcs_withdrawal` accepte ce champ.
+- MCP : 7 outils en lecture seule (`soma_encode`, `intero_encode`, `kin_closure`,
+  `kin_manipulation_check`, `kin_protocol`, `kin_analyse`, `kin_validate`), la ressource
+  `astra://kinaesthetic/protocol-template` et le prompt `kinaesthetic-withdrawal-test`.
+- Documents : `SOMATOSENSORY-INTEGRATION.fr.md` / `.en.md` et `REVUE-SENSORS.md` (analyse
+  critique, corrections, références aux DOI vérifiés). Le niveau II de `levels.ts` mentionne
+  les nouveaux modules. `REVIEW.md` reçoit les questions A7, B8 et C8.
+
+### Préenregistrements complétés (décisions de l'auteur, 20 octobre 2026)
+- **FCS-K0**, pilote robot (`empirical/PREREG-KINAESTHETIC-K0-PILOT.md`,
+  `empirical/protocols/FCS-K0.protocol.json`). Complet et prêt à déposer sur OSF Registries,
+  déclaré `role: "pilot"` : il ne fixe jamais de résultat de retrait. Banc minimal : servo à
+  encodeur absolu avec courant moteur, DIGIT, thermistance chauffée et deux jauges
+  d'étirement ; côté intéroceptif, thermistance d'actionneur, jauge de batterie et
+  température de carte. Dix séances. Huit mouvements-sondes (quatre amplitudes × mousse et
+  aluminium). Niveaux calqués sur K1.
+- **FCS-K1**, participants humains, confirmatoire (`empirical/PREREG-KINAESTHETIC-K1.md`,
+  `empirical/protocols/FCS-K1.protocol.json`). Main virtuelle mobile avec délais
+  visuo-moteurs de 0, 100, 200, 300 et 500 ms ; rétroaction cardio-visuelle synchrone,
+  déphasée de 25 % puis de 50 %, puis découplée. Jugements de similarité par paires sur six
+  configurations par niveau. Blocs contrebalancés et carrés latins, deux lignes de base
+  regroupées. α = 0,05, SESOI = 0,25, critère de supériorité. Exclusions techniques
+  seulement. Règle d'effectif fixée par un pilote de 10 participants : n = 40 ou 60. Trois
+  valeurs restent en attente : laboratoire hôte, approbation éthique et n.
+- `prereg:check` compte aussi les marqueurs « EN ATTENTE » / « PENDING » et reconnaît les
+  statuts « prêt à déposer » et « déposé ». `scripts/kin.mjs` fournit `kin:protocol`
+  (empreinte et préparation au dépôt), `kin:k0:dryrun`, `kin:k0:observe` et `kin:analyse`.
+- Code associé : champ `role` (pilot | confirmatory) ; dissimilarité `judged-similarity`
+  et `rdmFromSimilarityJudgements` ; manipulation `phase-shift` (exécutée par l'appareil) ;
+  `body-probes.ts` (sondes et observations de K0) ; `calibrateFreezeManipulate`.
+
+### Corrigé pendant le développement
+- Sans SESOI, un intervalle minuscule au-dessus de 0 était lu comme une « augmentation », et
+  un plan « intéroceptif seul » pouvait conclure à « both », ce qui maintenait la thèse.
+  Désormais, aucun motif n'est dérivé sans SESOI (test de régression).
+- **Empreinte du protocole.** Elle incluait `status` et `registry`, qui changent au dépôt :
+  tout protocole déposé aurait cessé de correspondre à l'empreinte enregistrée. Elle ne
+  couvre plus que le contenu scientifique.
+- **Garde de monotonie**, ajoutée sur décision de l'auteur. La simulation à blanc de K0
+  montrait une réponse en U inversé dont la pente, proche de 0, aurait été lue comme une
+  absence. Une absence exige désormais que la pente **et** chaque niveau tombent dans
+  ±SESOI ; sinon, le résultat est « non concluant ».
+- **Réponses de K0.** Avec les seules erreurs du comparateur somatosensoriel, une
+  manipulation intéroceptive ne pouvait pas modifier les motifs, et l'absence intéroceptive
+  était garantie par construction. Les réponses combinent désormais les erreurs des deux
+  canaux, chacune centrée-réduite.
+
+### Inchangé
+- Fichiers gelés E1/E2 (`check:frozen`) et RNG global : les nouveaux calculs utilisent des
+  flux locaux, ce qu'un test vérifie.
+- Surface : 75 → **82 outils**, 16 → **17 ressources**, 10 → **11 prompts**.
+  Tests : 425 → **511** (101 suites).
+
+### À décider par l'auteur
+- K1 : laboratoire hôte, référence éthique et n, après le pilote humain ; ce sont des
+  événements, non des décisions. K0 : dépôt sur OSF, puis collecte.
+- Raccorder ou non le canal intéroceptif au contrôleur homéostatique (cela couplerait les
+  deux familles).
+- La rc.4 n'ayant pas été publiée, la fusion de la rc.5 avec elle ou leur numérotation
+  séparée.
+
 ## [3.3.0-rc.4] — 2026-10-19 (candidat local, non publié)
 
 - Origine des biomarqueurs FCS préservée : `simulated` / `reported` ; aucune preuve de mesure déduite du mode `live`.

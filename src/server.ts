@@ -2,7 +2,7 @@
  * ASTRA MCP Server — Complete Server Factory
  * ==========================================
  *
- * 75 Tools · 16 Resources · 10 Prompts (version: src/version.ts; counts computed at registration)
+ * 82 Tools · 17 Resources · 11 Prompts (version: src/version.ts; counts computed at registration)
  *
  * Every tool and resource payload passes the server-wide claim guard
  * (src/lint-guard.ts): Block's access/phenomenal linter and the five FCS
@@ -34,6 +34,7 @@ import { registerOrchTools } from './server-orch-tools.js';
 import { registerFcsCapabilities } from './server-fcs-tools.js';
 import { registerTeleologyCapabilities } from './server-teleology-tools.js';
 import { registerProxyCapabilities } from './server-proxy-tools.js';
+import { registerBodyCapabilities } from './server-body-tools.js';
 import { logger } from './utils/logger.js';
 import { seedInfo } from './utils/rng.js';
 import type { AstraBridgeState, SpikeAction } from './bridge-state.js';
@@ -259,6 +260,9 @@ export function createAstraServer(): McpServer {
 
   // ═══ FUNCTIONAL TELEOLOGY (v3.3.0-rc) — declared-purpose contracts, read-only (TELEOLOGY.fr.md) ═══
   registerTeleologyCapabilities(server);
+
+  // ═══ BODY CHANNELS & KINAESTHETIC WITHDRAWAL TEST (v3.3.0-rc.5) — read-only (SOMATOSENSORY-INTEGRATION.*.md) ═══
+  registerBodyCapabilities(server);
 
   // v3.2.0 — counted at registration, not typed by hand; CI asserts the expected figures.
   const c = capabilityCounts(server);

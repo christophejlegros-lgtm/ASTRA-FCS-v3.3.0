@@ -296,6 +296,8 @@ export function registerFcsCapabilities(server: McpServer, deps: FcsToolDeps = {
       fieldBeyondFiringInHumans: z.boolean().nullable().optional(),
       boundaryBetterByResonanceOrTopology: z.boolean().nullable().optional(),
       dimensionalityFromInteroception: z.boolean().nullable().optional(),
+      kinaestheticPattern: z.enum(['interoceptive-only', 'sensorimotor-only', 'both', 'neither']).nullable().optional()
+        .describe('v3.3.0-rc.5: pattern from a confirmatory kin_analyse run; must agree with dimensionalityFromInteroception'),
       experimentRankedByM1: z.boolean().nullable().optional(),
       revisions: z.array(z.object({
         thesis: z.enum(['inference-and-measurement', 'bridge-auxiliary', 'M2', 'M3', 'kinaesthetic', 'field-hypothesis', 'M1']),

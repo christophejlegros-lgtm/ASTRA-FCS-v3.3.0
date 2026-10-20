@@ -6,6 +6,9 @@
  * Consommée par server.ts, sse-server.ts et http-server.ts afin
  * d'éliminer les chaînes de version divergentes (2.0.0 / 2.2.0 / 2.9.0).
  *
+ * v3.3.0-rc.5 — somatosensory and interoceptive channels, kept separate, and the
+ * withdrawal test of the kinaesthetic thesis (server-body-tools.ts): 7 tools,
+ * 1 resource and 1 prompt added → 82 · 17 · 11.
  * v3.3.0-rc.3 — the name and the definition join the version here (ASTRA_IDENTITY);
  * `check:identity` now also tests the name. Counts unchanged.
  * v3.3.0-rc.2 — corrections of rc.1 after critical review (REVUE-v3.3.0-rc.1.md); counts unchanged.
@@ -16,14 +19,14 @@
  * les mêmes effectifs que ce fichier. Le nom du dépôt GitHub (…-FCS-v3.1.0)
  * n'est PAS un identifiant de version : voir RELEASE.md.
  */
-export const ASTRA_VERSION = '3.3.0-rc.4';
+export const ASTRA_VERSION = '3.3.0-rc.5';
 
 /**
  * Effectifs MCP attendus. Les effectifs réels sont comptés à l'enregistrement
  * (lint-guard.ts → capabilityCounts) ; les tests et le gate CI comparent les
  * deux, et check-identity compare la documentation à ces valeurs.
  */
-export const EXPECTED_CAPABILITIES = Object.freeze({ tools: 75, resources: 16, prompts: 10 });
+export const EXPECTED_CAPABILITIES = Object.freeze({ tools: 82, resources: 17, prompts: 11 });
 
 /**
  * Identity of the cited object: name, expansion and definition (v3.3.0-rc.3).

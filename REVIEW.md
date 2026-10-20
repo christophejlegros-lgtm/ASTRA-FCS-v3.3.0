@@ -1,6 +1,6 @@
 # Demande de revue externe · External review request
 
-**ASTRA-FCS v3.3.0-rc.4** · <https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0>
+**ASTRA-FCS v3.3.0-rc.5** · <https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0>
 (le nom du dépôt porte « v3.3.0 » ; ce n'est pas un identifiant
 de version — voir `RELEASE.md` · *the repository name is not a version identifier*)
 Christophe Jean Legros · Assistance Multi IA, Genève · Assistant-Multi-IA@proton.me
@@ -10,7 +10,7 @@ Christophe Jean Legros · Assistance Multi IA, Genève · Assistant-Multi-IA@pro
 ## FR — Objet
 
 ASTRA-FCS (*Agent Orchestré de Simulation et Test de Recherche sur l'Access*) est un serveur
-*Model Context Protocol* qui expose 75 outils de simulation et
+*Model Context Protocol* qui expose 82 outils de simulation et
 d'analyse à des assistants d'IA, et qui rend exécutable le programme de recherche du
 fonctionnalisme contraint par le substrat (FCS). Toutes les données biologiques produites
 sont simulées ; les indices liés à la conscience sont des proxys calculés, non des mesures.
@@ -28,7 +28,7 @@ Cette demande sollicite **trois relectures séparées**, confiées à des person
 ## EN — Purpose
 
 ASTRA-FCS (*Agent-orchestrated Simulation Testbed for Research on Access*) is a
-*Model Context Protocol* server exposing 75 simulation and analysis tools to
+*Model Context Protocol* server exposing 82 simulation and analysis tools to
 AI assistants and making the research programme of substrate-constrained functionalism
 (FCS) executable. All biological data produced are simulated; consciousness-related indices
 are computed proxies, not measurements. The review bears on the **admissibility** of what
@@ -75,7 +75,8 @@ Modèles et confrontation aux données · Models and their confrontation with da
 | A3 | Le simulateur NeuroPlatform et les générateurs `'poisson'` / `'network-burst'` reproduisent-ils des ordres de grandeur réalistes pour un MEA d'organoïde ? · Do the NeuroPlatform simulator and its generators reproduce realistic orders of magnitude for an organoid MEA? | `src/engine/neuroplatform.ts`, `empirical/RESULTS-E1.md`, `empirical/RESULTS-E2.md` |
 | A4 | Le plan d'E3 (organoïde comme unité, strates d'âge et de préparation, modèle hiérarchique contre témoin de complexité égale) est-il adéquat ? Quel jeu de données d'un autre laboratoire conviendrait ? · Is the E3 design adequate? Which dataset from another laboratory would fit? | `empirical/PREREG-E3-DRAFT.md`, `empirical/e3_analysis.py`, `empirical/test_e3.py` |
 | A5 | Les hypothèses de niveau substrat H1–H3 et leurs modèles concurrents (§2bis) sont-elles opérationnalisables telles quelles ? · Are the substrate-level hypotheses H1–H3 and their rival models operationalisable as stated? | `PREREGISTRATION.md` |
-| A6 | La classification des 75 outils (lecture seule, additif, destructif) est-elle juste ? · Is the classification of the 75 tools correct? | `src/tool-annotations.ts` |
+| A6 | La classification des 82 outils (lecture seule, additif, destructif) est-elle juste ? · Is the classification of the 82 tools correct? | `src/tool-annotations.ts` |
+| A7 | Les analogues de classes afférentes (SA1, FA1, FA2, SA2, thermiques, seuils protecteurs, fuseaux, tendons), le comparateur efférence–réafférence et le critère opérationnel de clôture (gain d'informativité de la commande sur un substitut décalé) sont-ils correctement posés ? (pré-version) · Are the afferent-class analogues, the efference–reafference comparator and the operational closure criterion (command informativeness gain over a shifted surrogate) correctly posed? | `src/engine/somatosensory.ts`, `src/engine/reafference.ts`, `src/engine/body-sim.ts` |
 
 ## Relecture B — Mesure · Review B — Measurement
 
@@ -90,6 +91,7 @@ Proxys, règles de décision, statistiques · Proxies, decision rules, statistic
 | B5 | Les résultats primaires d'E3 (erreurs par organoïde, couverture, CRPS, bootstrap sur organoïdes) et la règle « réglée / indéterminée » de H1–H3 (SESOI, équivalence) sont-ils bien posés ? · Are E3's primary outcomes and the settled/undetermined rule for H1–H3 well posed? | `empirical/PREREG-E3-DRAFT.md` §4, `PREREGISTRATION.md` §4bis |
 | B6 | L'α de Krippendorff et la feuille de codage aveugle suffisent-ils à éprouver la fidélité du codage des trois sous-critères ? · Do Krippendorff's α and the blind coding sheet suffice to test the reliability of the sub-criteria coding? | `src/engine/fcs/agreement.ts`, outil `fcs_agreement` |
 | B7 | La sémantique d'intervalles de l'extension téléologique (pass / fail / unknown, admissibilité relative aux contraintes déclarées, bornes exactes d'utilité sur le pavé, dominance de Pareto robuste) est-elle correctement posée et implémentée ? (pré-version) · Are the interval semantics of the functional-teleology extension correctly posed and implemented? | `src/engine/teleology/index.ts`, `tests/teleology.test.ts`, `TELEOLOGY.fr.md` §5–§7 |
+| B8 | Test de retrait de la thèse kinesthésique : dimensionnalité effective (rapport de participation du spectre MDS classique), pente par unité sur le niveau gradué, intervalles (1 − 2α), équivalence dans ±SESOI pour l'absence, contrôles de manipulation et de spécificité — la règle est-elle bien posée ? (pré-version) · Kinaesthetic withdrawal test: effective dimensionality, per-unit slope, (1 − 2α) intervals, equivalence within ±SESOI for absence, manipulation and specificity checks — is the rule well posed? | `src/engine/dimensionality.ts`, `src/engine/fcs/kinaesthetic-withdrawal.ts`, `empirical/PREREG-KINAESTHETIC-K0-PILOT.md`, `empirical/PREREG-KINAESTHETIC-K1.md` |
 
 ## Relecture C — Philosophie de l'esprit et des sciences · Review C — Philosophy of mind and of science
 
@@ -104,12 +106,13 @@ Cadre normatif et portée des inférences · Normative frame and reach of infere
 | C5 | Les distinctions du niveau II (contrôle sensorimoteur, soi minimal, expérience) suffisent-elles à empêcher « proto-conscience » d'incorporer l'explanandum ? · Do the level-II distinctions keep "proto-consciousness" from building in the explanandum? | `src/engine/fcs/levels.ts` |
 | C6 | Les six questions ouvertes (spécificité de la contrainte faible, M1 et sous-détermination, pont vers l'accès, épreuves discriminantes entre théories, valeur de l'information) sont-elles bien posées ? · Are the six open questions well posed? | `src/engine/fcs/levels.ts` (`OPEN_QUESTIONS`), `CONSOLIDATION.md` |
 | C7 | La « téléologie fonctionnelle sous contraintes » est-elle cohérente : fonction assignée (de conception) évaluée par une analyse à la Cummins, sans fonder la finalité sur le mécanisme ; contraintes avant valeur ; refus des fins portant sur la conscience (interdictions 1–2) et des agrégations ordinales (interdiction 4) ? (pré-version) · Is the functional teleology under constraints coherent (assigned design function assessed Cummins-style; constraints before value; no ends on consciousness; no ordinal aggregation)? | `TELEOLOGY.fr.md` §2–§6, `REVUE-v3.3.0-rc.1.md` |
+| C8 | Le document II §6.3 énonce la prédiction sur des matrices PHÉNOMÉNALES (jugements de similarité) ; ASTRA calcule la même statistique sur des réponses de substrat. Cette transposition est-elle recevable, et la séparation structurelle des canaux somatosensoriel et intéroceptif opérationnalise-t-elle correctement le rival déclaré (§4.2) ? (pré-version) · Document II §6.3 states the prediction on PHENOMENAL matrices; ASTRA computes the same statistic on substrate responses. Is this transposition admissible, and does the structural separation of the two channels correctly operationalise the declared rival (§4.2)? | `SOMATOSENSORY-INTEGRATION.fr.md`, `src/engine/interoception.ts`, `src/engine/fcs/kinaesthetic-withdrawal.ts` |
 
 ---
 
 ## Modalités · Practicalities
 
-- **Objet relu / Object reviewed :** la version étiquetée `v3.3.0-rc.4` (archive Zenodo et son
+- **Objet relu / Object reviewed :** la version étiquetée `v3.3.0-rc.5` (archive Zenodo et son
   DOI de version, à ajouter à `CITATION.cff` à la publication), vérifiée par
   `node scripts/manifest.mjs --check`. Un rapport cite l'empreinte de `MANIFEST.sha256`.
 - **Reproduire / Reproduce :** `npm ci && npm run build && npm test` (Node ≥ 20) ;

@@ -1,7 +1,7 @@
 {
   "name": "@astra/mcp-server",
-  "version": "3.3.0-rc.4",
-  "description": "ASTRA-FCS — Agent-orchestrated Simulation Testbed for Research on Access · MCP research server (simulated data; proxies, not measurements) with layered SNN LIF+STDP Engine, JEPA World Model (LeWM), Multimodal Sensor Pipeline (untrained encoders inspired by V-JEPA 2, A-JEPA, Koniku Kore), ACM Consciousness Proxies, simulated Bio-Computing Platform bridges & IRB-style ethics monitor (synthetic biomarkers)",
+  "version": "3.3.0-rc.5",
+  "description": "ASTRA-FCS — Agent-orchestrated Simulation Testbed for Research on Access · MCP research server (simulated data; proxies, not measurements) with layered SNN LIF+STDP Engine, JEPA World Model (LeWM), Multimodal Sensor Pipeline (untrained encoders inspired by V-JEPA 2, A-JEPA, Koniku Kore), somatosensory and separate interoceptive channels with a kinaesthetic withdrawal test, ACM Consciousness Proxies, simulated Bio-Computing Platform bridges & IRB-style ethics monitor (synthetic biomarkers)",
   "author": "Christophe Jean Legros <Assistant-Multi-IA@proton.me>",
   "license": "MIT AND LicenseRef-TCAI-NonCommercial",
   "type": "module",
@@ -35,7 +35,7 @@
     "dev": "tsx src/index.ts",
     "dev:sse": "tsx src/sse-server.ts",
     "dev:http": "tsx src/http-server.ts",
-    "test": "cross-env ASTRA_LOG_LEVEL=silent TSX_TSCONFIG_PATH=tsconfig.test.json npx tsx --test tests/fcs.test.ts tests/astra.test.ts tests/world-model.test.ts tests/wm-simulation.test.ts tests/multimodal-sensors.test.ts tests/tcai.test.ts tests/neuroplatform.test.ts tests/neuroplatform-e2.test.ts tests/second-order.test.ts tests/aif-equivalence.test.ts tests/integration.test.ts tests/transports.test.ts tests/annotations.test.ts tests/reproducibility.test.ts tests/lint-guard.test.ts tests/proxy-validation.test.ts tests/fcs-consolidation.test.ts tests/identity.test.ts tests/teleology.test.ts tests/audit-rc4.test.ts",
+    "test": "cross-env ASTRA_LOG_LEVEL=silent TSX_TSCONFIG_PATH=tsconfig.test.json npx tsx --test tests/fcs.test.ts tests/astra.test.ts tests/world-model.test.ts tests/wm-simulation.test.ts tests/multimodal-sensors.test.ts tests/tcai.test.ts tests/neuroplatform.test.ts tests/neuroplatform-e2.test.ts tests/second-order.test.ts tests/aif-equivalence.test.ts tests/integration.test.ts tests/transports.test.ts tests/annotations.test.ts tests/reproducibility.test.ts tests/lint-guard.test.ts tests/proxy-validation.test.ts tests/fcs-consolidation.test.ts tests/identity.test.ts tests/teleology.test.ts tests/audit-rc4.test.ts tests/somatosensory.test.ts tests/interoception.test.ts tests/kinaesthetic-withdrawal.test.ts tests/kinaesthetic-protocols.test.ts",
     "test:core": "cross-env TSX_TSCONFIG_PATH=tsconfig.test.json npx tsx --test tests/astra.test.ts",
     "test:wm": "cross-env TSX_TSCONFIG_PATH=tsconfig.test.json npx tsx --test tests/world-model.test.ts tests/wm-simulation.test.ts",
     "test:integration": "cross-env TSX_TSCONFIG_PATH=tsconfig.test.json npx tsx --test tests/integration.test.ts",
@@ -63,7 +63,12 @@
     "prereg:check": "node scripts/prereg-check.mjs",
     "test:teleology": "cross-env ASTRA_LOG_LEVEL=silent TSX_TSCONFIG_PATH=tsconfig.test.json npx tsx --test tests/teleology.test.ts",
     "teleology:example": "node examples/teleology/replay.mjs",
-    "teleology:example:check": "node examples/teleology/replay.mjs --check"
+    "teleology:example:check": "node examples/teleology/replay.mjs --check",
+    "kin:protocol": "tsx scripts/kin.mjs hash",
+    "kin:k0:dryrun": "tsx scripts/kin.mjs dryrun-k0",
+    "kin:k0:observe": "tsx scripts/kin.mjs k0-observe",
+    "kin:analyse": "tsx scripts/kin.mjs analyse",
+    "test:body": "cross-env ASTRA_LOG_LEVEL=silent TSX_TSCONFIG_PATH=tsconfig.test.json npx tsx --test tests/somatosensory.test.ts tests/interoception.test.ts tests/kinaesthetic-withdrawal.test.ts tests/kinaesthetic-protocols.test.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
@@ -110,6 +115,10 @@
     "multimodal",
     "cross-modal-fusion",
     "mel-spectrogram",
-    "chemoreceptor"
+    "chemoreceptor",
+    "somatosensory",
+    "interoception",
+    "efference-copy",
+    "kinaesthesia"
   ]
 }
