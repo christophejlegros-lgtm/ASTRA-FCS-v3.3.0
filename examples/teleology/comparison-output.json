@@ -1,10 +1,90 @@
 {
+  "contractSnapshot": {
+    "id": "prediction-v1",
+    "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
+    "function": "Prédiction sur données réservées",
+    "owner": "Équipe de recherche",
+    "context": "Exemple synthétique v1",
+    "horizon": "100 essais",
+    "criteria": [
+      {
+        "id": "error",
+        "description": "Erreur de prédiction",
+        "beneficiary": "Chercheurs",
+        "unit": "fraction",
+        "scale": "cardinal",
+        "direction": "minimize",
+        "threshold": 0.2
+      }
+    ],
+    "constraints": [
+      {
+        "id": "energy",
+        "description": "Budget énergétique",
+        "beneficiary": "Opérateur",
+        "unit": "J",
+        "direction": "minimize",
+        "threshold": 10
+      }
+    ],
+    "utility": {
+      "rationale": "Convention instrumentale linéaire entre erreur 1 et 0 ; aucune mesure de bien-être.",
+      "terms": [
+        {
+          "criterionId": "error",
+          "worst": 1,
+          "best": 0,
+          "weight": 1
+        }
+      ]
+    }
+  },
   "contractId": "prediction-v1",
   "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
   "function": "Prédiction sur données réservées",
   "owner": "Équipe de recherche",
   "reports": [
     {
+      "contractSnapshot": {
+        "id": "prediction-v1",
+        "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
+        "function": "Prédiction sur données réservées",
+        "owner": "Équipe de recherche",
+        "context": "Exemple synthétique v1",
+        "horizon": "100 essais",
+        "criteria": [
+          {
+            "id": "error",
+            "description": "Erreur de prédiction",
+            "beneficiary": "Chercheurs",
+            "unit": "fraction",
+            "scale": "cardinal",
+            "direction": "minimize",
+            "threshold": 0.2
+          }
+        ],
+        "constraints": [
+          {
+            "id": "energy",
+            "description": "Budget énergétique",
+            "beneficiary": "Opérateur",
+            "unit": "J",
+            "direction": "minimize",
+            "threshold": 10
+          }
+        ],
+        "utility": {
+          "rationale": "Convention instrumentale linéaire entre erreur 1 et 0 ; aucune mesure de bien-être.",
+          "terms": [
+            {
+              "criterionId": "error",
+              "worst": 1,
+              "best": 0,
+              "weight": 1
+            }
+          ]
+        }
+      },
       "contractId": "prediction-v1",
       "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
       "function": "Prédiction sur données réservées",
@@ -48,6 +128,46 @@
       "interpretation": "Conditional on supplied data and declared values; no causal inference."
     },
     {
+      "contractSnapshot": {
+        "id": "prediction-v1",
+        "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
+        "function": "Prédiction sur données réservées",
+        "owner": "Équipe de recherche",
+        "context": "Exemple synthétique v1",
+        "horizon": "100 essais",
+        "criteria": [
+          {
+            "id": "error",
+            "description": "Erreur de prédiction",
+            "beneficiary": "Chercheurs",
+            "unit": "fraction",
+            "scale": "cardinal",
+            "direction": "minimize",
+            "threshold": 0.2
+          }
+        ],
+        "constraints": [
+          {
+            "id": "energy",
+            "description": "Budget énergétique",
+            "beneficiary": "Opérateur",
+            "unit": "J",
+            "direction": "minimize",
+            "threshold": 10
+          }
+        ],
+        "utility": {
+          "rationale": "Convention instrumentale linéaire entre erreur 1 et 0 ; aucune mesure de bien-être.",
+          "terms": [
+            {
+              "criterionId": "error",
+              "worst": 1,
+              "best": 0,
+              "weight": 1
+            }
+          ]
+        }
+      },
       "contractId": "prediction-v1",
       "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
       "function": "Prédiction sur données réservées",
@@ -91,6 +211,46 @@
       "interpretation": "Conditional on supplied data and declared values; no causal inference."
     },
     {
+      "contractSnapshot": {
+        "id": "prediction-v1",
+        "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
+        "function": "Prédiction sur données réservées",
+        "owner": "Équipe de recherche",
+        "context": "Exemple synthétique v1",
+        "horizon": "100 essais",
+        "criteria": [
+          {
+            "id": "error",
+            "description": "Erreur de prédiction",
+            "beneficiary": "Chercheurs",
+            "unit": "fraction",
+            "scale": "cardinal",
+            "direction": "minimize",
+            "threshold": 0.2
+          }
+        ],
+        "constraints": [
+          {
+            "id": "energy",
+            "description": "Budget énergétique",
+            "beneficiary": "Opérateur",
+            "unit": "J",
+            "direction": "minimize",
+            "threshold": 10
+          }
+        ],
+        "utility": {
+          "rationale": "Convention instrumentale linéaire entre erreur 1 et 0 ; aucune mesure de bien-être.",
+          "terms": [
+            {
+              "criterionId": "error",
+              "worst": 1,
+              "best": 0,
+              "weight": 1
+            }
+          ]
+        }
+      },
       "contractId": "prediction-v1",
       "purpose": "Prédire des événements avec une erreur limitée sous budget énergétique",
       "function": "Prédiction sur données réservées",

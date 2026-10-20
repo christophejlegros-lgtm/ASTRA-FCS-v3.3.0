@@ -169,3 +169,26 @@ Ces méthodes ne sont pas toutes implémentées. Le module fournit un instrument
 - Wright, L. (1973). « Functions ». *The Philosophical Review*, 82(2), 139–168. *(Notice PhilPapers ; DOI non vérifié, donc non indiqué.)* Ajouté en rc.2 pour la conception étiologique que la fonction assignée n’adopte pas (§2).
 
 Le contrat, les règles d’admissibilité, le modèle d’utilité et la comparaison par intervalles sont des choix de cette extension ; leur détail ne doit pas être attribué aux deux auteurs cités. Le noyau proposé est une **téléologie fonctionnelle sous contraintes de substrat et de valeur**, ouverte à la réfutation de ses hypothèses et à la révision de ses fins.
+
+
+## Addendum rc.4 — migration et limites de la validation
+
+L'utilité additive exige désormais `scale: "cardinal"` pour chaque objectif concerné.
+Les valeurs `ordinal` et `unspecified`, ainsi que l'absence de déclaration, restent
+acceptées pour les seuils et Pareto, mais interdisent l'utilité. La déclaration ne
+constitue pas une preuve de cardinalité ; elle doit être défendue dans `utility.rationale`.
+Le contrôle lexical des unités demeure une précaution imparfaite, susceptible de faux
+positifs et de contournements. Une unité nommée « points » ne prouve aucune propriété métrique.
+Les poids dont la somme est acceptée à 10⁻⁹ près sont normalisés par leur somme effective.
+Les bornes de valeur restent dans [0,1].
+
+Chaque rapport contient `contractSnapshot` : contexte, horizon, seuils, bénéficiaires,
+ancres et poids utilisés. Ce relevé permet la relecture ; ce n'est ni une signature,
+ni une authentification des données, ni une preuve d'antériorité.
+
+Les données du magasin de simulation FCS portent `simulated` ; les nombres transmis
+par l'appelant portent `reported`. Le mode `live` n'active aucune preuve d'acquisition.
+`auditBasis: "substrate-type-model"` indique que les verdicts concernent la classification
+théorique du type de substrat. `specimenVerified: false` interdit de les présenter comme
+l'inspection d'un organoïde connecté. Le changement de nom vers Access ne démontre
+pas davantage une conscience d'accès : il exprime un objet de recherche.

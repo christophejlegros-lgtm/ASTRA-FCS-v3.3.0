@@ -1,0 +1,34 @@
+{
+  "version": "3.3.0-rc.4",
+  "date": "2026-10-19",
+  "status": "local candidate; not published",
+  "source": {
+    "repository": "https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0",
+    "commit": "4c9e0e6fee15a1e3f4afbfb1a8c13943ed972054",
+    "archive_sha256": "718601e0340d298ac7dcb2ebbe14eff3c1601e4bd1552fc1c1e2d2ad487f3f3e",
+    "differences_archive_vs_commit": 0
+  },
+  "environment": {
+    "node": "24.19.0",
+    "dependencies": "existing local installation reused; npm ci not executed"
+  },
+  "checks": {
+    "baseline_tests": 415,
+    "corrected_tests": 425,
+    "failed": 0,
+    "skipped": 0,
+    "new_tests": 10,
+    "build": "pass",
+    "lint": "pass",
+    "identity": "pass",
+    "frozen_files": "12/12 pass",
+    "example_check": "pass"
+  },
+  "limits": [
+    "No Node 20/22 matrix or Docker execution",
+    "No biological acquisition or independent peer review",
+    "No rerun of empirical Python benches or golden check; frozen files preserved",
+    "Heuristic claim screening is incomplete",
+    "Cardinality and provenance remain declarations"
+  ]
+}

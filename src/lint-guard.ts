@@ -7,7 +7,7 @@
  * very moves the FCS negative heuristic forbids.
  *
  * `installLintGuard(server)` wraps `server.tool` and `server.resource` BEFORE
- * any registration, so that every text payload of every tool and resource
+ * any registration, so that every text payload (including embedded resources) and structured result of every tool, and resource text
  * passes BOTH linters:
  *   · `lintClaim` — Block's access/phenomenal distinction (phenomenal-guard.ts)
  *   · `lintFcs`   — the five prohibitions of the FCS series (negative-heuristic.ts)
@@ -47,7 +47,7 @@ export function screen(text: string): LintVerdict {
 }
 
 interface TextItem { type: 'text'; text: string }
-interface ToolResultLike { content?: unknown[]; isError?: boolean }
+interface ToolResultLike { content?: unknown[]; structuredContent?: unknown; isError?: boolean }
 interface ResourceResultLike { contents?: Array<{ uri?: string; text?: unknown }> }
 
 function isTextItem(x: unknown): x is TextItem {
@@ -62,23 +62,52 @@ function lintFailure(origin: string, v: LintVerdict): string {
     origin,
     claimPatterns: v.claimPatterns,
     fcsProhibitions: v.fcsFindings,
-    note: 'The payload asserts something ASTRA is not permitted to assert (Block\'s access/phenomenal ' +
-          'distinction; FCS prohibitions 1–5). Nothing was emitted.',
+    note: 'Pattern-based screening flagged the payload. This heuristic finding is not a semantic proof; the original payload was withheld.',
   }, null, 2);
 }
 
-/** Screen a tool result; returns it unchanged when admissible. */
+/** Scan decoded JSON strings as well as raw prose, without crossing field boundaries. */
+function screenPayload(payload: unknown): LintVerdict {
+  const pending: unknown[] = [payload];
+  const seen = new Set<object>();
+  while (pending.length) {
+    const value = pending.pop();
+    if (typeof value === 'string') {
+      const verdict = screen(value);
+      if (!verdict.admissible) return verdict;
+    } else if (value && typeof value === 'object' && !seen.has(value)) {
+      seen.add(value);
+      for (const [key, item] of Object.entries(value)) pending.push(key, item);
+    }
+  }
+  return screen('');
+}
+function screenText(text: string): LintVerdict {
+  const raw = screen(text);
+  if (!raw.admissible) return raw;
+  try { return screenPayload(JSON.parse(text)); } catch { return raw; }
+}
+
+/** Screen text and MCP structured content; on failure discard the whole payload. */
 export function guardToolResult<T>(toolName: string, result: T): T {
   if (LINT_EXEMPT_TOOLS.has(toolName)) return result;
   const r = result as unknown as ToolResultLike;
-  if (!r || !Array.isArray(r.content)) return result;
-  for (const item of r.content) {
-    if (!isTextItem(item)) continue;
-    const v = screen(item.text);
-    if (!v.admissible) {
-      return { content: [{ type: 'text', text: lintFailure(`tool:${toolName}`, v) }], isError: true } as unknown as T;
+  if (!r) return result;
+  const verdicts = [screenPayload(r.structuredContent)];
+  if (Array.isArray(r.content)) {
+    for (const item of r.content) {
+      if (isTextItem(item)) verdicts.push(screenText(item.text));
+      else if (item && typeof item === 'object') {
+        const block = item as { type?: string; resource?: { text?: unknown }; description?: unknown };
+        if (block.type === 'resource' && typeof block.resource?.text === 'string')
+          verdicts.push(screenText(block.resource.text));
+        if (block.type === 'resource_link') verdicts.push(screenPayload(block));
+      }
     }
   }
+  const failed = verdicts.find(v => !v.admissible);
+  if (failed) return { content: [{ type: 'text', text: lintFailure(`tool:${toolName}`, failed) }],
+    isError: true } as unknown as T;
   return result;
 }
 
@@ -88,7 +117,7 @@ export function guardResourceResult<T>(resourceName: string, result: T): T {
   if (!r || !Array.isArray(r.contents)) return result;
   const contents = r.contents.map((c) => {
     if (typeof c.text !== 'string') return c;
-    const v = screen(c.text);
+    const v = screenText(c.text);
     return v.admissible ? c : { ...c, text: lintFailure(`resource:${resourceName}`, v) };
   });
   return { ...r, contents } as unknown as T;

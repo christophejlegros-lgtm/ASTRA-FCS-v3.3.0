@@ -1,0 +1,185 @@
+✖ rc4: reported numbers do not become instrument measurements (4.030648ms)
+✖ rc4: absence of an observed constitutive pair is not evidence of absent carrier (5.827253ms)
+✖ rc4: invalid biomarker input is rejected by the pure API (0.3782ms)
+✖ rc4: the live UI mode does not create a MEA observation (32.017506ms)
+✖ rc4: structured MCP content is screened even with innocuous text (5.564989ms)
+✖ rc4: JSON escape sequences cannot hide an otherwise detected claim (0.377127ms)
+✖ rc4: additive utility requires an explicit cardinal scale declaration (2.664611ms)
+✖ rc4: reports retain the conventions needed to interpret their numbers (1.309161ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 0
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 460.511931
+
+✖ failing tests:
+
+test at tests/audit-rc4.test.ts:1:776
+✖ rc4: reported numbers do not become instrument measurements (4.030648ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'measured'
+  - 'reported'
+  
+      at TestContext.<anonymous> (/workspace/scratch/70b6f03f9a36/audit-rc3/ASTRA-FCS-v3.3.0-rc.3/tests/audit-rc4.test.ts:15:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'measured',
+    expected: 'reported',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/audit-rc4.test.ts:1:1063
+✖ rc4: absence of an observed constitutive pair is not evidence of absent carrier (5.827253ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(!a.notesEn.some(n => /carrier\s+is absent/.test(n)))
+  
+      at TestContext.<anonymous> (/workspace/scratch/70b6f03f9a36/audit-rc3/ASTRA-FCS-v3.3.0-rc.3/tests/audit-rc4.test.ts:20:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/audit-rc4.test.ts:1:1259
+✖ rc4: invalid biomarker input is rejected by the pure API (0.3782ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/scratch/70b6f03f9a36/audit-rc3/ASTRA-FCS-v3.3.0-rc.3/tests/audit-rc4.test.ts:24:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/audit-rc4.test.ts:1:1505
+✖ rc4: the live UI mode does not create a MEA observation (32.017506ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== null
+  
+      at TestContext.<anonymous> (/workspace/scratch/70b6f03f9a36/audit-rc3/ASTRA-FCS-v3.3.0-rc.3/tests/audit-rc4.test.ts:38:12)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/audit-rc4.test.ts:1:2402
+✖ rc4: structured MCP content is screened even with innocuous text (5.564989ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/70b6f03f9a36/audit-rc3/ASTRA-FCS-v3.3.0-rc.3/tests/audit-rc4.test.ts:46:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/audit-rc4.test.ts:1:2705
+✖ rc4: JSON escape sequences cannot hide an otherwise detected claim (0.377127ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/70b6f03f9a36/audit-rc3/ASTRA-FCS-v3.3.0-rc.3/tests/audit-rc4.test.ts:52:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/audit-rc4.test.ts:1:2944
+✖ rc4: additive utility requires an explicit cardinal scale declaration (2.664611ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/scratch/70b6f03f9a36/audit-rc3/ASTRA-FCS-v3.3.0-rc.3/tests/audit-rc4.test.ts:56:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /cardinal/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/audit-rc4.test.ts:1:3284
+✖ rc4: reports retain the conventions needed to interpret their numbers (1.309161ms)
+  Error [ZodError]: [
+    {
+      "code": "unrecognized_keys",
+      "keys": [
+        "scale"
+      ],
+      "path": [
+        "contract",
+        "criteria",
+        0
+      ],
+      "message": "Unrecognized key(s) in object: 'scale'"
+    }
+  ]
+      at get error (file:///workspace/scratch/70b6f03f9a36/consolidation/ASTRA-FCS-v3.2.0-rc.1/node_modules/zod/v3/types.js:39:31)
+      at ZodObject.parse (file:///workspace/scratch/70b6f03f9a36/consolidation/ASTRA-FCS-v3.2.0-rc.1/node_modules/zod/v3/types.js:114:22)
+      at assess (/workspace/scratch/70b6f03f9a36/audit-rc3/ASTRA-FCS-v3.3.0-rc.3/src/engine/teleology/index.ts:162:68)
+      at TestContext.<anonymous> (/workspace/scratch/70b6f03f9a36/audit-rc3/ASTRA-FCS-v3.3.0-rc.3/tests/audit-rc4.test.ts:62:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    issues: [ { code: 'unrecognized_keys', keys: [Array], path: [Array], message: "Unrecognized key(s) in object: 'scale'" } ],
+    [errors]: [ { code: 'unrecognized_keys', keys: [Array], path: [Array], message: "Unrecognized key(s) in object: 'scale'" } ]
+  }

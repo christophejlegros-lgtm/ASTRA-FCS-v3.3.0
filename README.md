@@ -1,5 +1,5 @@
 # ASTRA-FCS — MCP research server
-<!-- astra-current-version: 3.3.0-rc.3 -->
+<!-- astra-current-version: 3.3.0-rc.4 -->
 
 **ASTRA — Agent-orchestrated Simulation Testbed for Research on Access**
 *FR : Agent Orchestré de Simulation et Test de Recherche sur l'Access*
@@ -47,13 +47,31 @@
 > ([`empirical/PREREG-E3-DRAFT.md`](empirical/PREREG-E3-DRAFT.md), unfiled draft).
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-cyan.svg)](LICENSE)
-[![CI](https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0/actions/workflows/ci.yml/badge.svg)](https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0/actions)
+[![CI](https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0/actions/workflows/ci.yml/badge.svg)](https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0/actions)
 [![MCP Spec](https://img.shields.io/badge/MCP_Spec-2025--11--25-blue.svg)](https://modelcontextprotocol.io/specification/2025-11-25)
 [![MCP SDK](https://img.shields.io/badge/MCP_SDK-1.12+-blueviolet.svg)](https://modelcontextprotocol.io)
 [![Node.js](https://img.shields.io/badge/Node.js-≥20-green.svg)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue.svg)](https://typescriptlang.org)
 
 Production-grade [Model Context Protocol](https://modelcontextprotocol.io) server exposing the ASTRA bio-hybrid neuromorphic simulation pipeline to AI assistants. Built with the official `@modelcontextprotocol/sdk`, it integrates a layered SNN LIF+STDP engine, consciousness proxy assessment, bio-computing platform telemetry, and an IRB ethics monitor — all queryable as MCP tools, resources, and prompts from **Claude Desktop**, **Cursor**, **VS Code**, and any MCP-compatible client.
+
+## v3.3.0-rc.4 — Provenance and result screening (local candidate)
+
+FR : les valeurs FCS issues du simulateur sont marquées `simulated`, les valeurs fournies
+par l'appelant `reported`. Le mode logiciel `live` ne prouve aucune acquisition MEA.
+Les profils décrivent un type de substrat (`auditBasis`), sans spécimen vérifié.
+L'utilité téléologique exige désormais `scale: "cardinal"` sur chaque objectif ;
+les rapports conservent le contrat complet. Les contenus MCP structurés et les textes
+JSON décodés passent également le garde-fou heuristique.
+
+EN: FCS values retain their simulated or caller-reported origin; UI mode cannot certify
+an instrument channel. Substrate profiles are model-level descriptions, not specimen
+inspections. Additive utility requires explicit cardinal scales and reports retain the
+full contract. Structured MCP results and decoded JSON strings are screened too.
+
+Migration and critical review: [REVUE-v3.3.0-rc.3.md](REVUE-v3.3.0-rc.3.md).
+The word *Access* names a research target; passing a software gate does not establish
+access consciousness in Block's sense. This candidate has not been published or tagged.
 
 ## 🆕 v3.3.0-rc.3 — Name, definition and a widened claim guard (pre-release)
 
@@ -423,8 +441,8 @@ Koniku Kore ────────────────┘         │     
 ## Quick Start
 
 ```bash
-git clone https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0.git
-cd ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0
+git clone https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0.git
+cd ASTRA-FCS-v3.3.0
 
 # Install & build
 npm install

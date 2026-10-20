@@ -16,7 +16,7 @@
  * les mêmes effectifs que ce fichier. Le nom du dépôt GitHub (…-FCS-v3.1.0)
  * n'est PAS un identifiant de version : voir RELEASE.md.
  */
-export const ASTRA_VERSION = '3.3.0-rc.3';
+export const ASTRA_VERSION = '3.3.0-rc.4';
 
 /**
  * Effectifs MCP attendus. Les effectifs réels sont comptés à l'enregistrement

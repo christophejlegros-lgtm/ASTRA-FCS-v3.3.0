@@ -38,6 +38,7 @@ export const PHENOMENAL_TERMS =
 
 const criterion = z.object({
   id, description: label, beneficiary: label, unit: label,
+  scale: z.enum(['cardinal', 'ordinal', 'unspecified']).optional(),
   direction: z.enum(['minimize', 'maximize']), threshold: number,
 }).strict();
 export const contractSchema = z.object({
@@ -71,6 +72,8 @@ export const contractSchema = z.object({
     const k = c.criteria.find(k => k.id === t.criterionId);
     if (!k || (k.direction === 'maximize' ? t.best <= t.worst : t.best >= t.worst))
       issue('Utility anchors must follow the criterion direction with a nonzero span.');
+    if (k && k.scale !== 'cardinal')
+      issue(`Criterion "${k.id}" requires an explicit cardinal scale declaration for additive utility.`);
     if (k && isOrdinalUnit(k.unit))
       issue(`Criterion "${k.id}" has an ordinal unit ("${k.unit}"): it may carry a threshold and enter the Pareto ` +
         'comparison, never the additive utility (FCS prohibition 4).');
@@ -144,10 +147,11 @@ function evaluate(c: Contract, o: Outcome) {
       const a = score(v.lower), b = score(v.upper);
       return { lower: Math.min(a, b) * t.weight, upper: Math.max(a, b) * t.weight };
     });
-    utility = { lower: bounds.reduce((s, b) => s + b.lower, 0),
-      upper: bounds.reduce((s, b) => s + b.upper, 0), conditional: true };
+    const weightSum = c.utility.terms.reduce((sum, t) => sum + t.weight, 0);
+    utility = { lower: Math.max(0, Math.min(1, bounds.reduce((s, b) => s + b.lower, 0) / weightSum)),
+      upper: Math.max(0, Math.min(1, bounds.reduce((s, b) => s + b.upper, 0) / weightSum)), conditional: true };
   }
-  return { contractId: c.id, purpose: c.purpose, function: c.function, owner: c.owner,
+  return { contractSnapshot: c, contractId: c.id, purpose: c.purpose, function: c.function, owner: c.owner,
     outcomeId: o.id, evidenceKind: o.kind, source: o.source,
     admissibility,
     admissibilityBasis: c.constraints.length ? 'declared-constraints' : 'empty-contract',
@@ -184,7 +188,7 @@ export function compare(input: unknown) {
   };
   const dominance = eligible.flatMap(a => eligible.filter(b => b !== a && dominates(a, b))
     .map(b => ({ better: a.id, worse: b.id })));
-  return { contractId: c.id, purpose: c.purpose, function: c.function, owner: c.owner,
+  return { contractSnapshot: c, contractId: c.id, purpose: c.purpose, function: c.function, owner: c.owner,
     reports, dominance,
     nonDominated: eligible.filter(o => !dominance.some(d => d.worse === o.id)).map(o => o.id),
     excluded: outcomes.filter(o => !eligible.includes(o)).map(o => o.id),

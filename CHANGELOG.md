@@ -4,6 +4,18 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) ; versions : [
 La version courante est fixée par `src/version.ts` ; `npm run check:identity` vérifie que ce
 fichier, le README, les métadonnées de citation et le gate CI la portent tous.
 
+## [3.3.0-rc.4] — 2026-10-19 (candidat local, non publié)
+
+- Origine des biomarqueurs FCS préservée : `simulated` / `reported` ; aucune preuve de mesure déduite du mode `live`.
+- Profils de type de substrat explicitement distingués d'un spécimen vérifié ; inférence d'absence du porteur humain corrigée.
+- Validation des biomarqueurs dans l'API pure ; refus de NaN, Infinity et valeurs hors domaine.
+- Garde-fou étendu aux réponses structurées, ressources textuelles embarquées et chaînes JSON décodées.
+- Utilité : déclaration `scale: "cardinal"` requise (migration), poids acceptés normalisés ; contrat conservé dans les rapports.
+- Liens actifs du README, de la citation et de la demande de revue corrigés vers le dépôt vérifié.
+- Date de publication non déclarée avant publication effective. Archives de validation antérieures conservées comme historiques.
+- Aucun changement des fichiers gelés E1/E2 ni des effectifs MCP.
+- Revue : `REVUE-v3.3.0-rc.3.md` ; assistance d'IA, sans évaluation externe.
+
 ## [3.3.0-rc.3] — 2026-10-19 (préversion)
 
 Nom, définition et garde-fou des énoncés. Réalisé avec assistance d'IA ; ce n'est pas une

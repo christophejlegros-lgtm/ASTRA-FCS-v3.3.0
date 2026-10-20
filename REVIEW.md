@@ -1,7 +1,7 @@
 # Demande de revue externe · External review request
 
-**ASTRA-FCS v3.3.0-rc.3** · <https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0>
-(le nom du dépôt porte « v3.1.0 » pour des raisons historiques ; ce n'est pas un identifiant
+**ASTRA-FCS v3.3.0-rc.4** · <https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0>
+(le nom du dépôt porte « v3.3.0 » ; ce n'est pas un identifiant
 de version — voir `RELEASE.md` · *the repository name is not a version identifier*)
 Christophe Jean Legros · Assistance Multi IA, Genève · Assistant-Multi-IA@proton.me
 
@@ -109,7 +109,7 @@ Cadre normatif et portée des inférences · Normative frame and reach of infere
 
 ## Modalités · Practicalities
 
-- **Objet relu / Object reviewed :** la version étiquetée `v3.3.0-rc.3` (archive Zenodo et son
+- **Objet relu / Object reviewed :** la version étiquetée `v3.3.0-rc.4` (archive Zenodo et son
   DOI de version, à ajouter à `CITATION.cff` à la publication), vérifiée par
   `node scripts/manifest.mjs --check`. Un rapport cite l'empreinte de `MANIFEST.sha256`.
 - **Reproduire / Reproduce :** `npm ci && npm run build && npm test` (Node ≥ 20) ;
