@@ -78,7 +78,27 @@ externe (`REVIEW.md`).
   et `rdmFromSimilarityJudgements` ; manipulation `phase-shift` (exécutée par l'appareil) ;
   `body-probes.ts` (sondes et observations de K0) ; `calibrateFreezeManipulate`.
 
+### Dépôt de K0 préparé (21 octobre 2026)
+- **Texte du dépôt** : `empirical/OSF-K0-FILING.md` donne les métadonnées et les 25 champs
+  du modèle « OSF Preregistration » (Bowman et al. 2016), en anglais à coller et en
+  français, avec la procédure et les commandes à exécuter après l'approbation.
+- **Consignation du dépôt** : `node --import tsx scripts/kin.mjs file <protocole> --reference
+  <DOI> --filed-at <date>` (aussi `npm run kin:file`). La commande inscrit `status` et
+  `registry`, ne réécrit que ces deux champs du JSON et remplace la ligne de statut du
+  document. Elle vérifie que l'empreinte est inchangée et refuse un protocole non prêt ou
+  déjà déposé, un document qui ne cite pas l'empreinte, une date future et un DOI resté à
+  l'état de gabarit. L'option `--dry-run` montre l'effet sans rien écrire.
+- **K0, deux précisions avant le dépôt** : la règle d'échec technique et d'arrêt (une séance
+  refusée par `kin:k0:observe` est rapportée puis remplacée, jusqu'à dix séances acceptées),
+  et une analyse de dimensionnalité exécutée une seule fois.
+
 ### Corrigé pendant le développement
+- **Modèle OSF de K0.** Le §8 indiquait « Open-Ended Registration », qu'OSF réserve aux
+  études qu'aucun modèle structuré ne couvre ; il indique désormais « OSF Preregistration »,
+  comme K1.
+- **Test de `prereg:check`.** Il exigeait l'état « prêt à déposer » de K0, si bien que la
+  consignation du dépôt aurait fait échouer l'intégration continue. Il suit désormais le
+  statut du JSON, et un nouveau test vérifie que le JSON et la ligne de statut concordent.
 - Sans SESOI, un intervalle minuscule au-dessus de 0 était lu comme une « augmentation », et
   un plan « intéroceptif seul » pouvait conclure à « both », ce qui maintenait la thèse.
   Désormais, aucun motif n'est dérivé sans SESOI (test de régression).
@@ -98,11 +118,12 @@ externe (`REVIEW.md`).
 - Fichiers gelés E1/E2 (`check:frozen`) et RNG global : les nouveaux calculs utilisent des
   flux locaux, ce qu'un test vérifie.
 - Surface : 75 → **82 outils**, 16 → **17 ressources**, 10 → **11 prompts**.
-  Tests : 425 → **511** (101 suites).
+  Tests : 425 → **515** (102 suites).
 
 ### À décider par l'auteur
 - K1 : laboratoire hôte, référence éthique et n, après le pilote humain ; ce sont des
-  événements, non des décisions. K0 : dépôt sur OSF, puis collecte.
+  événements, non des décisions. K0 : dépôt sur OSF (`empirical/OSF-K0-FILING.md`), puis
+  collecte.
 - Raccorder ou non le canal intéroceptif au contrôleur homéostatique (cela couplerait les
   deux familles).
 - La rc.4 n'ayant pas été publiée, la fusion de la rc.5 avec elle ou leur numérotation

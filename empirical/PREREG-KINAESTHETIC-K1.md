@@ -124,7 +124,7 @@ K1 départage deux clôtures d'une boucle. Il n'attribue d'expérience à aucun 
 
 1. Renseigner les trois éléments en attente dans ce document et `minUnits` et `ethicsReference` dans le JSON. Vérifier que `npm run kin:protocol -- empirical/protocols/FCS-K1.protocol.json --strict` répond « ready to file: yes » et que `npm run prereg:check` ne compte plus de marqueur dans ce fichier.
 2. Sur OSF Registries, utiliser le modèle « OSF Preregistration ». Joindre ce document et le JSON, et citer l'empreinte SHA-256.
-3. Après le dépôt, renseigner `"status": "filed"` et `registry` (sans effet sur l'empreinte), remplacer la ligne de statut par « DÉPOSÉ LE <date> / FILED ON <date> », puis committer.
+3. Après le dépôt, consigner le DOI et la date avec `node --import tsx scripts/kin.mjs file empirical/protocols/FCS-K1.protocol.json --reference <DOI> --filed-at <date>`, qui renseigne `"status": "filed"` et `registry` (sans effet sur l'empreinte) et remplace la ligne de statut par « DÉPOSÉ LE … / FILED ON … » ; puis committer. La commande refuse tant que le protocole n'est pas prêt et que ce document ne cite pas l'empreinte.
 
 ## Références / References (DOI vérifiés sur Crossref le 20 octobre 2026)
 

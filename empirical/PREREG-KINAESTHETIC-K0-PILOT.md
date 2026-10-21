@@ -34,6 +34,7 @@ Une simulation à blanc de la même chaîne (`npm run kin:k0:dryrun`) donne un p
 
 - **Banc minimal**, décision du 20 octobre 2026. Un doigt à une articulation actionné par un servomoteur à encodeur absolu, avec mesure du courant moteur. Un capteur tactile optique DIGIT (Lambeta et al. 2020), dont les forces normales sont obtenues par un modèle d'étalonnage ; ce capteur, fonctionnant par images, ne fournit pas de canal FA2. Une thermistance qui chauffe le contact et mesure le flux. Deux jauges d'étirement sur la « peau » de l'articulation. Côté intéroceptif : une thermistance d'actionneur, une jauge de batterie et une sonde de température de la carte.
 - **Unité** : la séance (`session`). **Effectif** : 10 séances, sur des jours différents, après réinstallation du banc.
+- **Échecs techniques et arrêt** (précisé le 21 octobre 2026, avant le dépôt) : une séance dont l'enregistrement est refusé par `kin:k0:observe` (champ manquant, sonde sans retour apparié ou sans lecture intéroceptive, moins de deux caractéristiques non constantes) est un échec technique. Elle est rapportée avec son motif, puis remplacée par une nouvelle séance, un autre jour, jusqu'à dix séances acceptées. Aucune séance n'est écartée ni remplacée pour un autre motif ; une unité que l'analyse écarterait (`excludedUnits`) est rapportée sans être remplacée. La collecte s'arrête à la dixième séance acceptée, et le nombre d'échecs est un résultat du pilote (question 3). La clôture et l'exactitude temporelle d'une séance peuvent être contrôlées dès son enregistrement, pour surveiller l'instrument ; l'analyse de dimensionnalité n'est exécutée qu'une fois, sur les dix séances acceptées.
 - **Cible de délivrance** : silicium. **Éthique** : sans objet (décision `PASS`).
 
 ## 3. Canaux, signaux, horloge / Channels, signals, clock
@@ -83,13 +84,14 @@ K0 ne dit rien de la thèse kinesthésique, de l'expérience ni d'un quelconque 
 
 ## 8. Dépôt / Filing
 
-1. Sur OSF Registries, choisir le modèle « Open-Ended Registration ». Joindre ce document et `protocols/FCS-K0.protocol.json`, et citer l'empreinte SHA-256.
-2. Après le dépôt, renseigner dans le JSON `"status": "filed"` et `"registry": { "name": "OSF Registries", "reference": "<DOI ou URL>", "filedAt": "<date ISO>" }`. Ces champs n'entrent pas dans l'empreinte.
-3. Remplacer la ligne de statut ci-dessus par « DÉPOSÉ LE <date> / FILED ON <date> », puis committer.
-4. Ne collecter les séances réelles qu'**après** le dépôt.
+1. Sur OSF, créer un projet et y téléverser ce document, `protocols/FCS-K0.protocol.json` et l'archive du code source (`git archive` du commit courant, dont le nom porte l'identifiant du commit). Depuis l'onglet *Registrations* du projet, créer un enregistrement avec le modèle « OSF Preregistration » (Bowman et al. 2016). OSF réserve « Open-Ended Registration » aux études qu'aucun modèle structuré ne couvre, ce qui n'est pas le cas de K0. Le texte de chaque champ, en anglais et en français, est dans [`OSF-K0-FILING.md`](OSF-K0-FILING.md) ; il cite l'empreinte SHA-256.
+2. Une fois l'enregistrement approuvé, consigner le dépôt avec le DOI et la date qu'affiche OSF : `node --import tsx scripts/kin.mjs file empirical/protocols/FCS-K0.protocol.json --reference <DOI> --filed-at <date>`. La commande renseigne `"status": "filed"` et `registry` dans le JSON, champs qui n'entrent pas dans l'empreinte ; elle remplace la ligne de statut ci-dessus par « DÉPOSÉ LE … / FILED ON … », vérifie que l'empreinte est inchangée et refuse d'écraser un dépôt déjà consigné.
+3. Committer ces deux fichiers et pousser (commandes : `OSF-K0-FILING.md`, partie D).
+4. Ne collecter les séances réelles qu'**après** le dépôt ; si OSF n'affiche que le jour de l'enregistrement, à partir du lendemain.
 
-## Références / References (DOI vérifiés sur Crossref le 20 octobre 2026)
+## Références / References (DOI vérifiés sur Crossref le 20 octobre 2026, sauf mention)
 
+- Bowman, S. D., DeHaven, A. C., Errington, T. M., Hardwicke, T. E., Mellor, D. T., Nosek, B. A., & Soderberg, C. K. (2016). *OSF Prereg Template*. MetaArXiv. https://doi.org/10.31222/osf.io/epgjd (DOI vérifié le 21 octobre 2026 sur la notice RePEc/IDEAS et dans la documentation du paquet R `preregr`, Crossref n'étant pas joignable ce jour-là.)
 - Gao, P., & Ganguli, S. (2015). On simplicity and complexity in the brave new world of large-scale neuroscience. *Current Opinion in Neurobiology*, 32, 148–155. https://doi.org/10.1016/j.conb.2015.04.003
 - Kriegeskorte, N., Mur, M., & Bandettini, P. (2008). Representational similarity analysis – connecting the branches of systems neuroscience. *Frontiers in Systems Neuroscience*, 2, 4. https://doi.org/10.3389/neuro.06.004.2008
 - Lambeta, M., et al. (2020). DIGIT: A novel design for a low-cost compact high-resolution tactile sensor with application to in-hand manipulation. *IEEE Robotics and Automation Letters*, 5(3), 3838–3845. https://doi.org/10.1109/LRA.2020.2977257

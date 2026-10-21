@@ -76,15 +76,17 @@ specificity checks, SHA-256-frozen protocol filed before the data). ASTRA's own 
 never set a withdrawal outcome.
 
 Surface: 75 → **82 tools** (`soma_encode`, `intero_encode`, `kin_*` ×5), 16 → **17
-resources**, 10 → **11 prompts**. Test suite 425 → **511 tests · 101 suites**. Critical analysis
+resources**, 10 → **11 prompts**. Test suite 425 → **515 tests · 102 suites**. Critical analysis
 of `SENSORS.pdf` and corrections: [REVUE-SENSORS.md](REVUE-SENSORS.md). Guide:
 [SOMATOSENSORY-INTEGRATION.en.md](SOMATOSENSORY-INTEGRATION.en.md) ·
 [.fr.md](SOMATOSENSORY-INTEGRATION.fr.md). Preregistrations (author's decisions of 20 October
 2026): [FCS-K0](empirical/PREREG-KINAESTHETIC-K0-PILOT.md), robot pilot, complete and ready to
-file; [FCS-K1](empirical/PREREG-KINAESTHETIC-K1.md), human participants, confirmatory, complete
+file, with its OSF filing text ([OSF-K0-FILING.md](empirical/OSF-K0-FILING.md));
+[FCS-K1](empirical/PREREG-KINAESTHETIC-K1.md), human participants, confirmatory, complete
 except three values awaiting the host laboratory, the ethics approval and the pilot-based
 sample size. Machine protocols in `empirical/protocols/`; `npm run kin:protocol`,
-`kin:k0:dryrun`, `kin:k0:observe`, `kin:analyse`.
+`kin:k0:dryrun`, `kin:k0:observe`, `kin:analyse`, `kin:file` (records a filing once the
+registry has approved it).
 No hardware is connected; this candidate has not been published or tagged.
 
 ## v3.3.0-rc.4 — Provenance and result screening (local candidate)
@@ -703,7 +705,7 @@ src/
     ├── logger.ts         # Structured logging (pino → stderr)
     └── rng.ts            # Global seeded PRNG (mulberry32, ASTRA_SEED)
 
-tests/                    # 511 tests · 101 suites
+tests/                    # 515 tests · 102 suites
 ├── astra.test.ts             # Unit: state, bounds, SNN, ACM, ethics, security
 ├── world-model.test.ts       # World Model: encoder, predictor, SIGReg, CEM, surprise
 ├── wm-simulation.test.ts     # WM simulation: buffer, training, planning, lifecycle
@@ -823,6 +825,7 @@ npm run test:teleology     # functional teleology (pre-release)
 npm run test:body          # somatosensory, interoceptive, kinaesthetic withdrawal test and protocols (rc.5)
 npm run kin:protocol -- empirical/protocols/FCS-K1.protocol.json --strict   # hash and readiness to file
 npm run kin:k0:dryrun      # FCS-K0 pipeline on simulated sessions (never an outcome)
+node --import tsx scripts/kin.mjs file empirical/protocols/FCS-K0.protocol.json --reference <DOI> --filed-at <date> --dry-run   # record a filing (drop --dry-run to write)
 npm run teleology:example:check  # synthetic example recomputed by the compiled module (after build)
 npm run test:empirical     # E1/E2 bench + E3 synthetic ground truth (python3 + numpy [+ h5py])
 
@@ -835,8 +838,8 @@ npm run golden:check       # TS↔NumPy active-inference golden (requires python
 npm run inspect
 ```
 
-> **Full suite: 511/511 passing** (230 engine/integration + 8 E2 model + 12 transport-layer + 86 FCS + 7 annotations + 6 reproducibility + 10 claim guard + 18 proxy validation + 19 FCS consolidation + 6 identity and name + 13 functional teleology + 10 rc.4 audit + 86 body channels, kinaesthetic withdrawal test and protocols), 0 TypeScript errors
-> (strict, Node16 ESM), 0 ESLint errors — counts from a local run on Node 22 (20 October 2026); CI runs Node 20 and 22.
+> **Full suite: 515/515 passing** (230 engine/integration + 8 E2 model + 12 transport-layer + 86 FCS + 7 annotations + 6 reproducibility + 10 claim guard + 18 proxy validation + 19 FCS consolidation + 6 identity and name + 13 functional teleology + 10 rc.4 audit + 90 body channels, kinaesthetic withdrawal test, protocols and filing record), 0 TypeScript errors
+> (strict, Node16 ESM), 0 ESLint errors — counts from a local run on Node 22 (21 October 2026); CI runs Node 20 and 22.
 > Empirical benches: `python3 empirical/test_confront.py --strict` (17 checks) and `python3 empirical/test_e3.py` (22 checks).
 > Gates: `npm run check:identity`, `npm run check:frozen`, `npm run manifest:check`, `npm run prereg:check`.
 

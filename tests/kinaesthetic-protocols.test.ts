@@ -6,8 +6,11 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdtempSync, mkdirSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import {
   freezeProtocol, protocolHash, analyseKinaestheticTest, protocolTemplate, synthesizeObservations,
@@ -81,9 +84,90 @@ describe('FCS-K1 — confirmatory protocol, decisions taken, two values pending'
 
 describe('Preregistration check: K0 complete, K1 three values pending', () => {
   it('prereg:check counts 0 markers in K0 and exactly 3 EN ATTENTE in K1', () => {
-    const r = spawnSync(process.execPath, [new URL('../scripts/prereg-check.mjs', import.meta.url).pathname, '--report'], { encoding: 'utf8' });
-    assert.match(r.stdout, /PREREG-KINAESTHETIC-K0-PILOT\.md — 0 open marker\(s\), complete, unfiled/);
+    const r = spawnSync(process.execPath, [fileURLToPath(new URL('../scripts/prereg-check.mjs', import.meta.url)), '--report'], { encoding: 'utf8' });
+    // K0 reads "complete, unfiled" until its filing is recorded (kin.mjs file), "filed" afterwards.
+    const k0State = K0.status === 'filed' ? 'filed' : 'complete, unfiled';
+    assert.match(r.stdout, new RegExp(`PREREG-KINAESTHETIC-K0-PILOT\\.md — 0 open marker\\(s\\), ${k0State}`));
     assert.match(r.stdout, /PREREG-KINAESTHETIC-K1\.md — 3 open marker\(s\), unfiled draft/);
+  });
+
+  it('the JSON filing record and the status line of each document agree', () => {
+    for (const [p, doc] of [[K0, 'empirical/PREREG-KINAESTHETIC-K0-PILOT.md'], [K1, 'empirical/PREREG-KINAESTHETIC-K1.md']] as const) {
+      const head = read(doc).split('\n').slice(0, 12).join('\n');
+      const saysFiled = /DÉPOSÉ LE|FILED ON/.test(head);
+      assert.equal(saysFiled, p.status === 'filed', `${p.id}: JSON status "${p.status}" but the document ${saysFiled ? 'says filed' : 'does not say filed'}`);
+      if (p.status === 'filed') {
+        assert.ok(p.registry && head.includes(p.registry.reference), `${p.id}: the status line must quote the registry reference`);
+        assert.ok(Number.isFinite(Date.parse(p.registry.filedAt)));
+      } else {
+        assert.equal(p.registry, null);
+      }
+    }
+  });
+});
+
+describe('Recording a filing (kin.mjs file)', () => {
+  const kin = fileURLToPath(new URL('../scripts/kin.mjs', import.meta.url));
+  const run = (args: string[]) => spawnSync(process.execPath, ['--import', 'tsx', kin, 'file', ...args], { encoding: 'utf8' });
+  // The sandbox always holds K0 in its unfiled state, so these tests keep running after the real filing is recorded.
+  const UNFILED_K0 = '**Statut / Status : COMPLET, PRÊT À DÉPOSER sur OSF Registries, non encore déposé / COMPLETE, READY TO FILE (OSF Registries), not yet filed.**';
+  const sandbox = () => {
+    const dir = mkdtempSync(join(tmpdir(), 'kin-file-'));
+    mkdirSync(join(dir, 'protocols'));
+    writeFileSync(join(dir, 'protocols', 'FCS-K0.protocol.json'), JSON.stringify({ ...K0, status: 'draft', registry: null }, null, 2) + '\n');
+    writeFileSync(join(dir, 'protocols', 'FCS-K1.protocol.json'), read('empirical/protocols/FCS-K1.protocol.json'));
+    writeFileSync(join(dir, 'PREREG-KINAESTHETIC-K0-PILOT.md'),
+      read('empirical/PREREG-KINAESTHETIC-K0-PILOT.md').replace(/^\*\*Statut \/ Status :[^*\n]*\*\*/m, () => UNFILED_K0));
+    writeFileSync(join(dir, 'PREREG-KINAESTHETIC-K1.md'), read('empirical/PREREG-KINAESTHETIC-K1.md'));
+    return dir;
+  };
+
+  it('records the filing of K0: only the two filing fields change, the hash does not, and the status line says filed', () => {
+    const dir = sandbox();
+    const proto = join(dir, 'protocols', 'FCS-K0.protocol.json');
+    const original = readFileSync(proto, 'utf8');
+    const r = run([proto, '--reference', '10.17605/OSF.IO/ABCDE', '--filed-at', '2026-10-21']);
+    assert.equal(r.status, 0, r.stderr);
+    const filed = JSON.parse(readFileSync(proto, 'utf8')) as KinaestheticProtocol;
+    assert.equal(filed.status, 'filed');
+    assert.deepEqual(filed.registry, { name: 'OSF Registries', reference: 'https://doi.org/10.17605/OSF.IO/ABCDE', filedAt: '2026-10-21T00:00:00.000Z' });
+    assert.equal(protocolHash(filed), protocolHash(K0));
+    const keep = (s: string) => s.split('\n').filter((l) => !/"status"|"registry"|"name": "OSF|"reference"|"filedAt"|^  },?$/.test(l));
+    assert.deepEqual(keep(readFileSync(proto, 'utf8')), keep(original));
+    const md = readFileSync(join(dir, 'PREREG-KINAESTHETIC-K0-PILOT.md'), 'utf8');
+    assert.match(md, /^\*\*Statut \/ Status : DÉPOSÉ LE 21 octobre 2026 sur OSF Registries \(https:\/\/doi\.org\/10\.17605\/OSF\.IO\/ABCDE\) \/ FILED ON 2026-10-21/m);
+    assert.ok(md.includes(protocolHash(K0)));
+    // A filing record is never overwritten.
+    const again = run([proto, '--reference', '10.17605/OSF.IO/ZZZZZ', '--filed-at', '2026-10-22']);
+    assert.equal(again.status, 1);
+    assert.equal((JSON.parse(readFileSync(proto, 'utf8')) as KinaestheticProtocol).registry?.reference, 'https://doi.org/10.17605/OSF.IO/ABCDE');
+  });
+
+  it('refuses K1 (not ready to file), a future date, an unreplaced placeholder and a reference that is neither a DOI nor an https URL, writing nothing', () => {
+    const dir = sandbox();
+    const k1 = join(dir, 'protocols', 'FCS-K1.protocol.json');
+    const k1Before = readFileSync(k1, 'utf8');
+    assert.equal(run([k1, '--reference', 'https://osf.io/abcde', '--filed-at', '2026-10-21']).status, 1);
+    assert.equal(readFileSync(k1, 'utf8'), k1Before);
+    const k0 = join(dir, 'protocols', 'FCS-K0.protocol.json');
+    const k0Before = readFileSync(k0, 'utf8');
+    const mdBefore = readFileSync(join(dir, 'PREREG-KINAESTHETIC-K0-PILOT.md'), 'utf8');
+    assert.equal(run([k0, '--reference', '10.17605/OSF.IO/ABCDE', '--filed-at', '2099-01-01']).status, 1);
+    assert.equal(run([k0, '--reference', 'osf', '--filed-at', '2026-10-21']).status, 1);
+    assert.equal(run([k0, '--reference', '10.17605/OSF.IO/XXXXX', '--filed-at', '2026-10-21']).status, 1);
+    assert.equal(run([k0, '--reference', '10.17605/OSF.IO/ABCDE', '--filed-at', 'yesterday']).status, 1);
+    assert.equal(run([k0, '--dry-run', '--reference', '10.17605/OSF.IO/ABCDE', '--filed-at', '2026-10-21']).status, 0);
+    assert.equal(readFileSync(k0, 'utf8'), k0Before);
+    assert.equal(readFileSync(join(dir, 'PREREG-KINAESTHETIC-K0-PILOT.md'), 'utf8'), mdBefore);
+  });
+
+  it('refuses a document that does not quote the hash', () => {
+    const dir = sandbox();
+    const doc = join(dir, 'PREREG-KINAESTHETIC-K0-PILOT.md');
+    writeFileSync(doc, readFileSync(doc, 'utf8').replaceAll(protocolHash(K0), '0'.repeat(64)));
+    const r = run([join(dir, 'protocols', 'FCS-K0.protocol.json'), '--reference', '10.17605/OSF.IO/ABCDE', '--filed-at', '2026-10-21', '--doc', doc]);
+    assert.equal(r.status, 1);
+    assert.match(r.stderr, /does not quote the SHA-256/);
   });
 });
 

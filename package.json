@@ -68,6 +68,7 @@
     "kin:k0:dryrun": "tsx scripts/kin.mjs dryrun-k0",
     "kin:k0:observe": "tsx scripts/kin.mjs k0-observe",
     "kin:analyse": "tsx scripts/kin.mjs analyse",
+    "kin:file": "tsx scripts/kin.mjs file",
     "test:body": "cross-env ASTRA_LOG_LEVEL=silent TSX_TSCONFIG_PATH=tsconfig.test.json npx tsx --test tests/somatosensory.test.ts tests/interoception.test.ts tests/kinaesthetic-withdrawal.test.ts tests/kinaesthetic-protocols.test.ts"
   },
   "dependencies": {

@@ -1,6 +1,7 @@
 {
  "version": "3.3.0-rc.5",
  "date": "2026-10-20",
+ "updated": "2026-10-21",
  "status": "local candidate; not published",
  "source": {
   "base": "ASTRA-FCS-v3.3.0-rc.4 archive as supplied by the author (bee678c1-ASTRA-FCS-v3.3.0-rc.4.zip)",
@@ -19,11 +20,11 @@
  },
  "checks": {
   "baseline_tests": 425,
-  "rc5_tests": 511,
-  "suites": 101,
+  "rc5_tests": 515,
+  "suites": 102,
   "failed": 0,
   "skipped": 0,
-  "new_tests": 86,
+  "new_tests": 90,
   "build": "pass",
   "lint": "pass",
   "typecheck_tests": "pass",
@@ -34,7 +35,8 @@
   "golden_check": "pass",
   "empirical_test_confront_strict": "17/17 pass",
   "empirical_test_e3": "22/22 pass",
-  "prereg_check": "FCS-K0 complete (0 markers, ready to file); FCS-K1 complete except 3 pending values (host laboratory, ethics approval, pilot-based n); other drafts unchanged"
+  "prereg_check": "FCS-K0 complete (0 markers, ready to file; OSF filing text in empirical/OSF-K0-FILING.md); FCS-K1 complete except 3 pending values (host laboratory, ethics approval, pilot-based n); other drafts unchanged",
+  "filing_record_simulation": "kin.mjs file applied to the real K0 files, then reverted: hash unchanged, prereg-check reads 'filed', test:body 90/90"
  },
  "regression_found_and_fixed": "Without a SESOI, a negligible positive interval read as 'increase' and an interoceptive-only design could yield 'both'; no pattern is now derived without a SESOI.",
  "limits": [
@@ -59,6 +61,8 @@
  "corrections_while_completing": [
   "Protocol hash excludes status and registry (filing metadata)",
   "Monotonicity guard: absence requires slope and every level within ±SESOI",
-  "K0 responses combine both channels' errors (no interoceptive absence by construction)"
+  "K0 responses combine both channels' errors (no interoceptive absence by construction)",
+  "K0 filing template: OSF Preregistration, not Open-Ended Registration (which OSF reserves for studies no structured template covers)",
+  "The prereg-check test required K0's unfiled state; it now follows the JSON status, so recording the filing keeps CI green"
  ]
 }

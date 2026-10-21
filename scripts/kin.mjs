@@ -25,17 +25,33 @@
  *       quoted on the registry with --sha256: a protocol changed since then is
  *       refused for confirmatory use.
  *
+ *   node --import tsx scripts/kin.mjs file <protocol.json> --reference <DOI or https URL>
+ *        --filed-at <registration date> [--registry "OSF Registries"] [--doc <prereg.md>] [--dry-run]
+ *       Records a filing once the registry has accepted it: sets "status": "filed"
+ *       and the registry record in the JSON, and replaces the status line of the
+ *       preregistration document with « DÉPOSÉ LE … / FILED ON … ». Refuses a
+ *       protocol that is not ready to file or already filed, a document that does
+ *       not quote the hash, and a date in the future; checks that the hash is
+ *       unchanged. Only the two filing fields of the JSON are rewritten.
+ *       (`node --import tsx` rather than `npm run … --`: PowerShell can swallow the
+ *       `--` that npm needs to pass arguments on.)
+ *
  * © 2026 Christophe Jean Legros — Geneva · Assistance Multi IA
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { basename, dirname, join, relative, resolve } from 'node:path';
 import { freezeProtocol, analyseKinaestheticTest } from '../src/engine/fcs/kinaesthetic-withdrawal.js';
 import { simulateProbeSession, probeObservation } from '../src/engine/body-probes.js';
 import { exampleRobotInteroception } from '../src/engine/interoception.js';
 
 const [cmd, ...rest] = process.argv.slice(2);
+const BOOLEAN_FLAGS = new Set(['--strict', '--dry-run']);
 const flag = (name) => { const i = rest.indexOf(name); return i >= 0 ? rest[i + 1] : undefined; };
-const positional = rest.filter((a, i) => !a.startsWith('--') && !(i > 0 && rest[i - 1].startsWith('--') && rest[i - 1] !== '--strict'));
+const positional = rest.filter((a, i) => !a.startsWith('--') && !(i > 0 && rest[i - 1].startsWith('--') && !BOOLEAN_FLAGS.has(rest[i - 1])));
 const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'));
+const fail = (message, code = 1) => { console.error(message); process.exit(code); };
+/** Status line of a preregistration document (first bold segment of its line). */
+const STATUS_LINE = /^\*\*Statut \/ Status :[^*\n]*\*\*/m;
 const r3 = (v) => (typeof v === 'number' && Number.isFinite(v) ? Math.round(v * 1000) / 1000 : v);
 
 function report(frozen) {
@@ -105,7 +121,85 @@ if (cmd === 'hash') {
   if (quoted) frozen.sha256 = quoted;
   report(frozen);
   summary(analyseKinaestheticTest(frozen, readJson(positional[1])));
+} else if (cmd === 'file') {
+  const protoPath = positional[0];
+  const reference = flag('--reference');
+  const filedAtArg = flag('--filed-at');
+  const registryName = flag('--registry') ?? 'OSF Registries';
+  if (!protoPath || !reference || !filedAtArg) {
+    fail('usage: kin.mjs file <protocol.json> --reference <DOI or https URL> --filed-at <registration date> [--registry "OSF Registries"] [--doc <prereg.md>] [--dry-run]', 2);
+  }
+  const text = readFileSync(protoPath, 'utf8');
+  const p = JSON.parse(text);
+  if (p.status === 'filed') {
+    fail(`${p.id} is already recorded as filed (${p.registry?.name}, ${p.registry?.reference}, ${p.registry?.filedAt}); a filing record is never overwritten. Nothing written.`);
+  }
+  const before = freezeProtocol(p);
+  if (!report(before)) fail(`\n${p.id} is not ready to file. Nothing written.`);
+
+  const t = Date.parse(filedAtArg);
+  if (!Number.isFinite(t)) fail(`--filed-at: "${filedAtArg}" is not a date. Give the registration date shown by the registry, e.g. 2026-10-23 or 2026-10-23T14:05:00+02:00. Nothing written.`);
+  if (t > Date.now() + 60 * 60 * 1000) fail(`--filed-at: ${filedAtArg} is in the future. Nothing written.`);
+  const ref = /^10\.\d{4,9}\/\S+$/i.test(reference) ? `https://doi.org/${reference}` : reference;
+  if (!/^https:\/\/\S+$/.test(ref)) fail('--reference: give the registration DOI (e.g. 10.17605/OSF.IO/ABCDE) or its https URL. Nothing written.');
+  if (/XXXX/i.test(ref)) fail(`--reference: "${reference}" still holds the placeholder; give the DOI shown by the registry. Nothing written.`);
+  const registry = { name: registryName, reference: ref, filedAt: new Date(t).toISOString() };
+  const filed = { ...p, status: 'filed', registry };
+  const after = freezeProtocol(filed);
+  if (after.sha256 !== before.sha256) fail('internal error: recording the filing changed the hash. Nothing written.');
+  if (after.openParameters.length) fail(`incomplete registry record: ${after.openParameters.join(', ')}. Nothing written.`);
+
+  // Rewrite only the two filing fields, so that the rest of the file stays byte-identical.
+  const indentTail = (s, pad) => s.split('\n').map((l, i) => (i === 0 ? l : pad + l)).join('\n');
+  let newText = text
+    .replace(/"status":\s*"draft"/, '"status": "filed"')
+    .replace(/"registry":\s*null/, () => `"registry": ${indentTail(JSON.stringify(registry, null, 2), '  ')}`);
+  let parsed;
+  try { parsed = JSON.parse(newText); } catch { parsed = null; }
+  if (!parsed || parsed.status !== 'filed' || JSON.stringify(parsed.registry) !== JSON.stringify(registry) ||
+      freezeProtocol(parsed).sha256 !== before.sha256) {
+    newText = JSON.stringify(filed, null, 2) + '\n';
+  }
+
+  // The preregistration document: given, or the one document beside the protocols folder that links this file.
+  let docPath = flag('--doc');
+  if (!docPath) {
+    const dir = dirname(dirname(resolve(protoPath)));
+    const link = `protocols/${basename(protoPath)}`;
+    const candidates = readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => join(dir, f))
+      .filter((f) => { const d = readFileSync(f, 'utf8'); return d.includes(link) && STATUS_LINE.test(d); });
+    if (candidates.length !== 1) fail(`cannot tell which document registers ${link} (${candidates.length} candidates): pass --doc. Nothing written.`, 2);
+    docPath = candidates[0];
+  }
+  const doc = readFileSync(docPath, 'utf8');
+  if (!doc.includes(before.sha256)) fail(`${docPath} does not quote the SHA-256 ${before.sha256}; the registered document must quote it. Nothing written.`);
+  if (!STATUS_LINE.test(doc)) fail(`${docPath}: no status line « **Statut / Status : …** ». Nothing written.`);
+  // The day as the registry shows it: taken literally when given as YYYY-MM-DD…, else in UTC.
+  const day = /^\d{4}-\d{2}-\d{2}/.test(filedAtArg) ? filedAtArg.slice(0, 10) : registry.filedAt.slice(0, 10);
+  const frDay = new Intl.DateTimeFormat('fr-CH', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+    .format(new Date(`${day}T12:00:00Z`));
+  const statusLine = `**Statut / Status : DÉPOSÉ LE ${frDay} sur ${registryName} (${ref}) / FILED ON ${day} (${registryName}, ${ref}).**`;
+  const newDoc = doc.replace(STATUS_LINE, () => statusLine);
+
+  const rel = (f) => relative(process.cwd(), resolve(f)).split('\\').join('/');
+  console.log(`\n${p.id} — filing record`);
+  console.log(`  registry:  ${registryName}`);
+  console.log(`  reference: ${ref}`);
+  console.log(`  filedAt:   ${registry.filedAt}`);
+  console.log(`  SHA-256 unchanged: ${after.sha256}`);
+  console.log(`  status line of ${rel(docPath)}:\n    ${statusLine}`);
+  if (rest.includes('--dry-run')) {
+    console.log('\n--dry-run: nothing written.');
+  } else {
+    writeFileSync(protoPath, newText);
+    writeFileSync(docPath, newDoc);
+    console.log(`\nwritten: ${rel(protoPath)}, ${rel(docPath)}`);
+    console.log('next:');
+    console.log(`  git add ${rel(protoPath)} ${rel(docPath)}`);
+    console.log(`  git commit -m "${p.id} filed on ${registryName} (${ref})"`);
+    console.log('  git push');
+  }
 } else {
-  console.error('usage: kin.mjs hash|dryrun-k0|k0-observe|analyse …');
+  console.error('usage: kin.mjs hash|dryrun-k0|k0-observe|analyse|file …');
   process.exit(2);
 }
