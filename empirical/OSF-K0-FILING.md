@@ -284,7 +284,7 @@ Le contrôle de manipulation est réussi si la borne inférieure de la pente de 
 
 #### 6.1 Other
 
-**EN** — Identity of the protocol. The SHA-256 of the scientific content of protocols/FCS-K0.protocol.json, excluding its status and registry fields, is 1b5c9f3c7731bc6b922d587f38721139bdae9c098f5efdf1ea3a7f73eb0de997. It can be checked with node --import tsx scripts/kin.mjs hash empirical/protocols/FCS-K0.protocol.json --strict. The protocol was frozen in commit 23088e6669904916f1004c5278b3c6936b1a7ef8 of https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0.
+**EN** — Identity of the protocol. The SHA-256 of the scientific content of protocols/FCS-K0.protocol.json, excluding its status and registry fields, is 1b5c9f3c7731bc6b922d587f38721139bdae9c098f5efdf1ea3a7f73eb0de997. It is computed on the canonical JSON of the scientific fields, not on the bytes of the file, so sha256sum of the file gives a different value. It can be checked with node --import tsx scripts/kin.mjs hash empirical/protocols/FCS-K0.protocol.json --strict. The protocol was frozen in commit 23088e6669904916f1004c5278b3c6936b1a7ef8 of https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0.
 
 Attached files. The K0 preregistration document, in French with English summaries; the protocol JSON; and an archive of the source code made with git archive, whose file name carries the commit identifier.
 
@@ -298,7 +298,7 @@ Related registration. FCS-K1, the confirmatory test in human participants, will 
 
 Template and references. OSF Preregistration template: Bowman et al. (2016), https://doi.org/10.31222/osf.io/epgjd. Gao & Ganguli (2015), https://doi.org/10.1016/j.conb.2015.04.003. Kriegeskorte, Mur & Bandettini (2008), https://doi.org/10.3389/neuro.06.004.2008. Lambeta et al. (2020), https://doi.org/10.1109/LRA.2020.2977257. Torgerson (1952), https://doi.org/10.1007/BF02288916.
 
-**FR** — Identité du protocole. L'empreinte SHA-256 du contenu scientifique de `protocols/FCS-K0.protocol.json`, hors champs `status` et `registry`, est `1b5c9f3c7731bc6b922d587f38721139bdae9c098f5efdf1ea3a7f73eb0de997`. On la vérifie par `node --import tsx scripts/kin.mjs hash empirical/protocols/FCS-K0.protocol.json --strict`. Le protocole a été gelé dans le commit `23088e6669904916f1004c5278b3c6936b1a7ef8` de https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0.
+**FR** — Identité du protocole. L'empreinte SHA-256 du contenu scientifique de `protocols/FCS-K0.protocol.json`, hors champs `status` et `registry`, est `1b5c9f3c7731bc6b922d587f38721139bdae9c098f5efdf1ea3a7f73eb0de997`. Elle est calculée sur le JSON canonique des champs scientifiques, non sur les octets du fichier : `sha256sum` appliqué au fichier donne une autre valeur. On la vérifie par `node --import tsx scripts/kin.mjs hash empirical/protocols/FCS-K0.protocol.json --strict`. Le protocole a été gelé dans le commit `23088e6669904916f1004c5278b3c6936b1a7ef8` de https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0.
 
 Fichiers joints. Le document de préenregistrement K0, en français avec des résumés anglais ; le protocole JSON ; une archive du code source produite par `git archive`, dont le nom de fichier porte l'identifiant du commit.
 
