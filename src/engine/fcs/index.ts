@@ -18,6 +18,8 @@
  *   optogenetics    — S-1.6 belt extension: interventions, astrocytic anchoring
  *   references      — the source documents' verified-DOI apparatus
  *   agreement       — inter-rater agreement on the ordinal codings (v3.2.0)
+ *   kinaestheticWithdrawal — the withdrawal test of the kinaesthetic thesis:
+ *                     protocol, freeze, analysis, synthetic controls (v3.3.0-rc.5)
  */
 
 export * from './taxonomy.js';
@@ -29,6 +31,7 @@ export * from './negative-heuristic.js';
 export * from './references.js';
 export * from './optogenetics.js';
 export * from './agreement.js';
+export * from './kinaesthetic-withdrawal.js';
 
 import { canonicalStratification, dominanceRelation, incomparableAcrossStrata, independenceChecks, episodeWindowSensitivity } from './stratification.js';
 import { PAIRS } from './taxonomy.js';

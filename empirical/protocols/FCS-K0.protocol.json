@@ -1,0 +1,123 @@
+{
+  "id": "FCS-K0",
+  "title": "Pilot of the kinaesthetic withdrawal test on an instrumented robot finger (instrument test; exploratory)",
+  "role": "pilot",
+  "status": "draft",
+  "registry": null,
+  "unit": "session",
+  "minUnits": 10,
+  "alpha": 0.05,
+  "sesoi": 0.25,
+  "effectCriterion": "superiority",
+  "dissimilarity": "correlation",
+  "conditions": [
+    {
+      "id": "congruent",
+      "family": "baseline",
+      "level": 0,
+      "sensorimotor": [],
+      "interoceptive": []
+    },
+    {
+      "id": "sm-delay-100",
+      "family": "sensorimotor",
+      "level": 0.2,
+      "sensorimotor": [
+        {
+          "kind": "delay",
+          "ms": 100
+        }
+      ],
+      "interoceptive": []
+    },
+    {
+      "id": "sm-delay-200",
+      "family": "sensorimotor",
+      "level": 0.4,
+      "sensorimotor": [
+        {
+          "kind": "delay",
+          "ms": 200
+        }
+      ],
+      "interoceptive": []
+    },
+    {
+      "id": "sm-delay-300",
+      "family": "sensorimotor",
+      "level": 0.6,
+      "sensorimotor": [
+        {
+          "kind": "delay",
+          "ms": 300
+        }
+      ],
+      "interoceptive": []
+    },
+    {
+      "id": "sm-delay-500",
+      "family": "sensorimotor",
+      "level": 1.0,
+      "sensorimotor": [
+        {
+          "kind": "delay",
+          "ms": 500
+        }
+      ],
+      "interoceptive": []
+    },
+    {
+      "id": "io-gain-1.5",
+      "family": "interoceptive",
+      "level": 0.3333333333333333,
+      "sensorimotor": [],
+      "interoceptive": [
+        {
+          "kind": "gain",
+          "factor": 1.5
+        }
+      ]
+    },
+    {
+      "id": "io-gain-2.5",
+      "family": "interoceptive",
+      "level": 0.6666666666666666,
+      "sensorimotor": [],
+      "interoceptive": [
+        {
+          "kind": "gain",
+          "factor": 2.5
+        }
+      ]
+    },
+    {
+      "id": "io-decouple",
+      "family": "interoceptive",
+      "level": 1,
+      "sensorimotor": [],
+      "interoceptive": [
+        {
+          "kind": "decouple",
+          "seed": 1
+        }
+      ]
+    }
+  ],
+  "deliveryTarget": "silicon",
+  "ethicsReference": null,
+  "sourceSignals": {
+    "somatosensory": [
+      "servo-absolute-encoder",
+      "servo-motor-current",
+      "digit-optical-tactile",
+      "heated-contact-thermistor",
+      "stretch-gauge-0",
+      "stretch-gauge-1"
+    ],
+    "interoceptive": [
+      "actuator-thermistor",
+      "battery-fuel-gauge",
+      "board-thermistor"
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 # ASTRA-FCS — MCP research server
-<!-- astra-current-version: 3.3.0-rc.3 -->
+<!-- astra-current-version: 3.3.0-rc.5 -->
 
 **ASTRA — Agent-orchestrated Simulation Testbed for Research on Access**
 *FR : Agent Orchestré de Simulation et Test de Recherche sur l'Access*
@@ -47,13 +47,65 @@
 > ([`empirical/PREREG-E3-DRAFT.md`](empirical/PREREG-E3-DRAFT.md), unfiled draft).
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-cyan.svg)](LICENSE)
-[![CI](https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0/actions/workflows/ci.yml/badge.svg)](https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0/actions)
+[![CI](https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0/actions/workflows/ci.yml/badge.svg)](https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0/actions)
 [![MCP Spec](https://img.shields.io/badge/MCP_Spec-2025--11--25-blue.svg)](https://modelcontextprotocol.io/specification/2025-11-25)
 [![MCP SDK](https://img.shields.io/badge/MCP_SDK-1.12+-blueviolet.svg)](https://modelcontextprotocol.io)
 [![Node.js](https://img.shields.io/badge/Node.js-≥20-green.svg)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue.svg)](https://typescriptlang.org)
 
 Production-grade [Model Context Protocol](https://modelcontextprotocol.io) server exposing the ASTRA bio-hybrid neuromorphic simulation pipeline to AI assistants. Built with the official `@modelcontextprotocol/sdk`, it integrates a layered SNN LIF+STDP engine, consciousness proxy assessment, bio-computing platform telemetry, and an IRB ethics monitor — all queryable as MCP tools, resources, and prompts from **Claude Desktop**, **Cursor**, **VS Code**, and any MCP-compatible client.
+
+## v3.3.0-rc.5 — Body channels and the kinaesthetic withdrawal test (pre-release)
+
+FR : canal somatosensoriel (analogues fonctionnels SA1, FA1, FA2, SA2, froid, chaud, seuils
+protecteurs, fuseaux, tendons) et canal intéroceptif **séparé** (type, variables et prédiction
+distincts ; la fusion extéroceptive le refuse ; aucun signal physique partagé). Copie
+d'efférence, modèle direct et comparateur ; clôture opérationnelle M3 éprouvée contre un
+substitut décalé. Manipulations graduées de congruence des deux familles sur horodatages
+matériels. Test de retrait de la thèse kinesthésique : dimensionnalité effective (rapport de
+participation MDS), effet par unité, intervalles (1 − 2α), absence établie par équivalence
+(±SESOI), contrôles de manipulation et de spécificité, protocole figé par SHA-256 et déposé
+avant les données. Les simulations d'ASTRA ne fixent jamais de résultat de retrait.
+
+EN: a somatosensory channel (functional analogues of afferent classes) and a **separate**
+interoceptive channel; efference copy, forward model, comparator and an M3 operational-closure
+check against a shifted surrogate; graded congruence manipulations of both families on
+hardware timestamps; the withdrawal test of the kinaesthetic thesis (effective dimensionality,
+per-unit slopes, (1 − 2α) intervals, absence by equivalence within ±SESOI, manipulation and
+specificity checks, SHA-256-frozen protocol filed before the data). ASTRA's own simulations
+never set a withdrawal outcome.
+
+Surface: 75 → **82 tools** (`soma_encode`, `intero_encode`, `kin_*` ×5), 16 → **17
+resources**, 10 → **11 prompts**. Test suite 425 → **515 tests · 102 suites**. Critical analysis
+of `SENSORS.pdf` and corrections: [REVUE-SENSORS.md](REVUE-SENSORS.md). Guide:
+[SOMATOSENSORY-INTEGRATION.en.md](SOMATOSENSORY-INTEGRATION.en.md) ·
+[.fr.md](SOMATOSENSORY-INTEGRATION.fr.md). Preregistrations (author's decisions of 20 October
+2026): [FCS-K0](empirical/PREREG-KINAESTHETIC-K0-PILOT.md), robot pilot, complete and ready to
+file, with its OSF filing text ([OSF-K0-FILING.md](empirical/OSF-K0-FILING.md));
+[FCS-K1](empirical/PREREG-KINAESTHETIC-K1.md), human participants, confirmatory, complete
+except three values awaiting the host laboratory, the ethics approval and the pilot-based
+sample size. Machine protocols in `empirical/protocols/`; `npm run kin:protocol`,
+`kin:k0:dryrun`, `kin:k0:observe`, `kin:analyse`, `kin:file` (records a filing once the
+registry has approved it).
+No hardware is connected; this candidate has not been published or tagged.
+
+## v3.3.0-rc.4 — Provenance and result screening (local candidate)
+
+FR : les valeurs FCS issues du simulateur sont marquées `simulated`, les valeurs fournies
+par l'appelant `reported`. Le mode logiciel `live` ne prouve aucune acquisition MEA.
+Les profils décrivent un type de substrat (`auditBasis`), sans spécimen vérifié.
+L'utilité téléologique exige désormais `scale: "cardinal"` sur chaque objectif ;
+les rapports conservent le contrat complet. Les contenus MCP structurés et les textes
+JSON décodés passent également le garde-fou heuristique.
+
+EN: FCS values retain their simulated or caller-reported origin; UI mode cannot certify
+an instrument channel. Substrate profiles are model-level descriptions, not specimen
+inspections. Additive utility requires explicit cardinal scales and reports retain the
+full contract. Structured MCP results and decoded JSON strings are screened too.
+
+Migration and critical review: [REVUE-v3.3.0-rc.3.md](REVUE-v3.3.0-rc.3.md).
+The word *Access* names a research target; passing a software gate does not establish
+access consciousness in Block's sense. This candidate has not been published or tagged.
 
 ## 🆕 v3.3.0-rc.3 — Name, definition and a widened claim guard (pre-release)
 
@@ -281,7 +333,7 @@ module.
 - MCP surface: 62 → **70 tools** (`fcs_*` ×8); resources 11 → 15, prompts 8 → 10.
   Test suite 241 → **317 tests** (69 in `tests/fcs.test.ts`, 7 in `tests/annotations.test.ts`).
 - **MCP tool annotations** on all 70 tools (title + read-only / destructive / idempotent /
-  open-world hints), classified from each handler's code — see [MCP Tools](#mcp-tools-75).
+  open-world hints), classified from each handler's code — see [MCP Tools](#mcp-tools-82).
 - **Corrections before dissemination.** Acronym re-expanded without "Sentient"; data
   provenance stated up front; encoder labels now read "…-inspired (untrained)";
   `get_acm_score` retitled as a composite proxy; every stochastic component draws from one
@@ -399,7 +451,7 @@ Koniku Kore ────────────────┘         │     
                                       ├─→ TCAI/ACM Layer (GNW · AKOrN · PAD · Φ̃-RIIU · EI)
                                       ├─→ NeuroPlatform v2 Bridge (MEA ↔ SNN · StimParam · closed loop)
                                       ├─→ Ethics IRB Monitor (mode-aware)
-                                      └─→ MCP Server (75 tools · 16 resources · 10 prompts)
+                                      └─→ MCP Server (82 tools · 17 resources · 11 prompts)
 ```
 
 > **Note on data mode:** In the default `sim` mode, all bio-platform data is synthetically generated. The server is designed to connect to live platforms in `live` mode, but this requires hardware access and appropriate IRB approval.
@@ -423,8 +475,8 @@ Koniku Kore ────────────────┘         │     
 ## Quick Start
 
 ```bash
-git clone https://github.com/christophejlegros-lgtm/ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0.git
-cd ASTRA-Unified-ResearchLab-MCP-FCS-v3.1.0
+git clone https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0.git
+cd ASTRA-FCS-v3.3.0
 
 # Install & build
 npm install
@@ -508,7 +560,7 @@ docker compose up -d
 
 ---
 
-## MCP Tools (75)
+## MCP Tools (82)
 
 Counts below are asserted by the CI stdio smoke test, not maintained by hand.
 Every tool declares a title and the four MCP
@@ -538,7 +590,7 @@ live API when configured). `tests/annotations.test.ts` asserts that the table an
 | `export_snapshot` | Full State Snapshot | 📖 read-only |
 | `simulation_control` | Simulation Control | ✏️ non-destructive · idempotent |
 
-**Domain families (63)**
+**Domain families (70)**
 
 | Family | Count | Scope | Guide |
 |---|---|---|---|
@@ -551,8 +603,9 @@ live API when configured). `tests/annotations.test.ts` asserts that the table an
 | `fcs_*` | 9 | Substrate-constrained functionalism: 4-level framework, 17 species–function pairs in Pareto strata, per-substrate conformance audit, withdrawal conditions and revision records, negative-heuristic linter, inter-rater agreement (`fcs_agreement`) | [FCS-INTEGRATION.en.md](FCS-INTEGRATION.en.md) · [.fr.md](FCS-INTEGRATION.fr.md) |
 | `proxy_*` | 1 | `proxy_validate` — validation controls of every computed proxy (witness, common source, connectivity ablation, invariances, statuses); read-only on an isolated random stream | [CONSOLIDATION.md](CONSOLIDATION.md) |
 | `teleology_*` | 3 | Functional teleology (pre-release): framework, assessment of reported outcome intervals against a declared contract, robust interval Pareto comparison; read-only | [TELEOLOGY.fr.md](TELEOLOGY.fr.md) |
+| `soma_*` · `intero_*` · `kin_*` | 7 | Body channels (pre-release): somatosensory afferent-class encoding, separate interoceptive channel, M3 operational closure, manipulation check, kinaesthetic withdrawal protocol / analysis / synthetic controls; read-only, local random streams | [SOMATOSENSORY-INTEGRATION.en.md](SOMATOSENSORY-INTEGRATION.en.md) · [.fr.md](SOMATOSENSORY-INTEGRATION.fr.md) |
 
-## MCP Resources (16)
+## MCP Resources (17)
 
 | URI | Description |
 |---|---|
@@ -572,8 +625,9 @@ live API when configured). `tests/annotations.test.ts` asserts that the table an
 | `astra://fcs/conformance` | Per-substrate FCS conformance audit against live biomarkers |
 | `astra://fcs/references` | Verified-DOI bibliography of the FCS series |
 | `astra://proxies/cards` | Proxy cards: construct, exact formula, invariances, domain of use, inferences not licensed (v3.2.0) |
+| `astra://kinaesthetic/protocol-template` | Template protocol of the kinaesthetic withdrawal test, author decisions open, with its hash and open parameters (v3.3.0-rc.5) |
 
-## MCP Prompts (10)
+## MCP Prompts (11)
 
 Pre-built workflow templates that orchestrate multi-tool sequences:
 
@@ -589,6 +643,7 @@ Pre-built workflow templates that orchestrate multi-tool sequences:
 | `neuroplatform-experiment` | Guided closed-loop protocol: read MEA → configure charge-balanced stim → trigger → observe |
 | `fcs-substrate-audit` | Audit ASTRA's three substrates against the FCS taxonomy (no conformance score — prohibition 4) |
 | `fcs-belt-review` | Review the protective belt against current strand outcomes and the declared revision order |
+| `kinaesthetic-withdrawal-test` | Prepare, check and analyse the withdrawal test of the kinaesthetic thesis (simulated runs are never evidence) |
 
 ---
 
@@ -604,9 +659,9 @@ src/
 ├── http-server.ts        # Streamable HTTP transport (Express) — exports createHttpApp()
 ├── version.ts            # ASTRA_VERSION — single source of truth, consumed by all transports
 ├── lint-guard.ts         # Server-wide claim guard: lintClaim + lintFcs on every tool/resource payload
-├── tool-annotations.ts   # MCP annotations for all 75 tools (single table, test-enforced)
+├── tool-annotations.ts   # MCP annotations for all 82 tools (single table, test-enforced)
 ├── bridge-state.ts       # Typed state contract shared by the wm/sensor/tcai/np tool families
-├── server.ts             # MCP server factory (75 tools + 10 prompts + 16 resources; counts computed at registration)
+├── server.ts             # MCP server factory (82 tools + 11 prompts + 17 resources; counts computed at registration)
 │   ├── server-wm-tools.ts            # World Model JEPA (6 tools + 2 resources + 1 prompt)
 │   ├── server-sensor-tools.ts        # Multimodal sensors (6 tools + 1 resource + 1 prompt)
 │   ├── server-tcai-tools.ts          # TCAI/ACM (17 tools + 2 resources + 2 prompts, incl. closed-loop active inference)
@@ -615,7 +670,8 @@ src/
 │   ├── server-orch-tools.ts          # Orch OR criterion layer (6 tools)
 │   ├── server-fcs-tools.ts           # FCS layer (9 tools + 4 resources + 2 prompts)
 │   ├── server-proxy-tools.ts         # Proxy validation (1 tool + 1 resource, v3.2.0)
-│   └── server-teleology-tools.ts     # Functional teleology (3 tools, pre-release)
+│   ├── server-teleology-tools.ts     # Functional teleology (3 tools, pre-release)
+│   └── server-body-tools.ts          # Body channels & kinaesthetic withdrawal test (7 tools + 1 resource + 1 prompt, rc.5)
 ├── engine/
 │   ├── state.ts          # Reactive state store + parameter bounds registry
 │   ├── snn.ts            # Layered SNN LIF+STDP engine (Map-indexed sparse weights, event-driven)
@@ -629,10 +685,19 @@ src/
 │   ├── neuroplatform.ts  # FinalSpark NeuroPlatform v2 port + OrganoidMEA simulator
 │   ├── ovomind.ts        # OVOMIND adapter (sim default; live adapter is a declared stub)
 │   ├── simulation.ts     # Background tick loop
+│   ├── somatosensory.ts  # Afferent-class analogues, protective thresholds, rate code (rc.5)
+│   ├── interoception.ts  # Separate interoceptive channel, channel-separation check (rc.5)
+│   ├── reafference.ts    # Efference copy, forward model, comparator, M3 operational closure (rc.5)
+│   ├── congruence.ts     # Graded congruence manipulations of both families (rc.5)
+│   ├── body-loop.ts      # Calibrate, freeze, manipulate: the manipulation check (rc.5)
+│   ├── body-sim.ts       # Simulated one-joint finger (pipeline exercise only; rc.5)
+│   ├── body-probes.ts    # FCS-K0 probe movements → per-condition observations (rc.5)
+│   ├── dimensionality.ts # RDM, classical MDS participation ratio, Student t (rc.5)
 │   ├── fcs/              # FCS: taxonomy, levels, stratification (Pareto, dominance relation,
 │   │                     #   sensitivity), conformance, negative-heuristic linter, withdrawal
 │   │                     #   conditions and revision records, optogenetics (S-1.6 belt
-│   │                     #   extension), references, inter-rater agreement (v3.2.0)
+│   │                     #   extension), references, inter-rater agreement (v3.2.0),
+│   │                     #   kinaesthetic withdrawal test (v3.3.0-rc.5)
 │   └── tcai/             # ACM native port: global-workspace, oscillatory-binding, emotion,
 │                         #   emotional-memory, self-model, second-order, active-inference,
 │                         #   metrics, acm-bridge, orch-or, phenomenal-guard, types
@@ -640,7 +705,7 @@ src/
     ├── logger.ts         # Structured logging (pino → stderr)
     └── rng.ts            # Global seeded PRNG (mulberry32, ASTRA_SEED)
 
-tests/                    # 415 tests · 79 suites
+tests/                    # 515 tests · 102 suites
 ├── astra.test.ts             # Unit: state, bounds, SNN, ACM, ethics, security
 ├── world-model.test.ts       # World Model: encoder, predictor, SIGReg, CEM, surprise
 ├── wm-simulation.test.ts     # WM simulation: buffer, training, planning, lifecycle
@@ -657,6 +722,10 @@ tests/                    # 415 tests · 79 suites
 ├── proxy-validation.test.ts  # Proxy cards and controls, statuses, isolated stream, ACM wiring (v3.2.0)
 ├── fcs-consolidation.test.ts # Independence checks, window sensitivity, Krippendorff α, revision records (v3.2.0)
 ├── identity.test.ts          # Version and counts agree everywhere; counts computed = declared (v3.2.0)
+├── somatosensory.test.ts     # Afferent-class analogues, validation, thermal contact, rate code (rc.5)
+├── interoception.test.ts     # Separate channel: homeostatic encoding, freezing, separation, fusion refusal (rc.5)
+├── kinaesthetic-withdrawal.test.ts # Comparator, closure, manipulations, analysis, gates, MCP tools (rc.5)
+├── kinaesthetic-protocols.test.ts  # FCS-K0 / FCS-K1 protocols ↔ documents, hash, pilot role, monotonicity guard (rc.5)
 ├── teleology.test.ts         # Functional teleology: interval semantics, enforced P1–P2/P4, guard, example (pre-release)
 ├── annotations.test.ts       # MCP annotations: table ≡ tools/list, classification invariants
 └── reproducibility.test.ts   # Seeded streams: same seed ⇒ same SNN and encoder outputs
@@ -753,6 +822,10 @@ npm run test:guard         # server-wide claim guard
 npm run test:proxies       # proxy cards and validation controls (v3.2.0)
 npm run test:consolidation # FCS consolidation checks + identity (v3.2.0)
 npm run test:teleology     # functional teleology (pre-release)
+npm run test:body          # somatosensory, interoceptive, kinaesthetic withdrawal test and protocols (rc.5)
+npm run kin:protocol -- empirical/protocols/FCS-K1.protocol.json --strict   # hash and readiness to file
+npm run kin:k0:dryrun      # FCS-K0 pipeline on simulated sessions (never an outcome)
+node --import tsx scripts/kin.mjs file empirical/protocols/FCS-K0.protocol.json --reference <DOI> --filed-at <date> --dry-run   # record a filing (drop --dry-run to write)
 npm run teleology:example:check  # synthetic example recomputed by the compiled module (after build)
 npm run test:empirical     # E1/E2 bench + E3 synthetic ground truth (python3 + numpy [+ h5py])
 
@@ -765,8 +838,8 @@ npm run golden:check       # TS↔NumPy active-inference golden (requires python
 npm run inspect
 ```
 
-> **Full suite: 415/415 passing** (230 engine/integration + 8 E2 model + 12 transport-layer + 86 FCS + 7 annotations + 6 reproducibility + 10 claim guard + 18 proxy validation + 19 FCS consolidation + 6 identity and name + 13 functional teleology), 0 TypeScript errors
-> (strict, Node16 ESM), 0 ESLint errors — counts from a local run on Node 22 (19 October 2026); CI runs Node 20 and 22.
+> **Full suite: 515/515 passing** (230 engine/integration + 8 E2 model + 12 transport-layer + 86 FCS + 7 annotations + 6 reproducibility + 10 claim guard + 18 proxy validation + 19 FCS consolidation + 6 identity and name + 13 functional teleology + 10 rc.4 audit + 90 body channels, kinaesthetic withdrawal test, protocols and filing record), 0 TypeScript errors
+> (strict, Node16 ESM), 0 ESLint errors — counts from a local run on Node 22 (21 October 2026); CI runs Node 20 and 22.
 > Empirical benches: `python3 empirical/test_confront.py --strict` (17 checks) and `python3 empirical/test_e3.py` (22 checks).
 > Gates: `npm run check:identity`, `npm run check:frozen`, `npm run manifest:check`, `npm run prereg:check`.
 

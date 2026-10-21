@@ -94,14 +94,14 @@ jobs:
       - name: Capability smoke test (stdio transport)
         # The stdio entrypoint logs the capability summary at startup; since v3.2.0 the
         # counts are computed at registration (lint-guard.ts → capabilityCounts).
-        # Assert v3.3.0-rc.3 exposes exactly 75 tools · 16 resources · 10 prompts
-        # (50 core + 6 ovo_* + 6 orch_* + 9 fcs_* + proxy_validate + 3 teleology_*).
+        # Assert v3.3.0-rc.5 exposes exactly 82 tools · 17 resources · 11 prompts
+        # (50 core + 6 ovo_* + 6 orch_* + 9 fcs_* + proxy_validate + 3 teleology_* + 7 soma/intero/kin_*).
         run: |
           set -euo pipefail
           LOG="$(timeout 8s node dist/index.js 2>&1 || true)"
           echo "$LOG"
-          echo "$LOG" | grep -q "ASTRA MCP Server v3.3.0-rc.3: 75 tools · 16 resources · 10 prompts" \
-            || { echo "::error::Capability summary mismatch (expected 75 tools · 16 resources · 10 prompts)"; exit 1; }
+          echo "$LOG" | grep -q "ASTRA MCP Server v3.3.0-rc.5: 82 tools · 17 resources · 11 prompts" \
+            || { echo "::error::Capability summary mismatch (expected 82 tools · 17 resources · 11 prompts)"; exit 1; }
 
   docker-smoke:
     name: Docker build & /health smoke

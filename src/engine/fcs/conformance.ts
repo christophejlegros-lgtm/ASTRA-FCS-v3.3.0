@@ -63,7 +63,10 @@ export interface PairConformance {
  * Live biomarker inputs the audit consumes. Every field is optional: a missing
  * field yields `undetermined`, never a default standing in for a measurement.
  */
+export type BiomarkerField = 'calciumNm' | 'extracellularCalciumMm' | 'firingRateHz' | 'atpAdpRatio' | 'viabilityPct' | 'meaFieldActive';
 export interface BiomarkerInputs {
+  /** Origin labels are declarations, never an authentication of an instrument. */
+  provenance?: Partial<Record<BiomarkerField, 'simulated' | 'reported'>>;
   /**
    * INTRACELLULAR free calcium, nM — ASTRA `eth.ca`. A second-messenger
    * quantity: reported by the audit, bound to NO species–function pair.
@@ -108,7 +111,7 @@ const ORGANOID_BINDINGS: Record<string, Binding> = {
       ? withheld(
           'No extracellular calcium channel. ASTRA\'s eth.ca is intracellular free Ca²⁺ (nM), a second-messenger ' +
           'quantity outside class 1; reading it as mobile charge would be the category error document IV §2 forbids.')
-      : tagged(b.extracellularCalciumMm, 'access', 'measured', 'Extracellular Ca²⁺, mM, at the bath (externally supplied).'),
+      : tagged(b.extracellularCalciumMm, 'access', b.provenance?.extracellularCalciumMm ?? 'reported', 'Extracellular Ca²⁺, mM, at the bath (externally supplied).'),
   },
   '2b': {
     channel: 'eth.viab (culture viability, %)',
@@ -118,7 +121,7 @@ const ORGANOID_BINDINGS: Record<string, Binding> = {
       'pump itself is not assayed — this is a derived indicator, not a measurement of class 2b.',
     read: (b) => b.viabilityPct === undefined
       ? withheld('Viability channel not reporting.')
-      : tagged(b.viabilityPct, 'access', 'derived', 'Culture viability, %, as a permissive-role proxy for Na⁺/K⁺-ATPase.'),
+      : tagged(b.viabilityPct, 'access', b.provenance?.viabilityPct ?? 'reported', 'Culture viability, %, as a permissive-role proxy for Na⁺/K⁺-ATPase.'),
   },
   '3': {
     channel: 'eth.fr (median per-unit spontaneous firing rate, Hz)',
@@ -128,7 +131,7 @@ const ORGANOID_BINDINGS: Record<string, Binding> = {
       'inferred from the discharge they drive. Reference interval: DANDI 001603, 0.14–0.63 Hz (ethics.ts).',
     read: (b) => b.firingRateHz === undefined
       ? withheld('Firing-rate channel not reporting.')
-      : tagged(b.firingRateHz, 'access', 'derived', 'Median per-unit firing rate, Hz, as the class-3 generator signature.'),
+      : tagged(b.firingRateHz, 'access', b.provenance?.firingRateHz ?? 'reported', 'Median per-unit firing rate, Hz, as the class-3 generator signature.'),
   },
   '7': {
     channel: 'eth.atp (ATP/ADP ratio)',
@@ -137,7 +140,7 @@ const ORGANOID_BINDINGS: Record<string, Binding> = {
       'and prohibition 5 blocks reading a constitutive role off that failure.',
     read: (b) => b.atpAdpRatio === undefined
       ? withheld('ATP/ADP channel not reporting.')
-      : tagged(b.atpAdpRatio, 'access', 'measured', 'ATP/ADP ratio — class-7 energy metabolites.'),
+      : tagged(b.atpAdpRatio, 'access', b.provenance?.atpAdpRatio ?? 'reported', 'ATP/ADP ratio — class-7 energy metabolites.'),
   },
 };
 
@@ -160,6 +163,8 @@ export interface CarrierVerdict {
 }
 
 export interface SubstrateConformance {
+  auditBasis: 'substrate-type-model';
+  specimenVerified: false;
   substrate: SubstrateKind;
   label: string;
   isomorphismCaveat: string;
@@ -207,7 +212,7 @@ function carrierVerdict(substrate: SubstrateKind, bio: BiomarkerInputs): Carrier
       return {
         carrierPresent: true,
         fieldObserved: bio.meaFieldActive
-          ? tagged(1, 'access', 'measured', 'MEA extracellular field potential channel is live.')
+          ? tagged(1, 'access', bio.provenance?.meaFieldActive ?? 'reported', 'Caller reports an active MEA field channel; no instrument verification was performed.')
           : withheld('MEA field channel inactive — carrier present, field not currently observed.'),
         statementEn:
           'Transmembrane ionic currents are present and their field is measurable at the electrode. What the ' +
@@ -258,6 +263,17 @@ export function auditSubstrate(
   substrate: SubstrateKind,
   bio: BiomarkerInputs = {},
 ): SubstrateConformance {
+  for (const [key, value] of Object.entries(bio)) {
+    if (key === 'provenance' || key === 'meaFieldActive') continue;
+    if (value !== undefined && (typeof value !== 'number' || !Number.isFinite(value) || value < 0
+      || (key === 'viabilityPct' && value > 100) || (key === 'extracellularCalciumMm' && value > 20)))
+      throw new Error(`Invalid biomarker: ${key}`);
+  }
+  if (bio.meaFieldActive !== undefined && typeof bio.meaFieldActive !== 'boolean')
+    throw new Error('meaFieldActive must be boolean.');
+  for (const value of Object.values(bio.provenance ?? {})) {
+    if (value !== 'reported' && value !== 'simulated') throw new Error('Unsupported biomarker provenance.');
+  }
   const strat = canonicalStratification();
   const descriptor = SUBSTRATES[substrate];
 
@@ -286,9 +302,12 @@ export function auditSubstrate(
   const tally: Record<RealisationVerdict, number> = { realised: 0, simulated: 0, absent: 0, undetermined: 0 };
   for (const p of pairs) tally[p.verdict]++;
 
-  const notesEn: string[] = [];
+  const notesEn: string[] = [
+    'Pair verdicts and carrier presence describe the declared substrate type under the FCS model, not an inspected specimen. ' +
+    'No connected specimen is verified by this audit. Supplied channel values retain their declared origin.',
+  ];
   const constitutiveRealised = pairs.filter((p) => p.role === 'constitutive' && p.verdict === 'realised').length;
-  if (constitutiveRealised === 0) {
+  if (substrate === 'silicon-snn' && constitutiveRealised === 0) {
     notesEn.push(
       'No constitutive pair is realised on this substrate. Under the substrate constraint the level-I carrier ' +
       'is absent, whatever the level-III and level-IV profile shows.',
@@ -316,6 +335,8 @@ export function auditSubstrate(
 
   return {
     substrate,
+    auditBasis: 'substrate-type-model',
+    specimenVerified: false,
     label: descriptor.label,
     isomorphismCaveat: descriptor.isomorphismCaveat,
     levels: levelProfile(substrate),

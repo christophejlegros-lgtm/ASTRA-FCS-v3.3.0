@@ -13,7 +13,8 @@
         "beneficiary": "Chercheurs",
         "unit": "fraction",
         "direction": "minimize",
-        "threshold": 0.2
+        "threshold": 0.2,
+        "scale": "cardinal"
       }
     ],
     "constraints": [

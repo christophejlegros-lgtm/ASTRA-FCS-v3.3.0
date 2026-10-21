@@ -1,0 +1,68 @@
+{
+ "version": "3.3.0-rc.5",
+ "date": "2026-10-20",
+ "updated": "2026-10-21",
+ "status": "local candidate; not published",
+ "source": {
+  "base": "ASTRA-FCS-v3.3.0-rc.4 archive as supplied by the author (bee678c1-ASTRA-FCS-v3.3.0-rc.4.zip)",
+  "baseline_checks": {
+   "tests": 425,
+   "failed": 0,
+   "identity": "pass",
+   "frozen_files": "12/12 pass",
+   "manifest": "459 files verified"
+  }
+ },
+ "environment": {
+  "node": "22.22.0",
+  "dependencies": "npm ci from package-lock.json",
+  "python": "numpy 2.5.3; h5py installed for the strict empirical bench"
+ },
+ "checks": {
+  "baseline_tests": 425,
+  "rc5_tests": 515,
+  "suites": 102,
+  "failed": 0,
+  "skipped": 0,
+  "new_tests": 90,
+  "build": "pass",
+  "lint": "pass",
+  "typecheck_tests": "pass",
+  "identity": "pass (82 tools · 17 resources · 11 prompts)",
+  "frozen_files": "12/12 pass",
+  "stdio_capability_smoke": "ASTRA MCP Server v3.3.0-rc.5: 82 tools · 17 resources · 11 prompts",
+  "teleology_example_check": "pass",
+  "golden_check": "pass",
+  "empirical_test_confront_strict": "17/17 pass",
+  "empirical_test_e3": "22/22 pass",
+  "prereg_check": "FCS-K0 complete (0 markers, ready to file; OSF filing text in empirical/OSF-K0-FILING.md); FCS-K1 complete except 3 pending values (host laboratory, ethics approval, pilot-based n); other drafts unchanged",
+  "filing_record_simulation": "kin.mjs file applied to the real K0 files, then reverted: hash unchanged, prereg-check reads 'filed', test:body 90/90"
+ },
+ "regression_found_and_fixed": "Without a SESOI, a negligible positive interval read as 'increase' and an interoceptive-only design could yield 'both'; no pattern is now derived without a SESOI.",
+ "limits": [
+  "No Node 20 or Docker execution",
+  "No hardware, biological acquisition or independent peer review",
+  "Simulated observations never set a withdrawal outcome; the simulated finger is elementary",
+  "The transposition of document II §6.3 from phenomenal to substrate-response matrices is an open question (REVIEW.md C8)",
+  "Heuristic claim screening is incomplete; provenance remains a declaration"
+ ],
+ "protocols": {
+  "FCS-K0": {
+   "role": "pilot",
+   "sha256": "1b5c9f3c7731bc6b922d587f38721139bdae9c098f5efdf1ea3a7f73eb0de997",
+   "ready_to_file": true
+  },
+  "FCS-K1": {
+   "role": "confirmatory",
+   "sha256": "computed at freeze, after ethics approval and the human pilot",
+   "ready_to_file": false
+  }
+ },
+ "corrections_while_completing": [
+  "Protocol hash excludes status and registry (filing metadata)",
+  "Monotonicity guard: absence requires slope and every level within ±SESOI",
+  "K0 responses combine both channels' errors (no interoceptive absence by construction)",
+  "K0 filing template: OSF Preregistration, not Open-Ended Registration (which OSF reserves for studies no structured template covers)",
+  "The prereg-check test required K0's unfiled state; it now follows the JSON status, so recording the filing keeps CI green"
+ ]
+}

@@ -73,7 +73,10 @@ function liveBiomarkers(deps: FcsToolDeps): BiomarkerInputs {
     firingRateHz: s.eth.fr,
     atpAdpRatio: s.eth.atp,
     viabilityPct: s.eth.viab,
-    meaFieldActive: s.mode === 'live',
+    // UI mode is not instrument evidence; the production state is synthetic.
+    meaFieldActive: false,
+    provenance: { calciumNm: 'simulated', firingRateHz: 'simulated',
+      atpAdpRatio: 'simulated', viabilityPct: 'simulated' },
   };
 }
 
@@ -85,7 +88,7 @@ export function registerFcsCapabilities(server: McpServer, deps: FcsToolDeps = {
     'partition, the seventeen species–function pairs in their Pareto strata, the per-substrate conformance ' +
     'audit, the five prohibitions of the negative heuristic, and the declared revision order. Carries no ' +
     'aggregate score of any kind — prohibition 4 forbids one.',
-    { useLiveBiomarkers: z.boolean().optional().describe('Bind the conformance audit to the live IRB welfare channels. Default true.') },
+    { useLiveBiomarkers: z.boolean().optional().describe('Bind the conformance audit to the current synthetic state channels. Default true.') },
     toolAnnotations('fcs_report'), async ({ useLiveBiomarkers }) =>
       emit(fcsReport(useLiveBiomarkers === false ? {} : liveBiomarkers(deps))),
   );
@@ -247,30 +250,30 @@ export function registerFcsCapabilities(server: McpServer, deps: FcsToolDeps = {
     'fcs_conformance',
     'Audit one substrate — or all three — against the seventeen species–function pairs: which pairs it ' +
     'realises, which it only simulates, which are absent, and which ASTRA has no channel to determine. Binds ' +
-    'the live IRB welfare biomarkers to the taxonomy (ATP/ADP → class 7, median per-unit firing rate → class 3 ' +
+    'the current synthetic IRB-style biomarkers to the taxonomy (ATP/ADP → class 7, median per-unit firing rate → class 3 ' +
     'generator, viability → class 2b proxy). Class 1 (mobile charge) reads only an EXTRACELLULAR calcium value ' +
     'in mM supplied by the caller; ASTRA\'s eth.ca is intracellular second-messenger Ca²⁺ and binds to no pair. ' +
     'Returns a profile, never a conformance score.',
     {
       substrate: z.enum(SUBSTRATE_KINDS).optional().describe('One substrate; omit for all three.'),
-      calciumNm: z.number().min(0).optional()
+      calciumNm: z.number().finite().min(0).optional()
         .describe('Intracellular free Ca²⁺, nM (second messenger) — reported, bound to no pair.'),
-      extracellularCalciumMm: z.number().min(0).max(20).optional()
+      extracellularCalciumMm: z.number().finite().min(0).max(20).optional()
         .describe('Extracellular Ca²⁺ at the bath, mM — the only reading bound to class 1.'),
-      firingRateHz: z.number().min(0).optional()
+      firingRateHz: z.number().finite().min(0).optional()
         .describe('Median per-unit spontaneous firing rate, Hz (DANDI 001603 reference interval 0.14–0.63 Hz).'),
-      atpAdpRatio: z.number().min(0).optional(),
-      viabilityPct: z.number().min(0).max(100).optional(),
-      useLiveBiomarkers: z.boolean().optional().describe('Start from the live state store, overridden by any value given above. Default true.'),
+      atpAdpRatio: z.number().finite().min(0).optional(),
+      viabilityPct: z.number().finite().min(0).max(100).optional(),
+      useLiveBiomarkers: z.boolean().optional().describe('Start from the synthetic state store, overridden by any value given above. Default true.'),
     },
     toolAnnotations('fcs_conformance'), async ({ substrate, useLiveBiomarkers, ...overrides }) => {
       const base = useLiveBiomarkers === false ? {} : liveBiomarkers(deps);
-      const bio: BiomarkerInputs = { ...base };
-      if (overrides.calciumNm !== undefined) bio.calciumNm = overrides.calciumNm;
-      if (overrides.extracellularCalciumMm !== undefined) bio.extracellularCalciumMm = overrides.extracellularCalciumMm;
-      if (overrides.firingRateHz !== undefined) bio.firingRateHz = overrides.firingRateHz;
-      if (overrides.atpAdpRatio !== undefined) bio.atpAdpRatio = overrides.atpAdpRatio;
-      if (overrides.viabilityPct !== undefined) bio.viabilityPct = overrides.viabilityPct;
+      const bio: BiomarkerInputs = { ...base, provenance: { ...base.provenance } };
+      if (overrides.calciumNm !== undefined) { bio.calciumNm = overrides.calciumNm; bio.provenance!.calciumNm = 'reported'; }
+      if (overrides.extracellularCalciumMm !== undefined) { bio.extracellularCalciumMm = overrides.extracellularCalciumMm; bio.provenance!.extracellularCalciumMm = 'reported'; }
+      if (overrides.firingRateHz !== undefined) { bio.firingRateHz = overrides.firingRateHz; bio.provenance!.firingRateHz = 'reported'; }
+      if (overrides.atpAdpRatio !== undefined) { bio.atpAdpRatio = overrides.atpAdpRatio; bio.provenance!.atpAdpRatio = 'reported'; }
+      if (overrides.viabilityPct !== undefined) { bio.viabilityPct = overrides.viabilityPct; bio.provenance!.viabilityPct = 'reported'; }
       return emit({
         biomarkers: bio,
         audits: substrate ? [auditSubstrate(substrate, bio)] : auditAll(bio),
@@ -293,6 +296,8 @@ export function registerFcsCapabilities(server: McpServer, deps: FcsToolDeps = {
       fieldBeyondFiringInHumans: z.boolean().nullable().optional(),
       boundaryBetterByResonanceOrTopology: z.boolean().nullable().optional(),
       dimensionalityFromInteroception: z.boolean().nullable().optional(),
+      kinaestheticPattern: z.enum(['interoceptive-only', 'sensorimotor-only', 'both', 'neither']).nullable().optional()
+        .describe('v3.3.0-rc.5: pattern from a confirmatory kin_analyse run; must agree with dimensionalityFromInteroception'),
       experimentRankedByM1: z.boolean().nullable().optional(),
       revisions: z.array(z.object({
         thesis: z.enum(['inference-and-measurement', 'bridge-auxiliary', 'M2', 'M3', 'kinaesthetic', 'field-hypothesis', 'M1']),
@@ -417,7 +422,7 @@ export function registerFcsCapabilities(server: McpServer, deps: FcsToolDeps = {
     });
 
   server.resource('fcs-conformance', 'astra://fcs/conformance',
-    { description: 'Per-substrate FCS conformance audit against live biomarkers', mimeType: 'application/json' },
+    { description: 'Per-substrate FCS conformance audit against current synthetic biomarkers', mimeType: 'application/json' },
     async () => ({ contents: [{ uri: 'astra://fcs/conformance', mimeType: 'application/json',
       text: JSON.stringify(auditAll(liveBiomarkers(deps)), null, 2) }] }));
 

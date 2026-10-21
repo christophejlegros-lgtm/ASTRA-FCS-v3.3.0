@@ -11,7 +11,7 @@ const contract = {
   id: 'test', purpose: 'Reduce prediction error within an energy budget',
   function: 'Predict held-out events', owner: 'Research team', context: 'benchmark-v1', horizon: '100 trials',
   criteria: [{ id: 'error', description: 'Prediction error', beneficiary: 'Researchers',
-    unit: 'fraction', direction: 'minimize', threshold: 0.2 }],
+    unit: 'fraction', scale: 'cardinal', direction: 'minimize', threshold: 0.2 }],
   constraints: [{ id: 'energy', description: 'Energy budget', beneficiary: 'Operator',
     unit: 'J', direction: 'minimize', threshold: 10 }],
   utility: { rationale: 'Declared linear value over error; not a welfare measurement.',

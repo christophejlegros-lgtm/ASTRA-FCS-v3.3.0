@@ -5,7 +5,9 @@
  * Programme minimal de consolidation, points 2 and 4: a preregistration may be
  * filed on a time-stamped registry only once every parameter is fixed. This
  * script lists what is still open in each draft — « À FIXER », « TO BE SET »
- * and « PROPOSITION » markers — and refuses (exit 1) while any remains.
+ * and « PROPOSITION » markers, and (v3.3.0-rc.5) « EN ATTENTE » / « PENDING »:
+ * a decision already taken whose value awaits an external event (an ethics
+ * approval, a pilot) — and refuses (exit 1) while any remains.
  *
  *   node scripts/prereg-check.mjs            exit 1 if a draft is not ready
  *   node scripts/prereg-check.mjs --report   always exit 0 (CI information step)
@@ -24,8 +26,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const DRAFTS = ['PREREGISTRATION.md', 'empirical/PREREG-E3-DRAFT.md'];
-const MARKERS = [/À FIXER/g, /TO BE SET/g, /PROPOSITION/g];
+const DRAFTS = ['PREREGISTRATION.md', 'empirical/PREREG-E3-DRAFT.md', 'empirical/PREREG-KINAESTHETIC-K0-PILOT.md', 'empirical/PREREG-KINAESTHETIC-K1.md'];
+const MARKERS = [/À FIXER/g, /TO BE SET/g, /PROPOSITION/g, /EN ATTENTE/g, /PENDING/g];
 
 let open = 0;
 for (const rel of DRAFTS) {
@@ -42,11 +44,14 @@ for (const rel of DRAFTS) {
   });
   const total = hits.reduce((s, h) => s + h.n, 0);
   open += total;
-  const status = /BROUILLON NON DÉPOSÉ|UNFILED DRAFT/.test(lines.slice(0, 12).join('\n')) ? 'unfiled draft' : 'status line not found';
+  const head = lines.slice(0, 12).join('\n');
+  const status = /DÉPOSÉ LE|FILED ON/.test(head) ? 'filed'
+    : /PRÊT À DÉPOSER|READY TO FILE/.test(head) ? 'complete, unfiled'
+      : /BROUILLON NON DÉPOSÉ|UNFILED DRAFT/.test(head) ? 'unfiled draft' : 'status line not found';
   console.log(`\n${rel} — ${total} open marker(s), ${status}`);
   for (const h of hits) console.log(`  l.${String(h.line).padStart(4)}  ×${h.n}  ${h.text}`);
 }
 console.log(open === 0
   ? '\nNo open marker: the drafts may be completed and filed (time-stamped registry), then their status line changed.'
-  : `\n${open} open marker(s): NOT READY TO FILE. Each one is a decision for the author, before any data.`);
+  : `\n${open} open marker(s): NOT READY TO FILE. Each one is a decision for the author, or a value awaiting an external event (EN ATTENTE / PENDING), before any data.`);
 if (open > 0 && !process.argv.includes('--report')) process.exit(1);

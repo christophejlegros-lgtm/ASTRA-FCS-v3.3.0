@@ -1,7 +1,7 @@
 {
   "title": "ASTRA-FCS — Agent-orchestrated Simulation Testbed for Research on Access (MCP server, FCS layer)",
   "upload_type": "software",
-  "version": "3.3.0-rc.3",
+  "version": "3.3.0-rc.5",
   "license": "MIT",
   "creators": [
     {
@@ -9,7 +9,7 @@
       "affiliation": "Assistance Multi IA, Geneva"
     }
   ],
-  "description": "ASTRA-FCS is a research instrument for simulating and auditing functional correlates of access (Block 1995) under substrate constraints; it neither measures, detects nor attributes phenomenal consciousness. Model Context Protocol server exposing 75 simulation and analysis tools to AI assistants: a LIF+STDP spiking network, a JEPA-style world model, computed proxies named after theories of consciousness, simulated bridges to biocomputing platforms, an executable layer for the research programme of substrate-constrained functionalism (FCS), and a read-only functional-teleology extension (pre-release) that assesses declared purposes against reported outcome intervals under hard constraints. All biological and physiological data are simulated; the consciousness-related indices are proxies, not measurements, each documented by a proxy card and checked by validation controls (v3.2.0). The vendored directory python/the_consciousness_ai/ and the ported files listed in THIRD_PARTY_NOTICES.md are not covered by the MIT licence.",
+  "description": "ASTRA-FCS is a research instrument for simulating and auditing functional correlates of access (Block 1995) under substrate constraints; it neither measures, detects nor attributes phenomenal consciousness. Model Context Protocol server exposing 82 simulation and analysis tools to AI assistants: a LIF+STDP spiking network, a JEPA-style world model, computed proxies named after theories of consciousness, simulated bridges to biocomputing platforms, an executable layer for the research programme of substrate-constrained functionalism (FCS), and a read-only functional-teleology extension (pre-release) that assesses declared purposes against reported outcome intervals under hard constraints, and somatosensory and interoceptive channels kept separate, with the protocol and analysis of the withdrawal test of the kinaesthetic thesis (pre-release). All biological and physiological data are simulated; the consciousness-related indices are proxies, not measurements, each documented by a proxy card and checked by validation controls (v3.2.0). The vendored directory python/the_consciousness_ai/ and the ported files listed in THIRD_PARTY_NOTICES.md are not covered by the MIT licence.",
   "keywords": [
     "model context protocol",
     "spiking neural network",
@@ -18,5 +18,5 @@
     "biocomputing",
     "epistemology"
   ],
-  "notes": "Licensing is composite: MIT for the original work; python/the_consciousness_ai/ and nine ported files of src/engine/tcai/ follow the upstream non-commercial licence (THIRD_PARTY_NOTICES.md). The single licence field of this record names the MIT part only. Random streams are seeded (ASTRA_SEED, default 20260923; mulberry32). Cite the archived DOI of the release you used. Check the deposited archive against MANIFEST.sha256 (node scripts/manifest.mjs --check). The repository name carries \"v3.1.0\" for historical reasons and is not a version identifier."
+  "notes": "Licensing is composite: MIT for the original work; python/the_consciousness_ai/ and nine ported files of src/engine/tcai/ follow the upstream non-commercial licence (THIRD_PARTY_NOTICES.md). The single licence field of this record names the MIT part only. Random streams are seeded (ASTRA_SEED, default 20260923; mulberry32). Cite the archived DOI of the release you used. Check the deposited archive against MANIFEST.sha256 (node scripts/manifest.mjs --check). Repository: https://github.com/christophejlegros-lgtm/ASTRA-FCS-v3.3.0. The repository name does not identify an exact release. This is a local candidate, not a deposited release."
 }

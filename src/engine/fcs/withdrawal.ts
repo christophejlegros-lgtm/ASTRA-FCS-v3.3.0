@@ -191,11 +191,47 @@ export interface StrandOutcomes {
   boundaryBetterByResonanceOrTopology?: boolean | null;
   /** Dimensionality effects obtained by interoceptive, not sensorimotor, congruence. */
   dimensionalityFromInteroception?: boolean | null;
+  /**
+   * v3.3.0-rc.5 — the pattern behind that boolean, as a confirmatory run of
+   * `fcs/kinaesthetic-withdrawal.ts` derives it. Optional: when present it must
+   * agree with `dimensionalityFromInteroception` (true ⇔ 'interoceptive-only'),
+   * and it lets the evaluation say WHY the thesis stands — a sensorimotor-only
+   * pattern supports the choice of first closure, while 'both' and 'neither'
+   * leave it undiscriminated.
+   */
+  kinaestheticPattern?: KinaestheticPattern | null;
   /** An experiment has been exhibited whose ranking depends on M1. */
   experimentRankedByM1?: boolean | null;
 }
 
 export type ThesisStanding = 'withdrawn' | 'standing' | 'undetermined';
+
+/**
+ * Patterns of the kinaesthetic withdrawal test (v3.3.0-rc.5): which family of
+ * congruence manipulation raised effective dimensionality, each leg decided by
+ * superiority (an effect) or equivalence (an absence within the preregistered
+ * bound).
+ */
+export type KinaestheticPattern = 'interoceptive-only' | 'sensorimotor-only' | 'both' | 'neither';
+
+const KINAESTHETIC_PATTERN_NOTE: Record<KinaestheticPattern, { standing: ThesisStanding; reasonEn: string }> = {
+  'interoceptive-only': {
+    standing: 'withdrawn',
+    reasonEn: 'Dimensionality effects obtained by manipulating interoceptive, not sensorimotor, congruence. The declared rival wins and level II is redefined as interoceptive.',
+  },
+  'sensorimotor-only': {
+    standing: 'standing',
+    reasonEn: 'Dimensionality effects followed sensorimotor congruence and were shown absent, within the preregistered bound, under interoceptive manipulation: the first closure stays kinaesthetic, as the M3 choice states.',
+  },
+  'both': {
+    standing: 'standing',
+    reasonEn: 'Dimensionality effects followed both families of manipulation. The withdrawal condition (interoceptive AND NOT sensorimotor) is not met, but the test does not discriminate the first closure either.',
+  },
+  'neither': {
+    standing: 'standing',
+    reasonEn: 'Neither family produced dimensionality effects (equivalence shown for both). The withdrawal condition is not met; what fails is the dimensionality prediction of document II §6.3 itself — an anomaly that goes first to rank 1 of the revision order.',
+  },
+};
 
 export interface ThesisEvaluation {
   thesis: ThesisId;
@@ -290,7 +326,14 @@ export function evaluateWithdrawal(
 
   // Kinaesthetic thesis.
   const intero = outcomes.dimensionalityFromInteroception;
-  if (intero === true) {
+  const pattern = outcomes.kinaestheticPattern ?? null;
+  if (pattern !== null && !(pattern in KINAESTHETIC_PATTERN_NOTE)) {
+    push('kinaesthetic', 'undetermined', `Unknown kinaesthetic pattern "${String(pattern)}".`);
+  } else if (pattern !== null && intero != null && (pattern === 'interoceptive-only') !== intero) {
+    push('kinaesthetic', 'undetermined', `Inconsistent outcomes: pattern "${pattern}" with dimensionalityFromInteroception = ${intero}. Neither is used.`);
+  } else if (pattern !== null) {
+    push('kinaesthetic', KINAESTHETIC_PATTERN_NOTE[pattern].standing, KINAESTHETIC_PATTERN_NOTE[pattern].reasonEn);
+  } else if (intero === true) {
     push('kinaesthetic', 'withdrawn', 'Dimensionality effects obtained by manipulating interoceptive, not sensorimotor, congruence. The declared rival wins and level II is redefined as interoceptive.');
   } else if (intero === false) {
     push('kinaesthetic', 'standing', 'Dimensionality effects did not follow interoceptive congruence.');
